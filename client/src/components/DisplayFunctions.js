@@ -65,11 +65,11 @@ const States = [
 
 export const firstLastName = (props) => {
 
-    console.log(props.firsttouched);
-    console.log(props.lasttouched);
-    console.log(props.firstvalid);
-    console.log(props.lastvalid);
-    console.log('#################');
+    //console.log(props.firsttouched);
+    //console.log(props.lasttouched);
+    //console.log(props.firstvalid);
+    //console.log(props.lastvalid);
+    //console.log('#################');
 
     let firstinputControl = "validname";
     let firstlabelname = "l1";
@@ -413,12 +413,12 @@ export const income = (props) => {
 
 export const education = (props) => {
 
-    let inputControl = "validname";
+    let inputControl = "radiovalidname";
     let firstlabelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         firstlabelname = 'l1 l1invalid'
 
     }
@@ -498,12 +498,12 @@ export const okeedokee = (props) => {
 
 export const maritalStatus = (props) => {
 
-    let inputControl = "validname";
+    let inputControl = "radiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         labelname = 'radiovalidname'
 
     }
@@ -563,15 +563,21 @@ export const maritalStatus = (props) => {
 
 export const dependents = (props) => {
 
-    let inputControl = "validname";
+    console.log("in dependents display" + props.value)
+
+    let inputControl = "radiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
 
     }
+
+    let checkedbuttonnumber = props.value;
+
+    console.log(checkedbuttonnumber==="2");
 
 
     return(
@@ -590,6 +596,10 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-1`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "0"}
+
+
+
                         />
                         <Form.Check inline
                                     label = "1"
@@ -598,6 +608,9 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-2`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "1"}
+
+
                         />
 
                         <Form.Check inline
@@ -607,6 +620,9 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-3`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "2"}
+
+
                         />
                         <Form.Check inline
                                     label = "3"
@@ -615,6 +631,9 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-4`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "3"}
+
+
                         />
                         <Form.Check inline
                                     label = "4"
@@ -623,14 +642,20 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-5`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "4"}
+
+
                         />
                         <Form.Check inline
                                     label = "5+"
-                                    value="5+"
+                                    value="5"
                                     name = "numdependents"
                                     type={type}
                                     id={`inline-NumDependents-6`}
                                     onChange ={props.parseKids}
+                                    defaultChecked = {checkedbuttonnumber === "5"}
+
+
                         />
 
                     </div>
@@ -645,12 +670,12 @@ export const dependents = (props) => {
 
 export const residence= (props) => {
 
-    let inputControl = "validname";
+    let inputControl = "radiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
 
     }
@@ -703,12 +728,12 @@ export const residence= (props) => {
 
 export const applications = (props) => {
 
-    let inputControl = "validname";
+    let inputControl = "radaiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
 
     }
@@ -774,12 +799,12 @@ export const applications = (props) => {
 
 export const applicationsdenied = (props) => {
 
-    let inputControl = "validname";
+    let inputControl = "radiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'validname invalidname';
+        inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
 
     }

@@ -9,9 +9,10 @@ export const MyModal2 = (props) => {
     return (
 
 
+
         <Modal
             show = {props.show}
-            showArray={props.showArray}
+            showArray={props.showarray}
             showincome = {props.showincome}
             animation = {true}
             size = "md"
@@ -19,7 +20,7 @@ export const MyModal2 = (props) => {
             <Modal.Header>
                 <h6>Hi {props.firstname.value},
                 this bank uses advanced algorithmic software from DataTwin to check for errors and issues that
-                    can affect your application. Either confirm or correct the information below.</h6>
+                    can affect your application. A pattern was detected that is unusual. Please either confirm or correct the information below.</h6>
                 <button
                     type="button"
                     className="close"
@@ -35,10 +36,10 @@ export const MyModal2 = (props) => {
                 <p>Please confirm this information</p>
 
 
-                { props.showArray.dependents ? < displays.dependents  numdependents = {props.numdependents} parseKids = {props.parseKids} /> : ""}
-                { props.showArray.income ? < displays.income  rawincome = {props.rawincome} storeIncome = {props.storeIncome}/>: "" }
-                { props.showArray.education ? < displays.education  education = {props.education}  handleChange = {props.handleChange2} /> : "" }
-                { props.showArray.okeedokee ? < displays.okeedokee />: "" }
+                { props.showarray.dependents ? < displays.dependents  value = {props.numdependents.value} parseKids = {props.parseKids} /> : ""}
+                { props.showarray.income ? < displays.income value = {props.rawincome.value} storeIncome = {props.storeIncome}/>: "" }
+                { props.showarray.education ? < displays.education  value = {props.education.value}  handleChange = {props.handleChange2} /> : "" }
+                { props.showarray.okeedokee ? < displays.okeedokee />: "" }
 
             </Modal.Body>
 

@@ -35,6 +35,8 @@ class App extends React.Component {
             showmodal: false,
             formIsValid: false,
 
+
+            // show array holds the true/false response values from the search to control what is shown
             showArray: {
                 dependents: '',
                 income: '',
@@ -239,16 +241,12 @@ class App extends React.Component {
     }
 
 
-    // in the event handler need to do a post to the express server passing the user name
-    // then the server will run the api retrieval and returnt he numebr of repos
 
-    /*axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
-    console.log("im here");
-    console.log(res.data);
-    })
-    */
 
-    toggle = () => {
+
+
+
+   toggle = () => {
 
         console.log(this.state.showmodal);
         this.setState({showmodal: !this.state.showmodal});// added for modal
@@ -256,6 +254,8 @@ class App extends React.Component {
 
 
     handleSubmit = (e) => {
+
+        console.log("in submit");
 
         //if (this.state.formControls.numdependents.value === "3") {
         //    this.toggle();
@@ -284,7 +284,7 @@ class App extends React.Component {
 
             axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
 
-                console.log(res.body);
+                console.log("valid form");
                 const newState = update(this.state, {
                     showArray: {
                         dependents: {$set: res.data[0]},
@@ -320,6 +320,15 @@ class App extends React.Component {
             });
 
         }
+
+        // in the event handler need to do a post to the express server passing the user name
+        // then the server will run the api retrieval and returnt he numebr of repos
+
+
+        //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
+           // console.log("im here");
+            //console.log(res.data);
+        //})
     }
 
 
@@ -352,9 +361,11 @@ class App extends React.Component {
             }
         }
 
+        //todo temporary change
         this.setState({
             formControls: updatedControls,
             formIsValid: formIsValid
+
         }, () => {
             console.log("checking form is valid");
             console.log(this.state);
@@ -587,6 +598,8 @@ class App extends React.Component {
 
         const value = e.target.value;
 
+        console.log("in store income" + value);
+
         const updatedControls = {
             ...this.state.formControls // gives you all of the form controls and all their ste elements
         };
@@ -760,7 +773,8 @@ class App extends React.Component {
                         storeIncome={this.storeIncome}
                         placeholder={this.state.formControls.income.placeholder}
                         valid={this.state.formControls.rawincome.valid}
-                        touched={this.state.formControls.rawincome.touched}/>
+                        touched={this.state.formControls.rawincome.touched}
+                        value={this.state.formControls.rawincome.value}/>
 
 
                     <displays.education
@@ -799,14 +813,14 @@ class App extends React.Component {
                             <Button
                                 className="submitButton"
                                 onClick={this.handleSubmit}
-                                disabled={!this.state.formIsValid}
+                                //disabled={!this.state.formIsValid}
                             > Submit
                             </Button>
                         </Col>
 
                     </Form.Group>
 
-
+                    {/*
                     <Form.Group as={Row} controlId="modalButton" className="formgroup">
                         <Col>
                             <Button
@@ -816,21 +830,22 @@ class App extends React.Component {
                             >
                                 Show Modal
                             </Button>
-                        </Col>
+                        </Col>ß
 
                     </Form.Group>
-
+*/}
 
                     {showmodal && (
                         <MyModal2
                             show={this.state.showmodal}
-                            showArray={this.state.showArray}
+                            showarray={this.state.showArray}
                             firstname={this.state.formControls.firstname}
                             rawincome={this.state.formControls.rawincome}
                             numdependents={this.state.formControls.numdependents}
                             education={this.state.formControls.education}
                             storeIncome={this.storeIncome}
-                            parentAction={this.toggle}/>
+                            parentAction={this.toggle}
+                            parseKids = {this.parseKids}/>
                         /*  <ModalClass show = {this.state.show} parentAction = {this.toggle}/>*/
                     )}
 
