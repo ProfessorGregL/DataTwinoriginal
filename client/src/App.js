@@ -278,13 +278,23 @@ class App extends React.Component {
             }
 
         }
-        if (this.state.formIsValid) {
+
+        ///// ##### true added for testing only ####### //////   TESTING ONLY  todo  delete after testing
+
+
+
+       // if (this.state.formIsValid) {
+
+        if (true) {
+
+            console.log("valid form - post to server");
 
             let mynum = 0;
 
-            axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
+            axios.post('/api/riskratios', this.state.formControls).then(res => {
+                //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
 
-                console.log("valid form");
+
                 const newState = update(this.state, {
                     showArray: {
                         dependents: {$set: res.data[0]},
