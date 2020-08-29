@@ -1,34 +1,28 @@
 const express = require('express');
 const path = require('path');
-//const generatePassword = require('password-generator');
+const generatePassword = require('password-generator');
 
 const app = express();
+
+
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-
-// lets see if post can work
-
-var router = express.Router();
-
-
-router.post("/api/passwords", function(req, res) {
-
-let thresholds = [true,true,true];
-
-res.send(thresholds);
-
-
-
-
-/*
-
-
-
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {
   const count = 5;
+
+
+
+
+
+
+
+
+
+
+
 
   // Generate some passwords
   const passwords = Array.from(Array(count).keys()).map(i =>
@@ -39,9 +33,15 @@ app.get('/api/passwords', (req, res) => {
   res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
-  
-  */
 });
+
+
+
+
+
+
+
+
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
