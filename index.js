@@ -41,7 +41,7 @@ console.log(req.body);
 
 thresholds = [true,true,true];
 
-res,send(thresholds);
+res.send(thresholds);
 
 /*    
     
