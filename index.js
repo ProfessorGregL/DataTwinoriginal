@@ -15,37 +15,51 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
+var MongoClient = require('mongodb').MongoClient;
+//var url = "mongodb://localhost:27017/";
+
+var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
+
+processRatios = (ratios, thresholds) => {
+    //console.log("ratios" + ratios);
+
+    let riskyRatio = [false,false,false];
+
+    if(ratios[0] > thresholds[0]){riskyRatio[0] = true;}
+    if(ratios[1] > thresholds[1]){riskyRatio[1] = true;}
+    if(ratios[2] > thresholds[2]){riskyRatio[2] = true;}
+
+    console.log(riskyRatio);
+
+    return riskyRatio;
+}
+
 
 app.post("/api/riskratios", function(req, res) {
 
 console.log(req.body);
 
-let thresholds = [true,true,true];
+    MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
+        if (err) throw err; // todo change this to try catch
 
-res.send(thresholds);
+        var querystring = [req.body.numdependents.value,req.body.income.value,req.body.education.value].join(',');
 
+        console.log("query string:" +  querystring)
 
+        var dbo = db.db("datatwin1");
+        dbo.collection("pva").find({params:querystring} ).toArray(function(err,result){
+            if (err) throw err;  // todo change this to try catch
+            let array = [String(result[0].ratio[0]),String(result[0].ratio[1]),String(result[0].ratio[2])];
+            console.log(array);
 
+            let thresholds = [1.8,1.8,1.8];
+            //processRatios(array, thresholds);
 
-/*
+            res.send(processRatios(array, thresholds));
+            db.close();
+        });
+    });
 
-
-
-// Put all API endpoints under '/api'
-app.get('/api/passwords', (req, res) => {
-  const count = 5;
-
-  // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i =>
-    generatePassword(12, false)
-  )
-
-  // Return them as json
-  res.json(passwords);
-
-  console.log(`Sent ${count} passwords`);
-  
-  */
 });
 
 // The "catchall" handler: for any request that doesn't
