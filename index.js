@@ -16,9 +16,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+//var url = "mongodb://localhost:27017/";
 
-//var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
+var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
 
 processRatios = (ratios, thresholds) => {
     //console.log("ratios" + ratios);
