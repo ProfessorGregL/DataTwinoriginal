@@ -29,7 +29,7 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="286">
               <caret line="305" column="19" lean-forward="true" selection-start-line="305" selection-start-column="19" selection-end-line="305" selection-end-column="19" />
               <folding />
             </state>
@@ -121,8 +121,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2144" />
-    <option name="y" value="35" />
+    <option name="x" value="2042" />
+    <option name="y" value="23" />
     <option name="width" value="1715" />
     <option name="height" value="1026" />
   </component>
@@ -194,7 +194,7 @@
     <option name="totallyTimeSpent" value="11714000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2144" y="35" width="1715" height="1026" extended-state="0" />
+    <frame x="2042" y="23" width="1715" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29598308" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -494,7 +494,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="286">
           <caret line="305" column="19" lean-forward="true" selection-start-line="305" selection-start-column="19" selection-end-line="305" selection-end-column="19" />
           <folding />
         </state>

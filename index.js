@@ -31,7 +31,7 @@ processRatios = (ratios, thresholds) => {
 
 app.post("/api/riskratios", function(req, res) {
 
-console.log(req.body);
+console.log(req.body.numdependents.value);
 
 thresholds = [true,false,true];
 
