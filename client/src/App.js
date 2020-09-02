@@ -297,6 +297,8 @@ class App extends React.Component {
 
                 axios.post('/api/riskratios', {hello:"world"}).then(res => {
 
+                    console.log(res);
+
                     const newState = update(this.state, {
                     showArray: {
                         dependents: {$set: res.data[0]},
