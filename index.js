@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require("cors");
 const path = require('path');
-//const generatePassword = require('password-generator');
 
 var bodyParser = require('body-parser');
 var app = express();
@@ -14,17 +13,11 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-
-// ### moved this into production below
-// Serve static files from the React app
-//app.use(express.static(path.join(__dirname, 'client/build')));
-
-
 const port = process.env.PORT || 5000;
 
 var MongoClient = require('mongodb').MongoClient;
 
-var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
+
 
 processRatios = (ratios, thresholds) => {
 
@@ -42,24 +35,13 @@ processRatios = (ratios, thresholds) => {
 
 app.post('/api/riskratios', (req, res) => {
 
-//console.log(req.body.numdependents.value);
-
-//console.log(req.body);
-
-//thresholds = [true,false,true];
-
-///res.send(thresholds);
-
-
-    
-    
+    var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
+   
     MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
     
         if (err) throw err; // todo change this to try catch
 
         var querystring = [req.body.numdependents.value,req.body.income.value,req.body.education.value].join(',');
-
-        //var querystring = "4,12,24"
         
         console.log(querystring);
 
