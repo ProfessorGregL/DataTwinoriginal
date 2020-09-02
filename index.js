@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require("cors");
 const path = require('path');
 //const generatePassword = require('password-generator');
 
@@ -10,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(cors());
 
 
 // ### moved this into production below
@@ -37,22 +40,20 @@ processRatios = (ratios, thresholds) => {
 }
 
 
-app.post('/api/riskratios', (req, res)).then(res => {
+app.post('/api/riskratios', (req, res) => {
 
 //console.log(req.body.numdependents.value);
 
-console.log(req.body);
+//console.log(req.body);
 
-thresholds = [true,false,true];
+//thresholds = [true,false,true];
 
-res.send(req.body.hello.value);
+///res.send(thresholds);
 
-});
+
     
-   /* 
+    
     MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
-    
-    console.log("in mongo");
     
         if (err) throw err; // todo change this to try catch
 
@@ -63,24 +64,26 @@ res.send(req.body.hello.value);
         console.log(querystring);
 
         var dbo = db.db("datatwin1");
+        
+       
         dbo.collection("pva").find({params:querystring} ).toArray(function(err,result){
             if (err) throw err;  // todo change this to try catch
             let array = [String(result[0].ratio[0]),String(result[0].ratio[1]),String(result[0].ratio[2])];
             console.log(array);
 
             let thresholds = [1.8,1.8,1.8];
-            let results = processRatios(array, thresholds);
+            results = processRatios(array, thresholds);    
             
             console.log(results);
 
             res.send(results);
             db.close();
-        });
+        }); 
     });
     
-    */
+    
 
-
+});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

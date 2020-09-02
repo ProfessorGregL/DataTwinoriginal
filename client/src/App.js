@@ -295,7 +295,7 @@ class App extends React.Component {
             //axios.post('/api/riskratios', this.state.formControls).then(res => {
                 //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
 
-                axios.post('/api/riskratios', {hello:"world"}).then(res => {
+                axios.post('/api/riskratios', this.state.formControls).then(res => {
 
                     console.log(res);
 
