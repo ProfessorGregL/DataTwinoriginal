@@ -31,15 +31,17 @@ processRatios = (ratios, thresholds) => {
 
 app.post("/api/riskratios", function(req, res) {
 
-//console.log(req.body);
+console.log(req.body);
 
-//thresholds = [true,true,true];
+thresholds = [true,false,true];
 
-//res.send(thresholds);
+res.send(thresholds);
 
     
-    
+   /* 
     MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
+    
+    console.log("in mongo");
     
         if (err) throw err; // todo change this to try catch
 
@@ -65,7 +67,7 @@ app.post("/api/riskratios", function(req, res) {
         });
     });
     
-    
+    */
 
 });
 
