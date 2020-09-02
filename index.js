@@ -2,7 +2,15 @@ const express = require('express');
 const path = require('path');
 //const generatePassword = require('password-generator');
 
-const app = express();
+var bodyParser = require('body-parser');
+var app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
 
 // ### moved this into production below
 // Serve static files from the React app
@@ -29,7 +37,7 @@ processRatios = (ratios, thresholds) => {
 }
 
 
-app.post("/api/riskratios", function(req, res) {
+app.post('/api/riskratios', (req, res)).then(res => {
 
 //console.log(req.body.numdependents.value);
 
@@ -39,6 +47,7 @@ thresholds = [true,false,true];
 
 res.send(req.body.hello.value);
 
+});
     
    /* 
     MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
@@ -71,7 +80,7 @@ res.send(req.body.hello.value);
     
     */
 
-});
+
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
