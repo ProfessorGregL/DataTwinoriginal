@@ -27,8 +27,7 @@ class App extends React.Component {
         this.toggle = this.toggle.bind(this);  // added for modal
         this.storeIncome = this.storeIncome.bind(this);
         this.printValue = this.printValue.bind(this);
-        this.ssn_PopoverLogic = this.ssn_PopoverLogic.bind(this);
-        this.closeModals = this.closeModals.bind(this);
+        this.showPopover = this.showPopover.bind(this);
 
         this.state = {
             showFormMortgagePersonalInfoSpouseName: false,
@@ -37,8 +36,8 @@ class App extends React.Component {
             close: false,
             showmodal: false,
             formIsValid: false,
-            showssnwrong:false,  //todo this should really be at the component level not here
-            showssnwronglength:false,
+            ssnmodalshow:false,  //todo this should really be at the component level not here
+
 
             // show array holds the true/false response values from the search to control what is shown
             showArray: {
@@ -156,7 +155,7 @@ class App extends React.Component {
                 },
                 socialsecuritynumber: {
                     value: '',
-                    placeholder: '111223333',
+                    placeholder: '111-222-3333',
                     valid: false,
                     touched: false,
                     visible: true,
@@ -634,77 +633,22 @@ class App extends React.Component {
         this.handleChange(name, value);
     }
 
-/*
-    ssn_PopoverLogic = (popName,itsState) => {
 
-
+    showPopover = (popName,itsState) => {
 
         this.setState({[popName]:itsState}, () => {
-            console.log("in the ssn_PopoverLogic function after state set");
+            console.log("in the showPopover function");
             console.log(this.state);
         });
 
     }
-*/
-    ssn_PopoverLogic = (e) => {
 
-        console.log("in ssn_PopoverLogic");
-
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
-
-
-        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
-
-        if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
-            this.setState({
-                ssnwrong:true,
-                ssnwronglength:false
-            }, () => {
-                console.log("in the ssn_PopoverLogic function after state set - true-false");
-            });
-        }
-
-
-        //else if(e.key === 'Enter' && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
-        else if(e.key === 'Enter' &&(e.target.getAttribute('value').length != 9)&&  thisvalid.valid === false ) {
-
-            this.setState({
-                ssnwrong:false,
-                ssnwronglength:true
-            }, () => {
-                console.log("in the ssn_PopoverLogic function after state set - false -true");
-            });
-        }
-
-        else {this.setState({
-            ssnwrong:false,
-            ssnwronglength:false
-        }, () => {
-            console.log("in the ssn_PopoverLogic function after state set - false - false");
-        });
-
-        }
-
-    }
-
-
-
-    closeModals = (e) => {
-
-        console.log("in close modals")
-        this.setState({
-            ssnwrong:false,
-            ssnwronglength:false
-        }, () => {
-            console.log("in the close modals function");
-        });
-
-    }
 
 
     render() {
 
-        const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,ssnmodalshow,ssnwrong,ssnwronglength} = this.state;
+        const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,ssnmodalshow} = this.state;
+
 
         return (
 
@@ -790,9 +734,9 @@ class App extends React.Component {
                         lastonChange={this.handleChange2}
                         lastvalid={this.state.formControls.socialsecuritynumber.valid}
                         lasttouched={this.state.formControls.socialsecuritynumber.touched}
-                        lastonKeyUp = {this.ssn_PopoverLogic}
-                        lastshowssnwrong = {this.state.showssnwrong}
-                        lastshowssnwronglength = {this.state.showssnwronglength}/>
+                        lastShow = {this.state.showBasicSsnPopover}
+                        showPopover = {this.showPopover}
+                    />
 
                     <displays.maritalStatus
                         numdependents={this.state.formControls.maritalstatus.value}
@@ -891,19 +835,9 @@ class App extends React.Component {
 
 
 
-                    {ssnwrong && (
-
-                        <displays.popoverssnwrong
-                            show = {this.state.ssnwrong}
-                            closeModals = {this.closeModals}
-                        />
-                    )}
-
-                    {ssnwronglength && (
-
-                        <displays.popoverssnwronglength
-                            show = {this.state.ssnwronglength}
-                            closeModals = {this.closeModals}
+                    {ssnmodalshow && (
+                        <displays.popoverssn
+                            show = true
                         />
                     )}
 

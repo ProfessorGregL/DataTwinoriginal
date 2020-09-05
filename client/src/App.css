@@ -14,8 +14,9 @@
    display:inline;
    padding-left: .5em;
    padding-right: .5em;
-   /*background-color: orange;*/
-
+   /*background-color: orange;
+   color: darkslategray;
+   */
    color: darkslategray;
    font-weight: bold;
    /*border: 3px solid green;*/
@@ -24,6 +25,10 @@
 
 .l1invalid {
     color: crimson;
+}
+
+.l1valid {
+    color: green;
 }
 
 .l2 {
@@ -38,8 +43,8 @@
 }
 
 .b1{
-  /*border: 3px solid green;
-  background-color:lightskyblue  ;*/
+    /*border: 3px solid green;
+    background-color:lightskyblue  ;*/
 }
 
 .fg1{
@@ -114,8 +119,9 @@
 }
 
 .validname {
-    border: 1px solid #ccc;
+    border: 1px #ccc;
     padding: 10px;
+    color:green;
 
 }
 
@@ -129,6 +135,10 @@
 
     border: 1px solid transparent;
     padding: 10px;
+}
 
+.firstinputControl {
+
+    border: 3px solid red;
 
 }

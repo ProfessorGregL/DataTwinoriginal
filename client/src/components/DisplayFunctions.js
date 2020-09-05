@@ -6,6 +6,8 @@ import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 //import Autosuggest, { ItemAdapter } from 'react-bootstrap-autosuggest'
 import '../App.css';
 import Select from 'react-select';
+import Popover from 'react-bootstrap/Popover'
+
 
 const States = [
     { label: 'AL', value: 'Alabama' },
@@ -62,6 +64,59 @@ const States = [
     { label: 'WY', value: 'Wyoming' }
 ]
 
+
+export const popoverssnwrong = (props) => {
+    console.log("In the modal" + props.show);
+    return(
+
+        <Modal show={props.show} >
+            <Modal.Header>
+                <h6>Hi </h6>
+                <button
+                    name="ssnwrong"
+                    type="button"
+                    className="close"
+                    aria-label="Close"
+                    onClick={props.closeModals}>
+
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </Modal.Header>
+            <Modal.Body>
+                Enter social security with nine digits and no hypens! For you Trump lovers that means JUST NUMBERS
+            </Modal.Body>
+        </Modal>
+
+    )
+}
+
+
+export const popoverssnwronglength = (props) => {
+    //onClick={() => { props.showPopover("ssnmodalshow",false) }} // how to pass a function!
+    console.log("In the modal" + props.show);
+    return(
+
+        <Modal show={props.show} >
+            <Modal.Header>
+                <h6>Hi </h6>
+                <button
+                    name="ssnwronglength"
+                    type="button"
+                    className="close"
+                    aria-label="Close"
+                    onClick={props.closeModals}>
+
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </Modal.Header>
+            <Modal.Body>
+                Hey Bonehead - its only NINE digits
+                Use your fingers and count!!!!
+            </Modal.Body>
+        </Modal>
+
+    )
+}
 
 export const firstLastName = (props) => {
 
@@ -316,6 +371,7 @@ export const stateZip = (props) => {
 
 export const birthdayssn = (props) => {
 
+
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
@@ -332,6 +388,11 @@ export const birthdayssn = (props) => {
     if (props.lasttouched && !props.lastvalid) {
         lastinputControl = 'validname invalidname';
         lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname invalidname';
+        lastlabelname = 'l1 l1valid';
     }
 
     return(
@@ -363,6 +424,7 @@ export const birthdayssn = (props) => {
                         name="socialsecuritynumber"
                         value={props.lastvalue} // makes this a controlled component
                         onChange={props.lastonChange}
+                        onKeyUp = {props.lastonKeyUp}
                     />
                 </Col>
 
@@ -482,18 +544,7 @@ export const education = (props) => {
 }
 
 
-export const okeedokee = (props) => {
-    return(
-        <Form.Group  as={Row} controlId="thanksforsubmitting" className = "formgroup">
 
-            <Col>
-                Thanks for submitting your application! We are reviewing and validating your information using a battery
-                of sophisticated algortihmic tools from DataTwin.  You should receive an email shortly with an account number
-                and password.
-            </Col>
-        </Form.Group>
-    )
-}
 
 
 export const maritalStatus = (props) => {
@@ -563,7 +614,7 @@ export const maritalStatus = (props) => {
 
 export const dependents = (props) => {
 
-    console.log("in dependents display" + props.value)
+    //console.log("in dependents display" + props.value)
 
     let inputControl = "radiovalidname";
     let labelname = "l1";
@@ -577,7 +628,7 @@ export const dependents = (props) => {
 
     let checkedbuttonnumber = props.value;
 
-    console.log(checkedbuttonnumber==="2");
+    //console.log(checkedbuttonnumber==="2");
 
 
     return(
@@ -861,5 +912,30 @@ export const applicationsdenied = (props) => {
 
         </Form.Group>
 
+    )
+}
+
+export const okeedokee = (props) => {
+    return(
+        <Form.Group  as={Row} controlId="thanksforsubmitting" className = "formgroup">
+
+            <Col>
+                Thanks for submitting your application! We are reviewing and validating your information using a battery
+                of sophisticated algortihmic tools from DataTwin.  You should receive an email shortly with an account number
+                and password.
+            </Col>
+        </Form.Group>
+    )
+}
+
+
+export const basicssnmistake = (props) => {
+    return(
+        <Form.Group  as={Row} controlId="basicssnmistake" className = "formgroup">
+
+            <Col>
+                Your Social Security Number contains exactly 9 numbers with no letters or other characters.  Please check what you have entered.
+            </Col>
+        </Form.Group>
     )
 }
