@@ -40,16 +40,24 @@ app.post('/api/riskratios', (req, res) => {
     MongoClient.connect(url,{ useUnifiedTopology: true } , function(err, db) {
     
         if (err) throw err; // todo change this to try catch
-
-        var querystring = [req.body.numdependents.value,req.body.income.value,req.body.education.value].join(',');
         
-        console.log(querystring);
+       var numdep = req.body.numdependents.value;
+       var inc = req.body.income.value;
+       var ed = req.body.education.value;
+       
+       numdep = (numdep === '')?4:numdep;
+       inc = (inc === '')?14:inc;
+       ed = (ed === '')?21:ed;
+
+        var querystring = [numdep,inc,ed].join(',');
 
         var dbo = db.db("datatwin1");
         
        
         dbo.collection("pva").find({params:querystring} ).toArray(function(err,result){
             if (err) throw err;  // todo change this to try catch
+            
+            console.log(typeof(result[0]));         
             let array = [String(result[0].ratio[0]),String(result[0].ratio[1]),String(result[0].ratio[2])];
             console.log(array);
 

@@ -1,6 +1,6 @@
 import React, { Component , useState } from 'react';
 import axios from 'axios';
-import { Container, Col, Row, Form , Button} from "react-bootstrap";
+import { Container, Col, Row, Form , Button, Alert} from "react-bootstrap";
 import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import { Modal } from 'react-bootstrap';
 import update from 'immutability-helper';
@@ -887,10 +887,22 @@ class App extends React.Component {
                         </Col>ß
 
                     </Form.Group>
+
+
+                    <Alert variant="success">
+                        <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                        <p>
+                            Aww yeah, you successfully read this important alert message. This example
+                            text is going to run a bit longer so that you can see how spacing within an
+                            alert works with this kind of content.
+                        </p>
+                        <hr />
+                        <p className="mb-0">
+                            Whenever you need to, be sure to use margin utilities to keep things nice
+                            and tidy.
+                        </p>
+                    </Alert>
 */}
-
-
-
                     {ssnwrong && (
 
                         <displays.popoverssnwrong

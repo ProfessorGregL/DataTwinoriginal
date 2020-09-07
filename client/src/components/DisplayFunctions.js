@@ -71,7 +71,11 @@ export const popoverssnwrong = (props) => {
 
         <Modal show={props.show} >
             <Modal.Header>
-                <h6>Hi </h6>
+                <Modal.Title
+
+                >
+                <h6 className = "nx-auto">Illegal Characters in SSN</h6>
+                </Modal.Title>
                 <button
                     name="ssnwrong"
                     type="button"
