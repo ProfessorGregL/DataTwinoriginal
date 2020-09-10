@@ -39,6 +39,9 @@ class App extends React.Component {
             formIsValid: false,
             showssnwrong:false,  //todo this should really be at the component level not here
             showssnwronglength:false,
+            showblankfield:false,
+            shownamewrong:false,
+            shownamewronglength:false,
 
             // show array holds the true/false response values from the search to control what is shown
             showArray: {
@@ -57,9 +60,10 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 2, // names like Jo (is that a real name)
-                        isRequired: true,
-                        lettersOnly: true
+                        minLengthValidator: 2, // names like Jo (is that a real name)
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 lastname: {
@@ -69,9 +73,10 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 2, // names like Jo (is that a real name)
-                        isRequired: true,
-                        lettersOnly: true
+                        minLengthValidator: 2, // names like Jo (is that a real name)
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
 
@@ -82,21 +87,23 @@ class App extends React.Component {
                     touched: false,
                     visible: 'false',
                     validationRules: {
-                        minLength: 2, // names like Jo (is that a real name)
-                        isRequired: true,
-                        lettersOnly: true
+                        minLengthValidator: 2, // names like Jo (is that a real name)
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 spouse_lastname: {
                     value: '',
-                    placeholder: 'Fast name',
+                    placeholder: 'Last name',
                     valid: false,
                     touched: false,
                     visible: 'false',
                     validationRules: {
-                        minLength: 2, // names like Jo (is that a real name)
-                        isRequired: true,
-                        lettersOnly: true
+                        minLengthValidator: 2, // names like Jo (is that a real name)
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 street: {
@@ -106,8 +113,9 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 2,
-                        isRequired: true,
+                        minLengthValidator: 2,
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 city: {
@@ -117,9 +125,10 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 4,
-                        isRequired: true,
-                        lettersOnly: true
+                        minLengthValidator: 4,
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 state: {
@@ -129,8 +138,10 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 2,
-                        isRequired: true,
+                        minLengthValidator: 2,
+                        requiredValidator: true,
+                        lettersOnlyValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 zip: {
@@ -140,8 +151,9 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLength: 2,
-                        isRequired: true,
+                        minLengthValidator: 2,
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 birthday: {
@@ -151,7 +163,8 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 socialsecuritynumber: {
@@ -161,8 +174,9 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                         basicSSNValidator : true,
+                        emptyTextFieldValidator: false
                     }
                 },
                 maritalstatus: {
@@ -171,7 +185,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 numdependents: {
@@ -180,7 +194,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 income: {
@@ -190,7 +204,9 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false,
+                        numbersOnlyValidator: true
                     }
                 },
                 rawincome: {
@@ -199,7 +215,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 pastapplications: {
@@ -208,7 +224,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 pastapplicationsdenied: {
@@ -217,7 +233,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 education: {
@@ -226,7 +242,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 },
                 residence: {
@@ -235,7 +251,7 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        isRequired: true,
+                        requiredValidator: true,
                     }
                 }
 
@@ -397,6 +413,8 @@ class App extends React.Component {
 
 // can handle any target
     handleChange2 = (e) => {
+
+        console.log("in handle change 2 " + e.target.name + "  " + e.target.value );
 
 
         const name = e.target.name;
@@ -634,18 +652,228 @@ class App extends React.Component {
         this.handleChange(name, value);
     }
 
-/*
-    ssn_PopoverLogic = (popName,itsState) => {
+
+    //#######################################################################################
+
+    name_PopoverLogic = (e) => {
+
+        console.log("in name_PopoverLogic");
+        console.log(" name length  " + this.state.formControls.firstname.validationRules.minLengthValidator + "  " +e.target.getAttribute('value').length );
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+        console.log(e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
 
 
+        // is the field left blank?
+        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
 
-        this.setState({[popName]:itsState}, () => {
-            console.log("in the ssn_PopoverLogic function after state set");
-            console.log(this.state);
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the name_PopoverLogic blank field");
+            });
+        }
+
+        // name length must match the validator rule
+
+
+        else if(e.target.getAttribute('value').length < this.state.formControls.firstname.validationRules.minLengthValidator && thisvalid.valid === false ) {
+
+
+                this.setState({
+                shownamewronglength:true
+            }, () => {
+                console.log("in the name_PopoverLogic name too short");
+            });
+        }
+
+        // is there something there and its not letters only
+        else if(thisvalid.valid === false ) {
+            this.setState({
+                shownamewrong:true
+            }, () => {
+                console.log("in the name_PopoverLogic - bad character present");
+            });
+        }
+
+        // name length limited to 31 characters per passport but it passes basic test
+        else if(e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
+
+            this.setState({
+                shownamewronglength:true
+            }, () => {
+                console.log("in the name_PopoverLogic name  too long");
+            });
+        }
+
+        else {this.setState({
+
+        }, () => {
+            console.log("in the name_PopoverLogic function after state set - in else");
         });
 
+        }
+
     }
-*/
+
+    //#######################################################################################
+
+    streetcity_PopoverLogic = (e) => {
+
+        console.log("in streetcity_PopoverLogic");
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+
+
+        // is the field left blank?
+        if(e.key === 'Enter' && e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the name_PopoverLogic function after state set - false -true");
+            });
+        }
+
+        // is there something there and its not letters only
+        else if(e.key === 'Enter'  && (thisvalid.valid === false) ) {
+            this.setState({
+                shownamewrong:true
+            }, () => {
+                console.log("in the name_PopoverLogic function after state set - failed validity test");
+            });
+        }
+
+        // name length limited to 31 characters per passport but it passes basic test
+        else if(e.key === 'Enter' && e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
+
+            this.setState({
+                showssnwronglength:true
+            }, () => {
+                console.log("in the name_PopoverLogic function after state set - too long");
+            });
+        }
+
+        else {this.setState({
+
+        }, () => {
+            console.log("in the name_PopoverLogic function after state set - in else");
+        });
+
+        }
+
+    }
+
+    //#######################################################################################
+
+
+    statezip_PopoverLogic = (e) => {
+
+        console.log("in statezip_PopoverLogic");
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+
+
+        // is the field left blank?
+        if(e.key === 'Enter' && e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the name_PopoverLogic function after state set - false -true");
+            });
+        }
+
+        // is there something there and its not letters only
+        else if(e.key === 'Enter'  && (thisvalid.valid === false) ) {
+            this.setState({
+                shownamewrong:true
+            }, () => {
+                console.log("in the name_PopoverLogic function after state set - failed validity test");
+            });
+        }
+
+        // name length limited to 31 characters per passport but it passes basic test
+        else if(e.key === 'Enter' && e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
+
+            this.setState({
+                showssnwronglength:true
+            }, () => {
+                console.log("in the name_PopoverLogic function after state set - too long");
+            });
+        }
+
+        else {this.setState({
+
+        }, () => {
+            console.log("in the name_PopoverLogic function after state set - in else");
+        });
+
+        }
+
+    }
+
+    //#######################################################################################
+
+    birthday_PopoverLogic = (e) => {
+
+        console.log("in birthday_PopoverLogic");
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+
+        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+
+        if(e.key === 'Enter' &&(e.target.getAttribute('value').length === 0)&&  thisvalid.valid === false ) {
+
+            this.setState({
+                showblankfield:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic function after state set - false -true");
+            });
+        }
+
+        else if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
+            this.setState({
+                showssnwrong:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic function after state set - true-false");
+            });
+        }
+
+        //else if(e.key === 'Enter' && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
+        else if(e.key === 'Enter' &&(e.target.getAttribute('value').length != 9)&&  thisvalid.valid === false ) {
+
+            this.setState({
+                showssnwronglength:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic function after state set - false -true");
+            });
+        }
+
+        else {this.setState({
+
+        }, () => {
+            console.log("in the ssn_PopoverLogic function after state set - in else");
+        });
+
+        }
+
+    }
+
+    //#######################################################################################
+
     ssn_PopoverLogic = (e) => {
 
         console.log("in ssn_PopoverLogic");
@@ -655,56 +883,91 @@ class App extends React.Component {
 
         console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
 
-        if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
+        if(e.key === 'Enter' &&(e.target.getAttribute('value').length === 0)&&  thisvalid.valid === false ) {
+
             this.setState({
-                ssnwrong:true,
-                ssnwronglength:false
+                showblankfield:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic function after state set - false -true");
+            });
+        }
+
+        else if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
+            this.setState({
+                showssnwrong:true
             }, () => {
                 console.log("in the ssn_PopoverLogic function after state set - true-false");
             });
         }
 
-
         //else if(e.key === 'Enter' && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
         else if(e.key === 'Enter' &&(e.target.getAttribute('value').length != 9)&&  thisvalid.valid === false ) {
 
             this.setState({
-                ssnwrong:false,
-                ssnwronglength:true
+                showssnwronglength:true
             }, () => {
                 console.log("in the ssn_PopoverLogic function after state set - false -true");
             });
         }
 
         else {this.setState({
-            ssnwrong:false,
-            ssnwronglength:false
+
         }, () => {
-            console.log("in the ssn_PopoverLogic function after state set - false - false");
+            console.log("in the ssn_PopoverLogic function after state set - in else");
         });
 
         }
 
     }
 
+    //#######################################################################################
 
-
+    // ALL MODALS BEED TO BE ENTERED HERE!!!!!!!
     closeModals = (e) => {
 
-        console.log("in close modals")
+        //console.log("in close modals")
         this.setState({
-            ssnwrong:false,
-            ssnwronglength:false
+            showssnwrong:false,
+            showssnwronglength:false,
+            showblankfield:false,
+            shownamewrong:false,
+            shownamewronglength:false
         }, () => {
-            console.log("in the close modals function");
+            //console.log("in the close modals function");
         });
 
     }
 
 
+    setTouchedOnFocus = (e) => {
+        const name = e.target.name;
+
+        const updatedControls = {
+            ...this.state.formControls // gives you all of the form controls and all their ste elements
+        };
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement = {
+            ...updatedControls[name]
+        };
+
+        updatedFormElement.touched = true; // we did enter something - may not be correct yet
+
+        updatedControls[name] = updatedFormElement;
+
+        this.setState({
+            formControls: updatedControls,
+        }, () => {
+            //console.log(this.state);
+
+        });
+    }
+
+
     render() {
 
-        const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,ssnmodalshow,ssnwrong,ssnwronglength} = this.state;
+        const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
+            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength} = this.state;
 
         return (
 
@@ -724,14 +987,18 @@ class App extends React.Component {
                     <displays.firstLastName
                         type="text"
                         firstplaceholder={this.state.formControls.firstname.placeholder}
-                        lastplaceholder={this.state.formControls.lastname.placeholder}
                         firstvalue={this.state.formControls.firstname.value} // makes this a controlled component
-                        lastvalue={this.state.formControls.lastname.value}
-                        onChange={this.handleChange2}
                         firstvalid={this.state.formControls.firstname.valid}
-                        lastvalid={this.state.formControls.lastname.valid}
                         firsttouched={this.state.formControls.firstname.touched}
+
+
+                        lastplaceholder={this.state.formControls.lastname.placeholder}
+                        lastvalue={this.state.formControls.lastname.value}
+                        lastvalid={this.state.formControls.lastname.valid}
                         lasttouched={this.state.formControls.lastname.touched}
+                        myonChange={this.handleChange2}
+                        onBlur = {this.name_PopoverLogic}
+                        onFocus = {this.setTouchedOnFocus}
                     />
 
 
@@ -901,23 +1168,62 @@ class App extends React.Component {
                             Whenever you need to, be sure to use margin utilities to keep things nice
                             and tidy.
                         </p>
-                    </Alert>
+                    </Alert
 */}
-                    {ssnwrong && (
 
-                        <displays.popoverssnwrong
-                            show = {this.state.ssnwrong}
+                    {showssnwrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showssnwrong}
                             closeModals = {this.closeModals}
+                            headertext = "Illegal Characters in SSN"
+                            bodytext = "Please enter a social security number with nine digits and no hypens"
                         />
                     )}
 
-                    {ssnwronglength && (
+                    {showssnwronglength && (
 
-                        <displays.popoverssnwronglength
-                            show = {this.state.ssnwronglength}
+                        <displays.formfieldResponseModal
+                            show = {this.state.showssnwronglength}
                             closeModals = {this.closeModals}
+                            headertext = "Too Short or Too long!"
+                            bodytext = "Your social security number must be exactly nine (9) numbers in length"
                         />
                     )}
+
+
+                    {showblankfield && (
+
+                    <displays.formfieldResponseModal
+                            show = {this.state.showblankfield}
+                            closeModals = {this.closeModals}
+                            headertext = "You have left a field blank"
+                            bodytext = "We really need this information to process your application!"
+                        />
+                    )}
+
+                    {shownamewrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.shownamewrong}
+                            closeModals = {this.closeModals}
+                            headertext = "Names contain characters only"
+                            bodytext = "Please delete all non letters from your name"
+                        />
+                    )}
+
+                    {shownamewronglength && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.shownamewronglength}
+                            closeModals = {this.closeModals}
+                            headertext = "Name length must be more than one character and less than 32 characters"
+                            bodytext = "Please enter your name as it is on your passport!"
+                        />
+                    )}
+
+
+
 
 
 
@@ -936,6 +1242,12 @@ class App extends React.Component {
                             parseKids = {this.parseKids}/>
                         /*  <ModalClass show = {this.state.show} parentAction = {this.toggle}/>*/
                     )}
+
+
+
+
+
+
 
                     {/*
                     {showbasicSSNmodal && (

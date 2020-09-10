@@ -65,45 +65,24 @@ const States = [
 ]
 
 
-export const popoverssnwrong = (props) => {
-    console.log("In the modal" + props.show);
-    return(
 
-        <Modal show={props.show} >
-            <Modal.Header>
-                <Modal.Title
-
-                >
-                <h6 className = "nx-auto">Illegal Characters in SSN</h6>
-                </Modal.Title>
-                <button
-                    name="ssnwrong"
-                    type="button"
-                    className="close"
-                    aria-label="Close"
-                    onClick={props.closeModals}>
-
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </Modal.Header>
-            <Modal.Body>
-                Enter social security with nine digits and no hypens! For you Trump lovers that means JUST NUMBERS
-            </Modal.Body>
-        </Modal>
-
-    )
-}
-
-
-export const popoverssnwronglength = (props) => {
+export const formfieldResponseModal = (props) => {
     //onClick={() => { props.showPopover("ssnmodalshow",false) }} // how to pass a function!
-    console.log("In the modal" + props.show);
+
+
+    console.log("In the modal" + props.headertext);
     return(
 
         <Modal show={props.show} >
-            <Modal.Header>
-                <h6>Hi </h6>
+            <Modal.Header >
+                <Row className = "testrow"
+                >
+
+                    <Col md={12}><h4 >{props.headertext}</h4></Col>
+
+                </Row>
                 <button
+
                     name="ssnwronglength"
                     type="button"
                     className="close"
@@ -114,8 +93,7 @@ export const popoverssnwronglength = (props) => {
                 </button>
             </Modal.Header>
             <Modal.Body>
-                Hey Bonehead - its only NINE digits
-                Use your fingers and count!!!!
+                <b>{props.bodytext} </b>
             </Modal.Body>
         </Modal>
 
@@ -123,21 +101,22 @@ export const popoverssnwronglength = (props) => {
 }
 
 export const firstLastName = (props) => {
-
-    //console.log(props.firsttouched);
-    //console.log(props.lasttouched);
-    //console.log(props.firstvalid);
-    //console.log(props.lastvalid);
-    //console.log('#################');
+// updated with the red and green change on valid / invalid
 
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
+    console.log("name " + props.firsttouched);
+    console.log("name " + props.firstvalid);
 
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
-        firstlabelname = 'l1 l1invalid'
+        firstlabelname = 'l1 l1invalid';
+    }
 
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
     }
 
     let lastinputControl = "validname";
@@ -145,7 +124,12 @@ export const firstLastName = (props) => {
 
     if (props.lasttouched && !props.lastvalid) {
         lastinputControl = 'validname invalidname';
-        lastlabelname = 'l1 l1invalid'
+        lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
     }
 
 
@@ -164,7 +148,9 @@ export const firstLastName = (props) => {
                     className={firstinputControl}
                     name="firstname"
                     value={props.firstvalue} // makes this a controlled component
-                    onChange={props.onChange}
+                    onChange={props.myonChange} // dont want confusion between built in on change
+                    onBlur = {props.onBlur}
+                    onFocus = {props.onFocus}
                 />
             </Col>
 
@@ -179,7 +165,9 @@ export const firstLastName = (props) => {
                     className={lastinputControl}
                     name="lastname"
                     value={props.lastvalue} // makes this a controlled component
-                    onChange={props.onChange}
+                    onChange={props.myonChange}
+                    onBlur = {props.onBlur}
+                    onFocus = {props.onFocus}
                 />
             </Col>
         </Form.Group>
@@ -256,11 +244,17 @@ export const streetCity = (props) => {
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
+    console.log("street " + props.firsttouched);
+    console.log("street " + props.firstvalid);
 
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
-        firstlabelname = 'l1 l1invalid'
+        firstlabelname = 'l1 l1invalid';
+    }
 
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
     }
 
     let lastinputControl = "validname";
@@ -269,6 +263,11 @@ export const streetCity = (props) => {
     if (props.lasttouched && !props.lastvalid) {
         lastinputControl = 'validname invalidname';
         lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
     }
 
 
@@ -375,7 +374,7 @@ export const stateZip = (props) => {
 
 export const birthdayssn = (props) => {
 
-
+// todo NOT updates with red / green
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
@@ -386,6 +385,7 @@ export const birthdayssn = (props) => {
 
     }
 
+     // update with red/green
     let lastinputControl = "validname";
     let lastlabelname = "l1";
 
