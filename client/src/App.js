@@ -677,18 +677,32 @@ class App extends React.Component {
             });
         }
 
+
         // name length must match the validator rule
-
-
         else if(e.target.getAttribute('value').length < this.state.formControls.firstname.validationRules.minLengthValidator && thisvalid.valid === false ) {
 
+            let re = /^[a-zA-Z'.-]*$/;
+            //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
+            var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
 
+            if(chartest === true) {
                 this.setState({
-                shownamewronglength:true
-            }, () => {
-                console.log("in the name_PopoverLogic name too short");
-            });
+                    shownamewronglength: true
+                }, () => {
+                    console.log("in the name_PopoverLogic name too short");
+                });
+            } else {
+                this.setState({
+                    shownamewrong: true
+                }, () => {
+                    console.log("in the name_PopoverLogic name too short but also bad charaacter");
+                });
+
+            }
         }
+
+
+
 
         // is there something there and its not letters only
         else if(thisvalid.valid === false ) {
