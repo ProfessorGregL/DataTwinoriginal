@@ -42,6 +42,11 @@ class App extends React.Component {
             showblankfield:false,
             shownamewrong:false,
             shownamewronglength:false,
+            showstreetwrong:false,
+            showstreetwronglength:false,
+            showcitywrong:false,
+            showcitywronglength:false,
+            showzipwrong: false,
 
             // show array holds the true/false response values from the search to control what is shown
             showArray: {
@@ -151,9 +156,10 @@ class App extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLengthValidator: 2,
+                        minLengthValidator: 5,
                         requiredValidator: true,
-                        emptyTextFieldValidator: false
+                        emptyTextFieldValidator: false,
+                        zipValidator: true
                     }
                 },
                 birthday: {
@@ -453,7 +459,7 @@ class App extends React.Component {
             formControls: updatedControls,
             formIsValid: formIsValid
         }, () => {
-            //console.log(this.state);
+            console.log(this.state);
 
         });
 
@@ -658,11 +664,11 @@ class App extends React.Component {
     name_PopoverLogic = (e) => {
 
         console.log("in name_PopoverLogic");
-        console.log(" name length  " + this.state.formControls.firstname.validationRules.minLengthValidator + "  " +e.target.getAttribute('value').length );
+
 
         let thisvalid = this.state.formControls[e.target.getAttribute('name')]
 
-        console.log(e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        //console.log(e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
 
 
         // is the field left blank?
@@ -735,9 +741,134 @@ class App extends React.Component {
 
     //#######################################################################################
 
-    streetcity_PopoverLogic = (e) => {
+    street_PopoverLogic = (e) => {
 
-        console.log("in streetcity_PopoverLogic");
+        console.log("in street_PopoverLogic");
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+
+
+        // is the field left blank?
+        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the street_PopoverLogic blank field");
+            });
+        }
+
+        // name length must match the validator rule
+        else if(e.target.getAttribute('value').length < this.state.formControls.street.validationRules.minLengthValidator && thisvalid.valid === false ) {
+
+            let re = /^[a-zA-Z'.-]*$/;
+            //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
+            var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
+
+            if(chartest === true) {
+                this.setState({
+                    showstreetwronglength: true
+                }, () => {
+                    console.log("in the street_PopoverLogic name too short");
+                });
+            } else {
+                this.setState({
+                    showstreetwrong: true
+                }, () => {
+                    console.log("in the street_PopoverLogic name too short but also bad charaacter");
+                });
+
+            }
+        }
+
+
+        // is there something there and its not letters only
+        else if(thisvalid.valid === false ) {
+            this.setState({
+                showstreetwrong:true
+            }, () => {
+                console.log("in the street_PopoverLogic - bad character present");
+            });
+        }
+
+    }
+
+    //#######################################################################################
+
+    city_PopoverLogic = (e) => {
+
+        console.log("in city_PopoverLogic");
+
+        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+
+        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+
+
+        // is the field left blank?
+        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the city_PopoverLogic blank field");
+            });
+        }
+
+        // name length must match the validator rule
+        else if(e.target.getAttribute('value').length < this.state.formControls.city.validationRules.minLengthValidator && thisvalid.valid === false ) {
+
+            let re = /^[a-zA-Z'.-]*$/;
+            //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
+            var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
+
+            if(chartest === true) {
+                this.setState({
+                    showcitywronglength: true
+                }, () => {
+                    console.log("in the city_PopoverLogic name too short");
+                });
+            } else {
+                this.setState({
+                    showcitywrong: true
+                }, () => {
+                    console.log("in the city_PopoverLogic name too short but also bad charaacter");
+                });
+
+            }
+        }
+
+
+        // is there something there and its not letters only
+        else if(thisvalid.valid === false ) {
+            this.setState({
+                showcitywrong:true
+            }, () => {
+                console.log("in the streetcity_PopoverLogic - bad character present");
+            });
+        }
+
+        // name length limited to 25 characters per passport but it passes basic test
+        else if(e.target.getAttribute('value').length >25 && thisvalid.valid === true ) {
+
+            this.setState({
+                showcitywronglength:true
+            }, () => {
+                console.log("in the city_PopoverLogic name  too long");
+            });
+        }
+
+    }
+
+    //#######################################################################################
+    zip_PopoverLogic = (e) => {
+
+        console.log("in zip_PopoverLogic");
 
         let thisvalid = this.state.formControls[e.target.getAttribute('name')]
 
@@ -745,100 +876,38 @@ class App extends React.Component {
 
 
         // is the field left blank?
-        if(e.key === 'Enter' && e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
 
             console.log("checking for blank field");
             this.setState({
                 showblankfield:true
             }, () => {
                 this.handleChange();
-                console.log("in the name_PopoverLogic function after state set - false -true");
+                console.log("in the zip_PopoverLogic blank field");
             });
         }
 
-        // is there something there and its not letters only
-        else if(e.key === 'Enter'  && (thisvalid.valid === false) ) {
-            this.setState({
-                shownamewrong:true
-            }, () => {
-                console.log("in the name_PopoverLogic function after state set - failed validity test");
-            });
-        }
+        // zip is wrong  - small,big, or bad charcters
+        else if(thisvalid.valid === false ) {
 
-        // name length limited to 31 characters per passport but it passes basic test
-        else if(e.key === 'Enter' && e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
 
-            this.setState({
-                showssnwronglength:true
-            }, () => {
-                console.log("in the name_PopoverLogic function after state set - too long");
-            });
-        }
 
-        else {this.setState({
-
-        }, () => {
-            console.log("in the name_PopoverLogic function after state set - in else");
-        });
+                this.setState({
+                    showzipwrong: true
+                }, () => {
+                    console.log("in the zip_PopoverLogic zipwrong");
+                });
 
         }
+
+
+
+
 
     }
 
     //#######################################################################################
 
-
-    statezip_PopoverLogic = (e) => {
-
-        console.log("in statezip_PopoverLogic");
-
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
-
-        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
-
-
-        // is the field left blank?
-        if(e.key === 'Enter' && e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
-
-            console.log("checking for blank field");
-            this.setState({
-                showblankfield:true
-            }, () => {
-                this.handleChange();
-                console.log("in the name_PopoverLogic function after state set - false -true");
-            });
-        }
-
-        // is there something there and its not letters only
-        else if(e.key === 'Enter'  && (thisvalid.valid === false) ) {
-            this.setState({
-                shownamewrong:true
-            }, () => {
-                console.log("in the name_PopoverLogic function after state set - failed validity test");
-            });
-        }
-
-        // name length limited to 31 characters per passport but it passes basic test
-        else if(e.key === 'Enter' && e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
-
-            this.setState({
-                showssnwronglength:true
-            }, () => {
-                console.log("in the name_PopoverLogic function after state set - too long");
-            });
-        }
-
-        else {this.setState({
-
-        }, () => {
-            console.log("in the name_PopoverLogic function after state set - in else");
-        });
-
-        }
-
-    }
-
-    //#######################################################################################
 
     birthday_PopoverLogic = (e) => {
 
@@ -945,7 +1014,12 @@ class App extends React.Component {
             showssnwronglength:false,
             showblankfield:false,
             shownamewrong:false,
-            shownamewronglength:false
+            shownamewronglength:false,
+            showstreetwrong:false,
+            showstreetwronglength:false,
+            showcitywrong:false,
+            showcitywronglength:false,
+            showzipwrong: false,
         }, () => {
             //console.log("in the close modals function");
         });
@@ -981,7 +1055,7 @@ class App extends React.Component {
     render() {
 
         const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
-            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength} = this.state;
+            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong, showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong} = this.state;
 
         return (
 
@@ -1042,6 +1116,9 @@ class App extends React.Component {
                         lastvalid={this.state.formControls.city.valid}
                         firsttouched={this.state.formControls.street.touched}
                         lasttouched={this.state.formControls.city.touched}
+                        firstonBlur = {this.street_PopoverLogic}
+                        lastonBlur = {this.city_PopoverLogic}
+                        onFocus = {this.setTouchedOnFocus}
                     />
 
 
@@ -1056,6 +1133,9 @@ class App extends React.Component {
                         lastvalid={this.state.formControls.zip.valid}
                         firsttouched={this.state.formControls.state.touched}
                         lasttouched={this.state.formControls.zip.touched}
+                        firstonBlur = {this.state_PopoverLogic}
+                        lastonBlur = {this.zip_PopoverLogic}
+                        onFocus = {this.setTouchedOnFocus}
                     />
 
 
@@ -1233,6 +1313,56 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Name length must be more than one character and less than 32 characters"
                             bodytext = "Please enter your name as it is on your passport!"
+                        />
+                    )}
+
+                    {showstreetwrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showstreetwrong}
+                            closeModals = {this.closeModals}
+                            headertext = "There is a character in the street "
+                            bodytext = "Please delete all non letters from your street address"
+                        />
+                    )}
+
+                    {showstreetwronglength && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showstreetwronglength}
+                            closeModals = {this.closeModals}
+                            headertext = "Street address length must be more than one character and less than 36 characters"
+                            bodytext = "Please check your street address for length"
+                        />
+                    )}
+
+                    {showcitywrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showcitywrong}
+                            closeModals = {this.closeModals}
+                            headertext = "City names contain letters only"
+                            bodytext = "Please delete all non letters from your city name"
+                        />
+                    )}
+
+                    {showcitywronglength && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showcitywronglength}
+                            closeModals = {this.closeModals}
+                            headertext = "Name length must be more than three characters and less than 25 characters"
+                            bodytext = "Please check the length of your city name"
+                        />
+                    )}
+
+                    {showzipwrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showzipwrong}
+                            closeModals = {this.closeModals}
+                            headertext = "Your zip code should be either 5 numbers or 5 numbers, a dash, and 4 more numbers"
+                            bodytext = "Please make sure your zip code meets these requirements"
                         />
                     )}
 

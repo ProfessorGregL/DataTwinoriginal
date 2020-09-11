@@ -19,7 +19,7 @@ const minLengthValidator = (value, minLength) => {
 
 const requiredValidator = (value,comp) => {
     console.log("in required validator");
-    return (value.trim() != '') === comp;
+    return (value.trim() != '' === comp);
 }
 
 // actually name validator
@@ -29,13 +29,13 @@ const lettersOnlyValidator = (value,comp) => {
     console.log("in letters only validator");
     let re = /^[a-zA-Z'.-]*$/;
     console.log( re.test(String(value).toLowerCase()));
-    return (re.test(String(value).toLowerCase())) === comp;
+    return (re.test(String(value).toLowerCase()) === comp);
 }
 
 const emptyTextFieldValidator = (value,comp) => {
     console.log("in empty field validator");
-    console.log(value.length === 0);
-    return (value.length === 0) === comp;
+    console.log("empty" + (value.length === 0));
+    return ((value.length === 0)=== comp);
 
 }
 
@@ -48,9 +48,47 @@ const numbersOnlyValidator = (value,comp) => {
     //accept one or more digits
     let re = /^[0-9]+$/;
     console.log(re.test(Number(value)));
-    return (re.test(Number(value))) === comp;
+    return (re.test(Number(value)) === comp);
 
 
+}
+
+
+const streetValidator = (value,comp) => {
+
+    console.log("in street validator");
+    let re = /\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\.?/;
+    return (re.test(String(value).toLowerCase()) === comp);
+
+}
+
+
+
+const cityValidator = (value,comp) => {
+
+    console.log("in city validator");
+    let re = /(?:[A-Z][a-z.-]+[ ]?)+/;
+    return (re.test(String(value).toLowerCase()) === comp);
+
+
+
+}
+
+const stateValidator = (value,comp) => {
+
+/// not needed  ///////////////
+
+}
+
+const zipValidator = (value,comp) => {
+
+    console.log("in zip validator");
+
+    //let re = /^[0-9]{5}$/
+    let re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+
+    console.log("in the zipp " + (re.test(String(value))));
+    return (re.test(String(value)) === comp);
 }
 
 const validate = (value,rules) => {
@@ -73,6 +111,8 @@ const validate = (value,rules) => {
             case 'emptyTextFieldValidator': isValid = isValid && emptyTextFieldValidator(value, rules[rule]);
             break;
             case 'numbersOnlyValidator': isValid = isValid && numbersOnlyValidator(value, rules[rule]);
+            break;
+            case 'zipValidator': isValid = isValid && zipValidator(value, rules[rule]);
             break;
             //default: isValid = true;
         }
