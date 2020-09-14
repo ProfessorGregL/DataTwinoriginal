@@ -106,8 +106,8 @@ export const firstLastName = (props) => {
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
-    console.log("name " + props.firsttouched);
-    console.log("name " + props.firstvalid);
+    //console.log("firstname " + props.firsttouched);
+    //console.log("firstname " + props.firstvalid);
 
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
@@ -182,8 +182,12 @@ export const spouseName = (props) => {
 
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
-        firstlabelname = 'l1 l1invalid'
+        firstlabelname = 'l1 l1invalid';
+    }
 
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
     }
 
     let lastinputControl = "validname";
@@ -191,7 +195,12 @@ export const spouseName = (props) => {
 
     if (props.lasttouched && !props.lastvalid) {
         lastinputControl = 'validname invalidname';
-        lastlabelname = 'l1 l1invalid'
+        lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
     }
 
     return(
@@ -210,7 +219,9 @@ export const spouseName = (props) => {
                     className={firstinputControl}
                     name="spouse_firstname"
                     value={props.firstvalue} // makes this a controlled component
-                    onChange={props.onChange}
+                    onChange={props.myonChange}
+                    onBlur = {props.onBlur}
+                    onFocus = {props.onFocus}
                 />
             </Col>
 
@@ -227,7 +238,9 @@ export const spouseName = (props) => {
                     type="text"
                     className={lastinputControl}
                     value={props.lastvalue} // makes this a controlled component
-                    onChange={props.onChange}
+                    onChange={props.myonChange}
+                    onBlur = {props.onBlur}
+                    onFocus = {props.onFocus}
                 />
             </Col>
 
@@ -462,17 +475,24 @@ export const stateZip = (props) => {
 }
 
 
-export const birthdayssn = (props) => {
+export const agessn = (props) => {
 
-// todo NOT updates with red / green
+
+
+
+
+
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
-
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
-        firstlabelname = 'l1 l1invalid'
+        firstlabelname = 'l1 l1invalid';
+    }
 
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
     }
 
      // update with red/green
@@ -485,25 +505,27 @@ export const birthdayssn = (props) => {
     }
 
     if (props.lasttouched && props.lastvalid) {
-        lastinputControl = 'validname invalidname';
+        lastinputControl = 'validname';
         lastlabelname = 'l1 l1valid';
     }
 
     return(
 
-        <Form.Group  as={Row} controlId="formMortgagePersonalInfoBirthdaySSN" className = "formgroup">
+        <Form.Group  as={Row} controlId="formMortgagePersonalInfoAgeSSN" className = "formgroup">
 
             <Form.Label  className={firstlabelname}>
-                Birthday:
+                Age:
             </Form.Label>
             <Col>
                 <Form.Control
                     type="text"
                     placeholder={props.firstplaceholder}
                     className={firstinputControl}
-                    name="birthday"
+                    name="age"
                     value={props.firstvalue} // makes this a controlled component
                     onChange={props.firstonChange}
+                    onBlur = {props.firstonBlur}
+                    onFocus = {props.onFocus}
                 />
             </Col>
 
@@ -514,11 +536,12 @@ export const birthdayssn = (props) => {
                     <Form.Control
                         type="text"
                         placeholder={props.lastplaceholder}
-                        className={firstinputControl}
+                        className={lastinputControl}
                         name="socialsecuritynumber"
                         value={props.lastvalue} // makes this a controlled component
                         onChange={props.lastonChange}
-                        onKeyUp = {props.lastonKeyUp}
+                        onBlur = {props.lastonBlur}
+                        onFocus = {props.onFocus}
                     />
                 </Col>
 
@@ -533,15 +556,26 @@ export const birthdayssn = (props) => {
 export const income = (props) => {
 
 
+    console.log("income " + props.firsttouched);
+    console.log("income " + props.firstvalid);
+
+
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
 
+
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
-        firstlabelname = 'l1 l1invalid'
-
+        firstlabelname = 'l1 l1invalid';
     }
+
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
+    }
+
+
 
 
     return(
@@ -557,6 +591,8 @@ export const income = (props) => {
                         onChange = {props.storeIncome}
                         className={firstinputControl}
                         name="rawincome"
+                        onBlur = {props.firstonBlur}
+                        onFocus = {props.onFocus}
 
                     />
                 </Col>
@@ -579,8 +615,15 @@ export const education = (props) => {
 
     }
 
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        firstlabelname = 'l1 l1valid'
 
-    return(
+    }
+
+
+
+        return(
         <Form.Group as = {Row}  controlId="formMortgagePersonalInfoEducation" className = "formgroup">
 
 
@@ -643,18 +686,29 @@ export const education = (props) => {
 
 export const maritalStatus = (props) => {
 
+    //console.log("marital " + props.firsttouched);
+    //console.log("marital " + props.firstvalid);
+
+
     let inputControl = "radiovalidname";
     let labelname = "l1";
 
 
     if (props.firsttouched && !props.firstvalid) {
         inputControl = 'radiovalidname invalidname';
-        labelname = 'radiovalidname'
+        labelname = 'l1 l1invalid'
+
+    }
+
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
 
     }
 
 
-    return(
+
+        return(
 
         <Form.Group as = {Row} controlId="formMortgagePersonalInfoMaritalStatus" className = "formgroup">
 
@@ -720,7 +774,14 @@ export const dependents = (props) => {
 
     }
 
-    let checkedbuttonnumber = props.value;
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
+
+    }
+
+
+        let checkedbuttonnumber = props.value;
 
     //console.log(checkedbuttonnumber==="2");
 
@@ -825,6 +886,12 @@ export const residence= (props) => {
 
     }
 
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
+
+    }
+
 
    return (
 
@@ -880,6 +947,12 @@ export const applications = (props) => {
     if (props.firsttouched && !props.firstvalid) {
         inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
+
+    }
+
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
 
     }
 
@@ -951,6 +1024,12 @@ export const applicationsdenied = (props) => {
     if (props.firsttouched && !props.firstvalid) {
         inputControl = 'radiovalidname invalidname';
         labelname = 'l1 l1invalid'
+
+    }
+
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
 
     }
 

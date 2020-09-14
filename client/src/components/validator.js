@@ -91,6 +91,19 @@ const zipValidator = (value,comp) => {
     return (re.test(String(value)) === comp);
 }
 
+
+
+
+const ageValidator = (value,comp) => {
+
+
+    console.log("in age validator");
+    let re = /^(?:1[01][0-9]|120|1[7-9]|[2-9][0-9])$/;
+    return (re.test(Number(value)) === comp);
+
+
+}
+
 const validate = (value,rules) => {
 
     let isValid = true;
@@ -113,6 +126,8 @@ const validate = (value,rules) => {
             case 'numbersOnlyValidator': isValid = isValid && numbersOnlyValidator(value, rules[rule]);
             break;
             case 'zipValidator': isValid = isValid && zipValidator(value, rules[rule]);
+            break;
+            case 'ageValidator': isValid = isValid && ageValidator(value, rules[rule]);
             break;
             //default: isValid = true;
         }

@@ -46,7 +46,9 @@ class App extends React.Component {
             showstreetwronglength:false,
             showcitywrong:false,
             showcitywronglength:false,
+            showagewrong: false,
             showzipwrong: false,
+            showincomewrong: false,
 
             // show array holds the true/false response values from the search to control what is shown
             showArray: {
@@ -162,15 +164,16 @@ class App extends React.Component {
                         zipValidator: true
                     }
                 },
-                birthday: {
+                age: {
                     value: '',
-                    placeholder: '1/24/2000',
+                    placeholder: '42',
                     valid: false,
                     touched: false,
                     visible: true,
                     validationRules: {
                         requiredValidator: true,
-                        emptyTextFieldValidator: false
+                        emptyTextFieldValidator: false,
+                        ageValidator: true
                     }
                 },
                 socialsecuritynumber: {
@@ -211,8 +214,7 @@ class App extends React.Component {
                     visible: true,
                     validationRules: {
                         requiredValidator: true,
-                        emptyTextFieldValidator: false,
-                        numbersOnlyValidator: true
+
                     }
                 },
                 rawincome: {
@@ -222,6 +224,8 @@ class App extends React.Component {
                     visible: true,
                     validationRules: {
                         requiredValidator: true,
+                        emptyTextFieldValidator: false,
+                        numbersOnlyValidator: true
                     }
                 },
                 pastapplications: {
@@ -402,7 +406,7 @@ class App extends React.Component {
             }
         }
 
-        //todo temporary change
+
         this.setState({
             formControls: updatedControls,
             formIsValid: formIsValid
@@ -648,6 +652,9 @@ class App extends React.Component {
         });
     }
 
+
+
+
     parseKids = e => {
         let name = "numdependents";
         let value = Number(e.target.value);
@@ -666,13 +673,13 @@ class App extends React.Component {
         console.log("in name_PopoverLogic");
 
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        let nameValid = this.state.formControls[e.target.getAttribute('name')]
 
-        //console.log(e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        //console.log(e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
 
 
         // is the field left blank?
-        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+        if(e.target.getAttribute('value').length === 0 && nameValid.valid === false ) {  // this may not work  might be "" not zero
 
             console.log("checking for blank field");
             this.setState({
@@ -685,7 +692,7 @@ class App extends React.Component {
 
 
         // name length must match the validator rule
-        else if(e.target.getAttribute('value').length < this.state.formControls.firstname.validationRules.minLengthValidator && thisvalid.valid === false ) {
+        else if(e.target.getAttribute('value').length < this.state.formControls.firstname.validationRules.minLengthValidator && nameValid.valid === false ) {
 
             let re = /^[a-zA-Z'.-]*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
@@ -711,7 +718,7 @@ class App extends React.Component {
 
 
         // is there something there and its not letters only
-        else if(thisvalid.valid === false ) {
+        else if(nameValid.valid === false ) {
             this.setState({
                 shownamewrong:true
             }, () => {
@@ -720,7 +727,7 @@ class App extends React.Component {
         }
 
         // name length limited to 31 characters per passport but it passes basic test
-        else if(e.target.getAttribute('value').length >31 && thisvalid.valid === true ) {
+        else if(e.target.getAttribute('value').length >31 && nameValid.valid === true ) {
 
             this.setState({
                 shownamewronglength:true
@@ -745,13 +752,13 @@ class App extends React.Component {
 
         console.log("in street_PopoverLogic");
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        let nameValid = this.state.formControls[e.target.getAttribute('name')]
 
-        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
 
 
         // is the field left blank?
-        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+        if(e.target.getAttribute('value').length === 0 && nameValid.valid === false ) {  // this may not work  might be "" not zero
 
             console.log("checking for blank field");
             this.setState({
@@ -763,7 +770,7 @@ class App extends React.Component {
         }
 
         // name length must match the validator rule
-        else if(e.target.getAttribute('value').length < this.state.formControls.street.validationRules.minLengthValidator && thisvalid.valid === false ) {
+        else if(e.target.getAttribute('value').length < this.state.formControls.street.validationRules.minLengthValidator && nameValid.valid === false ) {
 
             let re = /^[a-zA-Z'.-]*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
@@ -787,7 +794,7 @@ class App extends React.Component {
 
 
         // is there something there and its not letters only
-        else if(thisvalid.valid === false ) {
+        else if(nameValid.valid === false ) {
             this.setState({
                 showstreetwrong:true
             }, () => {
@@ -803,13 +810,13 @@ class App extends React.Component {
 
         console.log("in city_PopoverLogic");
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        let nameValid = this.state.formControls[e.target.getAttribute('name')]
 
-        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        //console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
 
 
         // is the field left blank?
-        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+        if(e.target.getAttribute('value').length === 0 && nameValid.valid === false ) {  // this may not work  might be "" not zero
 
             console.log("checking for blank field");
             this.setState({
@@ -821,7 +828,7 @@ class App extends React.Component {
         }
 
         // name length must match the validator rule
-        else if(e.target.getAttribute('value').length < this.state.formControls.city.validationRules.minLengthValidator && thisvalid.valid === false ) {
+        else if(e.target.getAttribute('value').length < this.state.formControls.city.validationRules.minLengthValidator && nameValid.valid === false ) {
 
             let re = /^[a-zA-Z'.-]*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
@@ -845,7 +852,7 @@ class App extends React.Component {
 
 
         // is there something there and its not letters only
-        else if(thisvalid.valid === false ) {
+        else if(nameValid.valid === false ) {
             this.setState({
                 showcitywrong:true
             }, () => {
@@ -854,7 +861,7 @@ class App extends React.Component {
         }
 
         // name length limited to 25 characters per passport but it passes basic test
-        else if(e.target.getAttribute('value').length >25 && thisvalid.valid === true ) {
+        else if(e.target.getAttribute('value').length >25 && nameValid.valid === true ) {
 
             this.setState({
                 showcitywronglength:true
@@ -870,13 +877,13 @@ class App extends React.Component {
 
         console.log("in zip_PopoverLogic");
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        let nameValid = this.state.formControls[e.target.getAttribute('name')]
 
-        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
 
 
         // is the field left blank?
-        if(e.target.getAttribute('value').length === 0 && thisvalid.valid === false ) {  // this may not work  might be "" not zero
+        if(e.target.getAttribute('value').length === 0 && nameValid.valid === false ) {  // this may not work  might be "" not zero
 
             console.log("checking for blank field");
             this.setState({
@@ -888,7 +895,7 @@ class App extends React.Component {
         }
 
         // zip is wrong  - small,big, or bad charcters
-        else if(thisvalid.valid === false ) {
+        else if(nameValid.valid === false ) {
 
 
 
@@ -909,16 +916,47 @@ class App extends React.Component {
     //#######################################################################################
 
 
-    birthday_PopoverLogic = (e) => {
+    age_PopoverLogic = (e) => {
 
-        console.log("in birthday_PopoverLogic");
+        console.log("in age_PopoverLogic");
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        let namevalid = this.state.formControls[e.target.getAttribute('name')]
+
+        // is the field left blank?
+        if(e.target.getAttribute('value').length === 0 && namevalid.valid === false ) {  // this may not work  might be "" not zero
+
+            console.log("checking for blank field");
+            this.setState({
+                showblankfield:true
+            }, () => {
+                this.handleChange();
+                console.log("in the age_PopoverLogic blank field");
+            });
+        }
+
+        else if((e.target.getAttribute('value').length > 0 ) && (namevalid.valid === false) ) {
+            this.setState({
+                showagewrong:true
+            }, () => {
+                console.log("in the income_PopoverLogic function  - bad character");
+            });
+        }
 
 
-        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+    }
 
-        if(e.key === 'Enter' &&(e.target.getAttribute('value').length === 0)&&  thisvalid.valid === false ) {
+    //#######################################################################################
+
+    ssn_PopoverLogic = (e) => {
+
+        console.log("in ssn_PopoverLogic");
+
+        let nameValid = this.state.formControls[e.target.getAttribute('name')]
+
+
+        console.log(e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
+
+        if((e.target.getAttribute('value').length === 0)&&  nameValid.valid === false ) {
 
             this.setState({
                 showblankfield:true
@@ -927,7 +965,7 @@ class App extends React.Component {
             });
         }
 
-        else if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
+        else if((e.target.getAttribute('value').length === 9) && (nameValid.valid === false) ) {
             this.setState({
                 showssnwrong:true
             }, () => {
@@ -935,8 +973,8 @@ class App extends React.Component {
             });
         }
 
-        //else if(e.key === 'Enter' && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
-        else if(e.key === 'Enter' &&(e.target.getAttribute('value').length != 9)&&  thisvalid.valid === false ) {
+        //else if(e.key === && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
+        else if((e.target.getAttribute('value').length != 9)&&  nameValid.valid === false ) {
 
             this.setState({
                 showssnwronglength:true
@@ -957,49 +995,36 @@ class App extends React.Component {
 
     //#######################################################################################
 
-    ssn_PopoverLogic = (e) => {
 
-        console.log("in ssn_PopoverLogic");
+    income_PopoverLogic = (e) => {
 
-        let thisvalid = this.state.formControls[e.target.getAttribute('name')]
+        console.log("in income_PopoverLogic");
 
+        let namevalid = this.state.formControls[e.target.getAttribute('name')]
 
-        console.log(e.key + "  "+e.target.getAttribute('value').length+"  "+ thisvalid.valid + "  "+ e.target.getAttribute('name'));
+        console.log("income popover valid "+ e.target.getAttribute('name'));
 
-        if(e.key === 'Enter' &&(e.target.getAttribute('value').length === 0)&&  thisvalid.valid === false ) {
+        // is the field left blank?
+        if(e.target.getAttribute('value').length === 0 && namevalid.valid === false ) {  // this may not work  might be "" not zero
 
+            console.log("checking for blank field");
             this.setState({
                 showblankfield:true
             }, () => {
-                console.log("in the ssn_PopoverLogic function after state set - false -true");
+                this.handleChange();
+                console.log("in the income_PopoverLogic blank field");
             });
         }
 
-        else if(e.key === 'Enter' && (e.target.getAttribute('value').length === 9) && (thisvalid.valid === false) ) {
+
+        else if((e.target.getAttribute('value').length > 0 ) && (namevalid.valid === false) ) {
             this.setState({
-                showssnwrong:true
+                showincomewrong:true
             }, () => {
-                console.log("in the ssn_PopoverLogic function after state set - true-false");
+                console.log("in the income_PopoverLogic function  - bad character");
             });
         }
 
-        //else if(e.key === 'Enter' && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
-        else if(e.key === 'Enter' &&(e.target.getAttribute('value').length != 9)&&  thisvalid.valid === false ) {
-
-            this.setState({
-                showssnwronglength:true
-            }, () => {
-                console.log("in the ssn_PopoverLogic function after state set - false -true");
-            });
-        }
-
-        else {this.setState({
-
-        }, () => {
-            console.log("in the ssn_PopoverLogic function after state set - in else");
-        });
-
-        }
 
     }
 
@@ -1019,7 +1044,9 @@ class App extends React.Component {
             showstreetwronglength:false,
             showcitywrong:false,
             showcitywronglength:false,
+            showagewrong:false,
             showzipwrong: false,
+            showincomewrong: false
         }, () => {
             //console.log("in the close modals function");
         });
@@ -1029,6 +1056,8 @@ class App extends React.Component {
 
     setTouchedOnFocus = (e) => {
         const name = e.target.name;
+
+        console.log("in on focus   " + name);
 
         const updatedControls = {
             ...this.state.formControls // gives you all of the form controls and all their ste elements
@@ -1055,7 +1084,7 @@ class App extends React.Component {
     render() {
 
         const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
-            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong, showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong} = this.state;
+            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong, showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong} = this.state;
 
         return (
 
@@ -1094,14 +1123,18 @@ class App extends React.Component {
                         <displays.spouseName
                             type="text"
                             firstplaceholder={this.state.formControls.spouse_firstname.placeholder}
-                            lastplaceholder={this.state.formControls.spouse_lastname.placeholder}
                             firstvalue={this.state.formControls.spouse_firstname.value} // makes this a controlled component
-                            lastvalue={this.state.formControls.spouse_lastname.value}
-                            onChange={this.handleChange2}
                             firstvalid={this.state.formControls.spouse_firstname.valid}
-                            lastvalid={this.state.formControls.spouse_lastname.valid}
                             firsttouched={this.state.formControls.spouse_firstname.touched}
+
+
+                            lastplaceholder={this.state.formControls.spouse_lastname.placeholder}
+                            lastvalue={this.state.formControls.spouse_lastname.value}
+                            lastvalid={this.state.formControls.spouse_lastname.valid}
                             lasttouched={this.state.formControls.spouse_lastname.touched}
+                            myonChange={this.handleChange2}
+                            onBlur = {this.name_PopoverLogic}
+                            onFocus = {this.setTouchedOnFocus}
                         /> )}
 
 
@@ -1139,21 +1172,22 @@ class App extends React.Component {
                     />
 
 
-                    <displays.birthdayssn
+                    <displays.agessn
                         type="text"
-                        firstplaceholder={this.state.formControls.birthday.placeholder}
-                        firstvalue={this.state.formControls.birthday.value} // makes this a controlled component
+                        firstplaceholder={this.state.formControls.age.placeholder}
+                        firstvalue={this.state.formControls.age.value} // makes this a controlled component
                         firstonChange={this.handleChange2}
-                        firstvalid={this.state.formControls.birthday.valid}
-                        firsttouched={this.state.formControls.birthday.touched}
+                        firstvalid={this.state.formControls.age.valid}
+                        firsttouched={this.state.formControls.age.touched}
                         lastplaceholder={this.state.formControls.socialsecuritynumber.placeholder}
                         lastvalue={this.state.formControls.socialsecuritynumber.value} // makes this a controlled component
                         lastonChange={this.handleChange2}
                         lastvalid={this.state.formControls.socialsecuritynumber.valid}
                         lasttouched={this.state.formControls.socialsecuritynumber.touched}
-                        lastonKeyUp = {this.ssn_PopoverLogic}
-                        lastshowssnwrong = {this.state.showssnwrong}
-                        lastshowssnwronglength = {this.state.showssnwronglength}/>
+                        firstonBlur = {this.age_PopoverLogic}
+                        lastonBlur = {this.ssn_PopoverLogic}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
                     <displays.maritalStatus
                         numdependents={this.state.formControls.maritalstatus.value}
@@ -1161,8 +1195,10 @@ class App extends React.Component {
                         hideSpouse={this.hideSpouse2}
                         type="text"
                         value={this.state.formControls.maritalstatus.value} // makes this a controlled component
-                        valid={this.state.formControls.maritalstatus.valid}
-                        touched={this.state.formControls.maritalstatus.touched}/>
+                        firstvalid={this.state.formControls.maritalstatus.valid}
+                        firsttouched={this.state.formControls.maritalstatus.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
 
                     <displays.dependents
@@ -1170,8 +1206,10 @@ class App extends React.Component {
                         parseKids={this.parseKids}
                         type="text"
                         value={this.state.formControls.numdependents.value} // makes this a controlled component
-                        valid={this.state.formControls.numdependents.valid}
-                        touched={this.state.formControls.numdependents.touched}/>
+                        firstvalid={this.state.formControls.numdependents.valid}
+                        firsttouched={this.state.formControls.numdependents.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
 
                     <displays.residence
@@ -1179,17 +1217,23 @@ class App extends React.Component {
                         handleChange={this.handleChange2}
                         type="text"
                         value={this.state.formControls.residence.value} // makes this a controlled component
-                        valid={this.state.formControls.residence.valid}
-                        touched={this.state.formControls.residence.touched}/>
+                        firstvalid={this.state.formControls.residence.valid}
+                        firsttouched={this.state.formControls.residence.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
 
                     <displays.income
                         rawincome={this.state.formControls.rawincome.value}
                         storeIncome={this.storeIncome}
                         placeholder={this.state.formControls.income.placeholder}
-                        valid={this.state.formControls.rawincome.valid}
-                        touched={this.state.formControls.rawincome.touched}
-                        value={this.state.formControls.rawincome.value}/>
+                        firstvalid={this.state.formControls.rawincome.valid}
+                        firsttouched={this.state.formControls.rawincome.touched}
+                        value={this.state.formControls.rawincome.value}
+                        onFocus = {this.setTouchedOnFocus}
+                        firstonBlur = {this.income_PopoverLogic}
+
+                    />
 
 
                     <displays.education
@@ -1198,8 +1242,10 @@ class App extends React.Component {
                         type="text"
                         placeholder={this.state.formControls.education.placeholder}
                         value={this.state.formControls.education.value} // makes this a controlled component
-                        valid={this.state.formControls.education.valid}
-                        touched={this.state.formControls.education.touched}/>
+                        firstvalid={this.state.formControls.education.valid}
+                        firsttouched={this.state.formControls.education.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
                     <Form.Label className="l2">
                         Mortgage Applications:
@@ -1211,16 +1257,20 @@ class App extends React.Component {
                         handleChange={this.handleChange2}
                         placeholder={this.state.formControls.pastapplications.placeholder}
                         value={this.state.formControls.pastapplications.value} // makes this a controlled component
-                        valid={this.state.formControls.pastapplications.valid}
-                        touched={this.state.formControls.pastapplications.touched}/>
+                        firstvalid={this.state.formControls.pastapplications.valid}
+                        firsttouched={this.state.formControls.pastapplications.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
                     <displays.applicationsdenied
                         applicationsdenied={this.state.formControls.pastapplicationsdenied.value}
                         handleChange={this.handleChange2}
                         placeholder={this.state.formControls.pastapplicationsdenied.placeholder}
                         value={this.state.formControls.pastapplicationsdenied.value} // makes this a controlled component
-                        valid={this.state.formControls.pastapplicationsdenied.valid}
-                        touched={this.state.formControls.pastapplicationsdenied.touched}/>
+                        firstvalid={this.state.formControls.pastapplicationsdenied.valid}
+                        firsttouched={this.state.formControls.pastapplicationsdenied.touched}
+                        onFocus = {this.setTouchedOnFocus}
+                    />
 
 
                     <Form.Group as={Row} controlId="submitButton" className="formgroup">
@@ -1302,7 +1352,8 @@ class App extends React.Component {
                             show = {this.state.shownamewrong}
                             closeModals = {this.closeModals}
                             headertext = "Names contain characters only"
-                            bodytext = "Please delete all non letters from your name"
+                            bodytext = "Please delete all non letters from your name -
+                            spaces are not valid characters - make sure you didn't add one to name!!"
                         />
                     )}
 
@@ -1363,6 +1414,27 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Your zip code should be either 5 numbers or 5 numbers, a dash, and 4 more numbers"
                             bodytext = "Please make sure your zip code meets these requirements"
+                        />
+                    )}
+
+                    {showagewrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showagewrong}
+                            closeModals = {this.closeModals}
+                            headertext = "Your age is required to be 17 to 120 years old"
+                            bodytext = "We do not lend to folks younger than 17.  If you are older than 120 years old please
+                            call customer service for special service to make this easier."
+                        />
+                    )}
+
+                    {showincomewrong && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showincomewrong}
+                            closeModals = {this.closeModals}
+                            headertext = "Your income should be only numbers."
+                            bodytext = "There is no need to enter a dollar sign. Please make sure you have only entered numbers!"
                         />
                     )}
 
