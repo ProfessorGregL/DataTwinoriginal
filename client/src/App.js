@@ -49,13 +49,14 @@ class App extends React.Component {
             showagewrong: false,
             showzipwrong: false,
             showincomewrong: false,
+            showokeedokee: false,
+            shownotokeedokee: false,
 
             // show array holds the true/false response values from the search to control what is shown
             showArray: {
                 dependents: '',
                 income: '',
                 education: '',
-                okeedokee: false
             },
 
 
@@ -297,26 +298,37 @@ class App extends React.Component {
         if (!this.state.formIsValid) {
 
 
-            const fControls = {
+            // first make sure all invalid fields are set to label red
+            const updatedControls = {
                 ...this.state.formControls // gives you all of the form controls and all their ste elements
             };
 
-            for (let inputIdentifier in fControls) {
 
-                if (fControls[inputIdentifier].valid == false) {
-                    // set the label style to be red
+
+            // dealing with the conditional display - there has got to be a better way to do this
+            for (let inputIdentifier in updatedControls) {
+
+                if (!updatedControls[inputIdentifier].touched) {
+
+                    updatedControls[inputIdentifier].touched = true;
                 }
             }
 
-        }
 
-        ///// ##### true added for testing only ####### //////   TESTING ONLY  todo  delete after testing
+            this.setState({
+                formControls: updatedControls
+            }, () => {
+                console.log("turning all untouched red ");
+                console.log(this.state);
+                this.setState({shownotokeedokee: true});
+
+            });
+
+            // Now all I need to do is pop a modal that says they have to fill in the missing info
 
 
+        } else if (this.state.formIsValid) {
 
-        // if (this.state.formIsValid) {
-
-        if (true) {
 
             console.log("valid form - post to server");
 
@@ -351,13 +363,15 @@ class App extends React.Component {
                     this.setState({showmodal: true});
                 } else {
 
-                    const newState = update(this.state, {
-                        showArray: {
-                            okeedokee: {$set: true}
-                        },
-                    });
+                    this.setState({showokeedokee: true})
 
-                    this.setState(newState);
+                    //const newState = update(this.state, {
+                     //   showArray: {
+                         //   okeedokee: {$set: true}
+                      //  },
+                   // });
+
+                   // this.setState(newState);
                 }
             }, () => {
                 console.log(this.state); // Note how the callback fixes the async issue with last character
@@ -1046,7 +1060,9 @@ class App extends React.Component {
             showcitywronglength:false,
             showagewrong:false,
             showzipwrong: false,
-            showincomewrong: false
+            showincomewrong: false,
+            showokeedokee: false,
+            shownotokeedokee: false
         }, () => {
             //console.log("in the close modals function");
         });
@@ -1084,7 +1100,8 @@ class App extends React.Component {
     render() {
 
         const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
-            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong, showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong} = this.state;
+            showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong,
+            showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong, showokeedokee, shownotokeedokee} = this.state;
 
         return (
 
@@ -1435,6 +1452,28 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Your income should be only numbers."
                             bodytext = "There is no need to enter a dollar sign. Please make sure you have only entered numbers!"
+                        />
+                    )}
+
+                    {showokeedokee && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showokeedokee}
+                            closeModals = {this.closeModals}
+                            headertext = "Your application has been submitted."
+                            bodytext = "Thanks for submitting your application! We are reviewing and validating your information using a battery
+                            of sophisticated algortihmic tools from DataTwin.  You should receive an email shortly with an account number
+                             and password."
+                        />
+                    )}
+
+                    {shownotokeedokee && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.shownotokeedokee}
+                            closeModals = {this.closeModals}
+                            headertext = "Your application cannot be submitted unless all fields are complete and valid."
+                            bodytext = "Invalid fields are clearly marked in red.  Please fix and click submit."
                         />
                     )}
 
