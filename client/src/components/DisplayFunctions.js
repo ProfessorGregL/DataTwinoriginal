@@ -1,12 +1,11 @@
 //Modal component
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Modal } from 'react-bootstrap';
-import { Container, Col, Row, Form , Button} from "react-bootstrap";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 //import Autosuggest, { ItemAdapter } from 'react-bootstrap-autosuggest'
 import '../App.css';
-import Select from 'react-select';
-import Popover from 'react-bootstrap/Popover'
+//import Select from 'react-select';
+//import Popover from 'react-bootstrap/Popover'
 
 
 const States = [
@@ -559,8 +558,8 @@ export const agessn = (props) => {
 export const income = (props) => {
 
 
-    console.log("income " + props.firsttouched);
-    console.log("income " + props.firstvalid);
+    //console.log("income " + props.firsttouched);
+    //console.log("income " + props.firstvalid);
 
 
     let firstinputControl = "validname";

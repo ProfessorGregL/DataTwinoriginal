@@ -120,7 +120,6 @@ class App extends React.Component {
                     validationRules: {
                         minLengthValidator: 2,
                         requiredValidator: true,
-                        emptyTextFieldValidator: false
                         //streetValidator: true
                     }
                 },
@@ -133,8 +132,6 @@ class App extends React.Component {
                     validationRules: {
                         minLengthValidator: 4,
                         requiredValidator: true,
-                        lettersOnlyValidator: true,
-                        emptyTextFieldValidator: false,
                         cityValidator: true
                     }
                 },
@@ -1014,7 +1011,7 @@ class App extends React.Component {
 
         let namevalid = this.state.formControls[e.target.getAttribute('name')]
 
-        console.log("income popover valid "+ e.target.getAttribute('name'));
+        //console.log("income popover valid "+ e.target.getAttribute('name'));
 
         // is the field left blank?
         if(e.target.getAttribute('value').length === 0 && namevalid.valid === false ) {  // this may not work  might be "" not zero

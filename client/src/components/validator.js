@@ -28,14 +28,14 @@ const requiredValidator = (value,comp) => {
 const lettersOnlyValidator = (value,comp) => {
     console.log("in letters only validator");
     let re = /^[a-zA-Z'.-]*$/;
-    console.log( re.test(String(value).toLowerCase()));
+    console.log(re.test(String(value).toLowerCase()));
     return ((re.test(String(value).toLowerCase())) === comp);
 }
 
 const emptyTextFieldValidator = (value,comp) => {
     console.log("in empty field validator");
-    console.log("empty" + (value.length === 0));
-    return ((value.length === 0)=== comp);
+    //console.log("comp  " + (value.length === 0));
+    console.log("emptyfield evaluator results  " + ((value.length == 0) == comp));
 
 }
 
@@ -67,8 +67,9 @@ const streetValidator = (value,comp) => {
 const cityValidator = (value,comp) => {
 
     console.log("in city validator");
-    let re = /(?:[A-Z][a-z.-]+[ ]?)+/;
-    return (re.test(String(value).toLowerCase()) === comp);
+    let re = /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/;
+    console.log("retest" + re.test(String(value).toLowerCase()));
+    return (re.test(String(value).toLowerCase() === comp));
 
 
 
