@@ -68,11 +68,16 @@ const cityValidator = (value,comp) => {
 
     console.log("in city validator");
     let re = /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/;
-    console.log("retest" + re.test(String(value).toLowerCase()));
+    //console.log("retest" + re.test(String(value).toLowerCase()));
     return (re.test(String(value).toLowerCase() === comp));
 
+}
 
+const cityLengthValidator = (value,comp) => {
 
+    console.log("in city length validator");
+    //console.log("retest" + re.test(String(value).toLowerCase()));
+    return (value.length < (comp+ 1));
 }
 
 
@@ -126,9 +131,12 @@ const validate = (value,rules) => {
             case 'ageValidator': isValid = isValid && ageValidator(value, rules[rule]);
             break;
             case 'cityValidator': isValid = isValid && cityValidator(value, rules[rule]);
-                break;
+            break;
             case 'streetValidator': isValid = isValid && streetValidator(value, rules[rule]);
-                break;
+            break;
+            case 'cityLengthValidator': isValid = isValid && cityLengthValidator(value, rules[rule]);
+            break;
+
 
             //default: isValid = true;
         }

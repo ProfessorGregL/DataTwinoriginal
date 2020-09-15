@@ -132,7 +132,8 @@ class App extends React.Component {
                     validationRules: {
                         minLengthValidator: 4,
                         requiredValidator: true,
-                        cityValidator: true
+                        cityValidator: true,
+                        cityLengthValidator: 25
                     }
                 },
                 state: {
@@ -839,7 +840,7 @@ class App extends React.Component {
         // name length must match the validator rule
         else if(e.target.getAttribute('value').length < this.state.formControls.city.validationRules.minLengthValidator && nameValid.valid === false ) {
 
-            let re = /^[a-zA-Z'.-]*$/;
+            let re = /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
             var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
 
@@ -870,7 +871,7 @@ class App extends React.Component {
         }
 
         // name length limited to 25 characters per passport but it passes basic test
-        else if(e.target.getAttribute('value').length >25 && nameValid.valid === true ) {
+        else if(e.target.getAttribute('value').length > this.state.formControls.city.validationRules.cityLengthValidator && nameValid.valid === true ) {
 
             this.setState({
                 showcitywronglength:true
