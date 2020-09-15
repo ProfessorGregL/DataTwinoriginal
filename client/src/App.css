@@ -148,3 +148,17 @@
 margin-left: 30px;
 }
 
+.modal-70w {
+    min-width : 70%;
+
+}
+
+.modal-90w {
+    min-width : 90%;
+
+}
+
+.modal-50w {
+    min-width : 50%;
+
+}

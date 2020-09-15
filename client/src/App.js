@@ -1358,6 +1358,7 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "You have left a field blank"
                             bodytext = "We really need this information to process your application!"
+                            width = "modal-50w"
                         />
                     )}
 
@@ -1379,6 +1380,7 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Name length must be more than one character and less than 32 characters"
                             bodytext = "Please enter your name as it is on your passport!"
+                            width = "modal-70w"
                         />
                     )}
 
@@ -1399,6 +1401,7 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Street address length must be more than one character and less than 36 characters"
                             bodytext = "Please check your street address for length"
+                            width = "modal-70w"
                         />
                     )}
 
@@ -1429,6 +1432,7 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Your zip code should be either 5 numbers or 5 numbers, a dash, and 4 more numbers"
                             bodytext = "Please make sure your zip code meets these requirements"
+                            width = "modal-70w"
                         />
                     )}
 
@@ -1472,6 +1476,7 @@ class App extends React.Component {
                             closeModals = {this.closeModals}
                             headertext = "Your application cannot be submitted unless all fields are complete and valid."
                             bodytext = "Invalid fields are clearly marked in red.  Please fix and click submit."
+                            width = "modal-70w"
                         />
                     )}
 

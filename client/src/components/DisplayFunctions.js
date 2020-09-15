@@ -73,7 +73,10 @@ export const formfieldResponseModal = (props) => {
     console.log("In the modal" + props.headertext);
     return(
 
-        <Modal show={props.show} >
+        <Modal
+            show={props.show}
+            dialogClassName={props.width}
+        >
             <Modal.Header >
                 <Row className = "testrow"
                 >
