@@ -1,11 +1,8 @@
-import React, { Component , useState } from 'react';
+import React, { } from 'react';
 import axios from 'axios';
-import { Container, Col, Row, Form , Button, Alert} from "react-bootstrap";
-import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
-import { Modal } from 'react-bootstrap';
+import { Container, Col, Row, Form , Button} from "react-bootstrap";
 import update from 'immutability-helper';
 import validate from './components/validator.js';
-import Overlay from 'react-bootstrap/Overlay';
 
 
 //import ModalClass from "./components/ModalClass";  -- using a class
@@ -124,6 +121,7 @@ class App extends React.Component {
                         minLengthValidator: 2,
                         requiredValidator: true,
                         emptyTextFieldValidator: false
+                        //streetValidator: true
                     }
                 },
                 city: {
@@ -136,7 +134,8 @@ class App extends React.Component {
                         minLengthValidator: 4,
                         requiredValidator: true,
                         lettersOnlyValidator: true,
-                        emptyTextFieldValidator: false
+                        emptyTextFieldValidator: false,
+                        cityValidator: true
                     }
                 },
                 state: {
@@ -332,7 +331,6 @@ class App extends React.Component {
 
             console.log("valid form - post to server");
 
-            let mynum = 0;
 
             //axios.post('http://localhost:5000/api/riskratios', this.state.formControls).then(res => {
             //axios.post('/api/riskratios', this.state.formControls).then(res => {
@@ -786,7 +784,7 @@ class App extends React.Component {
         // name length must match the validator rule
         else if(e.target.getAttribute('value').length < this.state.formControls.street.validationRules.minLengthValidator && nameValid.valid === false ) {
 
-            let re = /^[a-zA-Z'.-]*$/;
+            let re = /^[A-Za-z0-9.-]+[ ]*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
             var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
 
@@ -988,7 +986,7 @@ class App extends React.Component {
         }
 
         //else if(e.key === && (e.target.getAttribute('value').length <9 || e.target.getAttribute('value').length >9) && this.valid === false ) {
-        else if((e.target.getAttribute('value').length != 9)&&  nameValid.valid === false ) {
+        else if((e.target.getAttribute('value').length !== 9)&&  nameValid.valid === false ) {
 
             this.setState({
                 showssnwronglength:true
@@ -1389,8 +1387,8 @@ class App extends React.Component {
                         <displays.formfieldResponseModal
                             show = {this.state.showstreetwrong}
                             closeModals = {this.closeModals}
-                            headertext = "There is a character in the street "
-                            bodytext = "Please delete all non letters from your street address"
+                            headertext = "Street addresses have letters, numbers, hyphens, and periods."
+                            bodytext = "Please delete everything else from your street address"
                         />
                     )}
 

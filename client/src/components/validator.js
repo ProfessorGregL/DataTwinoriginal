@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+
 
 //https://www.codeproject.com/Articles/651609/Validating-Social-Security-Numbers-through-Regular
 const basicSSNValidator = (value) => {
@@ -19,7 +19,7 @@ const minLengthValidator = (value, minLength) => {
 
 const requiredValidator = (value,comp) => {
     console.log("in required validator");
-    return (value.trim() != '' === comp);
+    return ((value.trim() !== '') === comp);
 }
 
 // actually name validator
@@ -29,7 +29,7 @@ const lettersOnlyValidator = (value,comp) => {
     console.log("in letters only validator");
     let re = /^[a-zA-Z'.-]*$/;
     console.log( re.test(String(value).toLowerCase()));
-    return (re.test(String(value).toLowerCase()) === comp);
+    return ((re.test(String(value).toLowerCase())) === comp);
 }
 
 const emptyTextFieldValidator = (value,comp) => {
@@ -74,11 +74,6 @@ const cityValidator = (value,comp) => {
 
 }
 
-const stateValidator = (value,comp) => {
-
-/// not needed  ///////////////
-
-}
 
 const zipValidator = (value,comp) => {
 
@@ -129,6 +124,11 @@ const validate = (value,rules) => {
             break;
             case 'ageValidator': isValid = isValid && ageValidator(value, rules[rule]);
             break;
+            case 'cityValidator': isValid = isValid && cityValidator(value, rules[rule]);
+                break;
+            case 'streetValidator': isValid = isValid && streetValidator(value, rules[rule]);
+                break;
+
             //default: isValid = true;
         }
 
