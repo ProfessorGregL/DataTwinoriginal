@@ -34,8 +34,10 @@ const lettersOnlyValidator = (value,comp) => {
 
 const emptyTextFieldValidator = (value,comp) => {
     console.log("in empty field validator");
-    //console.log("comp  " + (value.length === 0));
-    console.log("emptyfield evaluator results  " + ((value.length == 0) == comp));
+    //console.log("value  " + (value.length === 0));
+    //console.log("comp  " + (comp));
+    //console.log("emptyfield evaluator results  " + ((value.length == 0) == comp));
+    return ((value.length == 0) == comp);
 
 }
 
@@ -122,7 +124,7 @@ const validate = (value,rules) => {
             break;
             case 'basicSSNValidator': isValid = isValid && basicSSNValidator(value);
             break;
-            case 'emptyTextFieldValidator': isValid = isValid && emptyTextFieldValidator(value, rules[rule]);
+            case 'emptyTextFieldValidator':isValid = isValid && emptyTextFieldValidator(value, rules[rule]);
             break;
             case 'numbersOnlyValidator': isValid = isValid && numbersOnlyValidator(value, rules[rule]);
             break;
