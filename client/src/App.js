@@ -60,6 +60,8 @@ class App extends React.Component {
             formControls: {
                 firstname: {
                     value: '',
+                    minlength: 2,
+                    maxlength: 31,
                     placeholder: 'First name',
                     valid: false,
                     touched: false,
@@ -73,6 +75,8 @@ class App extends React.Component {
                 },
                 lastname: {
                     value: '',
+                    minlength: 2,
+                    maxlength: 31,
                     placeholder: 'Last name',
                     valid: false,
                     touched: false,
@@ -87,6 +91,8 @@ class App extends React.Component {
 
                 spouse_firstname: {
                     value: '',
+                    minlength: 2,
+                    maxlength: 31,
                     placeholder: 'First name',
                     valid: false,
                     touched: false,
@@ -100,6 +106,8 @@ class App extends React.Component {
                 },
                 spouse_lastname: {
                     value: '',
+                    minlength: 2,
+                    maxlength: 31,
                     placeholder: 'Last name',
                     valid: false,
                     touched: false,
@@ -113,6 +121,7 @@ class App extends React.Component {
                 },
                 street: {
                     value: '',
+                    minlength: 2,
                     placeholder: 'Street',
                     valid: false,
                     touched: false,
@@ -125,6 +134,8 @@ class App extends React.Component {
                 },
                 city: {
                     value: '',
+                    minlength: 4,
+                    maxlength: 25,
                     placeholder: 'City',
                     valid: false,
                     touched: false,
@@ -151,6 +162,7 @@ class App extends React.Component {
                 },
                 zip: {
                     value: '',
+                    maxlength:9,
                     placeholder: 'Zip',
                     valid: false,
                     touched: false,
@@ -164,6 +176,8 @@ class App extends React.Component {
                 },
                 age: {
                     value: '',
+                    minlength: 1,
+                    maxlength: 3,
                     placeholder: '42',
                     valid: false,
                     touched: false,
@@ -176,6 +190,7 @@ class App extends React.Component {
                 },
                 socialsecuritynumber: {
                     value: '',
+                    minlength: 9,
                     placeholder: '111223333',
                     valid: false,
                     touched: false,
@@ -702,7 +717,7 @@ class App extends React.Component {
 
 
         // name length must match the validator rule
-        else if(e.target.getAttribute('value').length < this.state.formControls.firstname.validationRules.minLengthValidator && nameValid.valid === false ) {
+        else if(e.target.getAttribute('value').length < this.state.formControls.firstname.minlength && nameValid.valid === false ) {
 
             let re = /^[a-zA-Z'.-]*$/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
@@ -737,7 +752,7 @@ class App extends React.Component {
         }
 
         // name length limited to 31 characters per passport but it passes basic test
-        else if(e.target.getAttribute('value').length >31 && nameValid.valid === true ) {
+        else if(e.target.getAttribute('value').length >this.state.formControls.firstname.maxlength && nameValid.valid === true ) {
 
             this.setState({
                 shownamewronglength:true
@@ -780,9 +795,9 @@ class App extends React.Component {
         }
 
         // name length must match the validator rule
-        else if(e.target.getAttribute('value').length < this.state.formControls.street.validationRules.minLengthValidator && nameValid.valid === false ) {
+        else if(e.target.getAttribute('value').length < this.state.formControls.street.minlength && nameValid.valid === false ) {
 
-            let re = /^[A-Za-z0-9.-]+[ ]*$/;
+            let re = /\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\.?/;
             //console.log( re.test(String(e.target.getAttribute('value')).toLowerCase()));
             var chartest =  (re.test(String(e.target.getAttribute('value')).toLowerCase()));
 
