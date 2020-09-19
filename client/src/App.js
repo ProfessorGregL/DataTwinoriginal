@@ -36,6 +36,8 @@ class App extends React.Component {
             formIsValid: false,
             showssnwrong:false,  //todo this should really be at the component level not here
             showssnwronglength:false,
+            showssnblacklist:false,
+            showssninuse: false,
             showblankfield:false,
             shownamewrong:false,
             shownamewronglength:false,
@@ -978,6 +980,27 @@ class App extends React.Component {
 
         let nameValid = this.state.formControls[e.target.getAttribute('name')]
 
+        // todo  special handling for demo cases!!!!
+
+        if(e.target.getAttribute('value') == "123456789" ) {
+
+            this.setState({
+                showssnblacklist:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic blacklist");
+            });
+        }
+
+        if(e.target.getAttribute('value') == "555061212" ) {
+
+            // put up the ssn already in use modal
+            this.setState({
+                showssninuse:true
+            }, () => {
+                console.log("in the ssn_PopoverLogic ssninuse");
+            });
+        }
+
 
         console.log(e.target.getAttribute('value').length+"  "+ nameValid.valid + "  "+ e.target.getAttribute('name'));
 
@@ -1073,7 +1096,9 @@ class App extends React.Component {
             showzipwrong: false,
             showincomewrong: false,
             showokeedokee: false,
-            shownotokeedokee: false
+            shownotokeedokee: false,
+            showssninuse: false,
+            showssnblacklist:false
         }, () => {
             //console.log("in the close modals function");
         });
@@ -1112,7 +1137,8 @@ class App extends React.Component {
 
         const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
             showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong,
-            showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong, showokeedokee, shownotokeedokee} = this.state;
+            showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong,
+            showokeedokee, shownotokeedokee,showssninuse,showssnblacklist} = this.state;
 
         return (
 
@@ -1493,10 +1519,28 @@ class App extends React.Component {
                         />
                     )}
 
+                    {showssnblacklist && (
+
+                        <displays.formfieldResponseModal
+                            show = {this.state.showssnblacklist}
+                            closeModals = {this.closeModals}
+                            headertext = "The entered SSN is not allowed!."
+                            bodytext = "The SSN you have entered is blacklisted by the IRS and is not allowed, please enter your correct SSN!"
+                            width = "modal-70w"
+                        />
+                    )}
 
 
+                    {showssninuse && (
 
-
+                        <displays.formfieldResponseModal
+                            show = {this.state.showssninuse}
+                            closeModals = {this.closeModals}
+                            headertext = "The entered SSN is assigned to another person!"
+                            bodytext = "Make sure you are entering your name as it is on your drivers license or passport.  Please make sure the number you have entered is correct!"
+                            width = "modal-70w"
+                        />
+                    )}
 
 
 

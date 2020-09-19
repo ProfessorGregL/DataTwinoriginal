@@ -299,6 +299,7 @@ export const stateZip = (props) => {
         lastlabelname = 'l1 l1valid';
     }
 
+    // from https://www.derpturkey.com/select-placeholder-with-react/
     let selectclassname = classnames({'placeholder': !props.firstvalue});
 
     return (
