@@ -65,6 +65,8 @@ export const firstLastName = (props) => {
         firstlabelname = 'l1 l1valid';
     }
 
+
+
     let lastinputControl = "validname";
     let lastlabelname = "l1";
 
@@ -77,6 +79,8 @@ export const firstLastName = (props) => {
         lastinputControl = 'validname';
         lastlabelname = 'l1 l1valid';
     }
+
+
 
 
 
@@ -216,6 +220,11 @@ export const streetCity = (props) => {
         firstlabelname = 'l1 l1valid';
     }
 
+
+
+
+
+
     let lastinputControl = "validname";
     let lastlabelname = "l1";
 
@@ -271,20 +280,41 @@ export const streetCity = (props) => {
     )
 }
 
+//###########################################################################################
+
+
 export const stateZip = (props) => {
 
     let firstinputControl = "validname";
     let firstlabelname = "l1";
 
-    if (props.firsttouched && !props.firstvalid) {
+    if (props.firsttouched && !props.firstvalid && props.firstvalue) {
+
+        console.log(" in props.firsttouched && !props.firstvalid");
         firstinputControl = 'validname invalidname';
         firstlabelname = 'l1 l1invalid';
     }
 
     if (props.firsttouched && props.firstvalid) {
+        console.log(" in props.firsttouched && props.firstvalid");
         firstinputControl = 'validname';
         firstlabelname = 'l1 l1valid';
     }
+
+
+    if (props.firsttouched && !props.firstvalid && !props.firstvalue) {
+        console.log(" in props.firsttouched && !props.firstvalid && !firstvlaue");
+        firstinputControl = 'validname invalidname placeholder';
+        firstlabelname = 'l1 l1invalid';
+    }
+
+    if (!props.firsttouched && !props.firstvalid && !props.firstvalue) {
+        console.log(" in !props.firsttouched && !props.firstvalid && !firstvalue");
+        firstinputControl = 'placeholder';
+        firstlabelname = 'l1';
+    }
+
+
 
     let lastinputControl = "validname";
     let lastlabelname = "l1";
@@ -300,7 +330,8 @@ export const stateZip = (props) => {
     }
 
     // from https://www.derpturkey.com/select-placeholder-with-react/
-    let selectclassname = classnames({'placeholder': !props.firstvalue});
+    //let selectclassname = classnames({'placeholder': !props.firstvalue});
+
 
     return (
 
@@ -333,7 +364,7 @@ export const stateZip = (props) => {
                     as =  "select"
                     type="text"
                     placeholder={props.firstplaceholder}
-                    className={selectclassname}
+                    className={firstinputControl}
                     name="state"
                     value={props.firstvalue} // makes this a controlled component
                     onChange={props.onChange}

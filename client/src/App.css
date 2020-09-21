@@ -31,6 +31,10 @@
     color: green;
 }
 
+.l1default {
+    color: black;
+}
+
 .l2 {
   font-size : 30px;
 
@@ -120,8 +124,10 @@
 
 .validname {
     border: 1px #ccc;
-    padding: 10px;
+    padding: 0px 10px;
     color:green;
+    font-size: 16px;
+
 
 }
 
@@ -133,13 +139,13 @@
 
 .radiovalidname {
 
-    border: 1px solid transparent;
+    border: 3px solid transparent;
     padding: 10px;
 }
 
 .firstinputControl {
 
-    border: 3px solid red;
+    border: 1px solid red;
 
 }
 
