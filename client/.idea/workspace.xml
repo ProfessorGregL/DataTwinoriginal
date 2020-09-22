@@ -19,11 +19,11 @@
     <splitter split-orientation="vertical" split-proportion="0.8722861">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="425">
-                  <caret line="1335" column="89" lean-forward="true" selection-start-line="1335" selection-start-column="89" selection-end-line="1335" selection-end-column="89" />
+                <state relative-caret-position="218">
+                  <caret line="1163" column="38" lean-forward="false" selection-start-line="1163" selection-start-column="38" selection-end-line="1163" selection-end-column="38" />
                   <folding />
                 </state>
               </provider>
@@ -73,7 +73,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MyModal.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MyModal.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/MyModal.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="323">
@@ -149,8 +149,8 @@
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/components/validator.js" />
         <option value="$PROJECT_DIR$/src/components/DisplayFunctions.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/MyModal.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -164,8 +164,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="100" />
-    <option name="y" value="404" />
+    <option name="x" value="148" />
+    <option name="y" value="624" />
     <option name="width" value="1920" />
     <option name="height" value="990" />
   </component>
@@ -271,15 +271,16 @@
       <workItem from="1600429898011" duration="505000" />
       <workItem from="1600457001638" duration="2994000" />
       <workItem from="1600507379655" duration="8409000" />
-      <workItem from="1600743765318" duration="5384000" />
+      <workItem from="1600743765318" duration="5975000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139034000" />
+    <option name="totallyTimeSpent" value="139625000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="100" y="404" width="1920" height="990" extended-state="0" />
+    <frame x="148" y="624" width="1920" height="990" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.115625" sideWeight="0.4944356" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -287,7 +288,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31323877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14705883" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14705883" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19682017" sideWeight="0.5055644" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -762,14 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="1335" column="89" lean-forward="true" selection-start-line="1335" selection-start-column="89" selection-end-line="1335" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MyModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -777,6 +770,14 @@
           <folding>
             <element signature="e#18#59#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="1163" column="38" lean-forward="false" selection-start-line="1163" selection-start-column="38" selection-end-line="1163" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

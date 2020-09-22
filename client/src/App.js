@@ -1161,7 +1161,7 @@ class App extends React.Component {
 
 
                     <Form.Label className="l2">
-                        Personal Information:
+                        Demo Twin Demo:
                     </Form.Label>
 
 
