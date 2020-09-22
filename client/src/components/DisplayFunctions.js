@@ -290,26 +290,26 @@ export const stateZip = (props) => {
 
     if (props.firsttouched && !props.firstvalid && props.firstvalue) {
 
-        console.log(" in props.firsttouched && !props.firstvalid");
+        //console.log(" in props.firsttouched && !props.firstvalid");
         firstinputControl = 'validname invalidname';
         firstlabelname = 'l1 l1invalid';
     }
 
     if (props.firsttouched && props.firstvalid) {
-        console.log(" in props.firsttouched && props.firstvalid");
+        //console.log(" in props.firsttouched && props.firstvalid");
         firstinputControl = 'validname';
         firstlabelname = 'l1 l1valid';
     }
 
 
     if (props.firsttouched && !props.firstvalid && !props.firstvalue) {
-        console.log(" in props.firsttouched && !props.firstvalid && !firstvlaue");
+        //console.log(" in props.firsttouched && !props.firstvalid && !firstvlaue");
         firstinputControl = 'validname invalidname placeholder';
         firstlabelname = 'l1 l1invalid';
     }
 
     if (!props.firsttouched && !props.firstvalid && !props.firstvalue) {
-        console.log(" in !props.firsttouched && !props.firstvalid && !firstvalue");
+       // console.log(" in !props.firsttouched && !props.firstvalid && !firstvalue");
         firstinputControl = 'placeholder';
         firstlabelname = 'l1';
     }
@@ -764,7 +764,7 @@ export const dependents = (props) => {
 
         let checkedbuttonnumber = props.value;
 
-    //console.log(checkedbuttonnumber==="2");
+    console.log(" checked button number"  + checkedbuttonnumber);
 
 
     return(
@@ -784,6 +784,7 @@ export const dependents = (props) => {
                                     id={`inline-NumDependents-1`}
                                     onChange ={props.parseKids}
                                     defaultChecked = {checkedbuttonnumber === "0"}
+                                    checked = {props.value === "0"}
 
 
 
@@ -796,6 +797,7 @@ export const dependents = (props) => {
                                     id={`inline-NumDependents-2`}
                                     onChange ={props.parseKids}
                                     defaultChecked = {checkedbuttonnumber === "1"}
+                                    checked = {props.value === "1"}
 
 
                         />
@@ -807,7 +809,8 @@ export const dependents = (props) => {
                                     type={type}
                                     id={`inline-NumDependents-3`}
                                     onChange ={props.parseKids}
-                                    defaultChecked = {checkedbuttonnumber === "2"}
+                                    defaultChecked = {props.value === "2"}
+                                    checked = {props.value === "2"}
 
 
                         />
@@ -819,6 +822,7 @@ export const dependents = (props) => {
                                     id={`inline-NumDependents-4`}
                                     onChange ={props.parseKids}
                                     defaultChecked = {checkedbuttonnumber === "3"}
+                                    checked = {props.value === "3"}
 
 
                         />
@@ -830,6 +834,7 @@ export const dependents = (props) => {
                                     id={`inline-NumDependents-5`}
                                     onChange ={props.parseKids}
                                     defaultChecked = {checkedbuttonnumber === "4"}
+                                    checked = {props.value === "4"}
 
 
                         />
@@ -841,6 +846,7 @@ export const dependents = (props) => {
                                     id={`inline-NumDependents-6`}
                                     onChange ={props.parseKids}
                                     defaultChecked = {checkedbuttonnumber === "5"}
+                                    checked = {props.value === "5"}
 
 
                         />

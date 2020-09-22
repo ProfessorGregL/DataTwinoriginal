@@ -294,7 +294,7 @@ class App extends React.Component {
 
     toggle = () => {
 
-        console.log(this.state.showmodal);
+        //console.log(this.state.showmodal);
         this.setState({showmodal: !this.state.showmodal});// added for modal
     }
 
@@ -309,7 +309,15 @@ class App extends React.Component {
 
         //e.preventDefault();
 
-        if (!this.state.formIsValid) {
+
+        // todo temp make form valid
+
+        this.setState({formIsValid : true});
+
+        //////////////////////////////////////////
+
+        //if (!this.state.formIsValid) {
+            if (false) {
 
 
             // first make sure all invalid fields are set to label red
@@ -341,7 +349,8 @@ class App extends React.Component {
             // Now all I need to do is pop a modal that says they have to fill in the missing info
 
 
-        } else if (this.state.formIsValid) {
+       // } else if (this.state.formIsValid) {
+            } else if (true) {
 
 
             console.log("valid form - post to server");
@@ -366,7 +375,6 @@ class App extends React.Component {
 
                 this.setState(newState);
 
-                console.log("state");
                 console.log(this.state);
 
                 console.log(res.data[0] || res.data[1] || res.data[2])
@@ -406,6 +414,8 @@ class App extends React.Component {
 
 // helper change handler
     handleChange = (name, value, visible = true) => {
+
+        console.log("in handle change  " + name + "  " + value );
 
         const updatedControls = {
             ...this.state.formControls // gives you all of the form controls and all their ste elements
@@ -631,8 +641,6 @@ class App extends React.Component {
         let name = "income";
         let value = incomenumber;
 
-        console.log(incomenumber);
-
         this.handleChange(name, value);
 
     }
@@ -640,7 +648,7 @@ class App extends React.Component {
     storeIncome = e => {
         const name = e.target.name;
 
-        console.log(e.target.name);
+        //console.log(e.target.name);
 
         const value = e.target.value;
 
@@ -683,6 +691,8 @@ class App extends React.Component {
 
 
     parseKids = e => {
+        console.log(" in parse kids");
+        console.log(e.target.value);
         let name = "numdependents";
         let value = Number(e.target.value);
         if (value >= 5) {

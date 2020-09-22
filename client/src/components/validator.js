@@ -12,13 +12,12 @@ const basicSSNValidator = (value) => {
 
 
 const minLengthValidator = (value, minLength) => {
-    console.log("in min length validator " + value.length + "  " + minLength);
-    console.log (value.length >= minLength);
+    //console.log("in min length validator " + value.length + "  " + minLength);
     return (value.length >= minLength);
 }
 
 const requiredValidator = (value,comp) => {
-    console.log("in required validator");
+    //console.log("in required validator");
     return ((value.trim() !== '') === comp);
 }
 
@@ -26,14 +25,13 @@ const requiredValidator = (value,comp) => {
 // https://stackoverflow.com/questions/2385701/regular-expression-for-first-and-last-name
 // Alexander Burakevych
 const lettersOnlyValidator = (value,comp) => {
-    console.log("in letters only validator");
+    //console.log("in letters only validator");
     let re = /^[a-zA-Z'.-]*$/;
-    console.log(re.test(String(value).toLowerCase()));
     return ((re.test(String(value).toLowerCase())) === comp);
 }
 
 const emptyTextFieldValidator = (value,comp) => {
-    console.log("in empty field validator");
+    //console.log("in empty field validator");
     //console.log("value  " + (value.length === 0));
     //console.log("comp  " + (comp));
     //console.log("emptyfield evaluator results  " + ((value.length == 0) == comp));
@@ -46,10 +44,10 @@ const emptyTextFieldValidator = (value,comp) => {
 //
 const numbersOnlyValidator = (value,comp) => {
 
-    console.log("in numbers only validator");
+    //console.log("in numbers only validator");
     //accept one or more digits
     let re = /^[0-9]+$/;
-    console.log(re.test(Number(value)));
+    //console.log(re.test(Number(value)));
     return (re.test(Number(value)) === comp);
 
 
@@ -58,7 +56,7 @@ const numbersOnlyValidator = (value,comp) => {
 
 const streetValidator = (value,comp) => {
 
-    console.log("in street validator");
+    //console.log("in street validator");
     let re = /\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)\.?/;
     return (re.test(String(value).toLowerCase()) === comp);
 
@@ -68,7 +66,7 @@ const streetValidator = (value,comp) => {
 
 const cityValidator = (value,comp) => {
 
-    console.log("in city validator");
+    //console.log("in city validator");
     let re = /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/;
     //console.log("retest" + re.test(String(value).toLowerCase()));
     return (re.test(String(value).toLowerCase() === comp));
@@ -77,7 +75,7 @@ const cityValidator = (value,comp) => {
 
 const cityLengthValidator = (value,comp) => {
 
-    console.log("in city length validator");
+    //console.log("in city length validator");
     //console.log("retest" + re.test(String(value).toLowerCase()));
     return (value.length < (comp+ 1));
 }
@@ -85,12 +83,12 @@ const cityLengthValidator = (value,comp) => {
 
 const zipValidator = (value,comp) => {
 
-    console.log("in zip validator");
+    //console.log("in zip validator");
 
     //let re = /^[0-9]{5}$/
     let re = /^[0-9]{5}(?:-[0-9]{4})?$/;
 
-    console.log("in the zipp " + (re.test(String(value))));
+    //console.log("in the zipp " + (re.test(String(value))));
     return (re.test(String(value)) === comp);
 }
 
@@ -100,7 +98,7 @@ const zipValidator = (value,comp) => {
 const ageValidator = (value,comp) => {
 
 
-    console.log("in age validator");
+    //console.log("in age validator");
     let re = /^(?:1[01][0-9]|120|1[7-9]|[2-9][0-9])$/;
     return (re.test(Number(value)) === comp);
 
@@ -112,8 +110,6 @@ const validate = (value,rules) => {
     let isValid = true;
 
     for (let rule in rules) {
-
-        console.log(" rule "+ rule + "isvalid " + isValid)
 
         switch (rule) { // has to have every rule from every target !
             case 'minLengthValidator': isValid = (isValid && minLengthValidator(value, rules[rule]));
@@ -146,7 +142,7 @@ const validate = (value,rules) => {
     }
 
 
-    console.log( "isvalid " + isValid)
+    //console.log( "isvalid " + isValid)
     return isValid;
 }
 
