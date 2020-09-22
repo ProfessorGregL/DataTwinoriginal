@@ -621,6 +621,7 @@ export const education = (props) => {
                                     type={type}
                                     id={`inline-Education-1`}
                                     onChange ={props.handleChange}
+                                    checked = {props.value === "21"}
                         />
                         <Form.Check inline
                                     label = "Associate"
@@ -629,6 +630,7 @@ export const education = (props) => {
                                     type={type}
                                     id={`inline-Education-2`}
                                     onChange ={props.handleChange}
+                                    checked = {props.value === "22"}
                         />
 
                         <Form.Check inline
@@ -638,6 +640,7 @@ export const education = (props) => {
                                     type={type}
                                     id={`inline-Education-3`}
                                     onChange ={props.handleChange}
+                                    checked = {props.value === "23"}
                         />
                         <Form.Check inline
                                     label = "Graduate"
@@ -646,6 +649,7 @@ export const education = (props) => {
                                     type={type}
                                     id={`inline-Education-4`}
                                     onChange ={props.handleChange}
+                                    checked = {props.value === "24"}
                         />
 
                     </div>
