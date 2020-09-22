@@ -1311,6 +1311,8 @@ class App extends React.Component {
                         onFocus = {this.setTouchedOnFocus}
                     />
 
+                    {/*
+
                     <Form.Label className="l2">
                         Mortgage Applications:
                     </Form.Label>
@@ -1335,6 +1337,8 @@ class App extends React.Component {
                         firsttouched={this.state.formControls.pastapplicationsdenied.touched}
                         onFocus = {this.setTouchedOnFocus}
                     />
+
+                    */}
 
 
                     <Form.Group as={Row} controlId="submitButton" className="formgroup">

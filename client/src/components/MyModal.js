@@ -20,7 +20,7 @@ export const MyModal2 = (props) => {
             <Modal.Header>
                 <h6>Hi {props.firstname.value},
                 this bank uses advanced algorithmic software from DataTwin to check for errors and issues that
-                    can affect your application. A pattern was detected that is unusual. Please either confirm or correct the information below.</h6>
+                    can affect your application. An unusual pattern was detected.</h6>
                 <button
                     type="button"
                     className="close"
@@ -52,6 +52,8 @@ export const MyModal2 = (props) => {
                 >
                     Confirm
                 </button>
+
+                {/*
                 <button
                     type="button"
                     className="btn btn-primary"
@@ -59,6 +61,8 @@ export const MyModal2 = (props) => {
                 >
                     Save changes
                 </button>
+
+                */}
             </Modal.Footer>
         </Modal>
     )
