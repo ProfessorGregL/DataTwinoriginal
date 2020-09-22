@@ -1161,7 +1161,7 @@ class App extends React.Component {
 
 
                     <Form.Label className="l2">
-                        Demo Twin Demo:
+                        Data Twin Demo:
                     </Form.Label>
 
 
