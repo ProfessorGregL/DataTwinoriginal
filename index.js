@@ -33,6 +33,17 @@ processRatios = (ratios, thresholds) => {
 }
 
 
+// add handler for post from godaddy
+
+app.post('/api/godaddy', (req, res) => {
+
+console.log("go daddy post");
+
+console.log(req.body);
+
+});
+
+
 app.post('/api/riskratios', (req, res) => {
 
     var url = 'mongodb+srv://greg-user:iy1UDSJTrS4xOznh@cluster0.jo9wm.mongodb.net/datatwin1?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE';
