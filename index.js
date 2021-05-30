@@ -4,7 +4,11 @@ const path = require('path');
 
 var bodyParser = require('body-parser');
 var app = express();
-var datapp = express();
+const datapp = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', () => { console.log("connecting"});
+server.listen(8080);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,7 +23,7 @@ datapp.use(cors());
 
 const port = process.env.PORT || 5000;
 
-const dataport = 80;
+
 
 
 
@@ -110,8 +114,8 @@ if (process.env.NODE_ENV === 'production') {
 
 
 app.listen(port);
-datapp.listen(datport);
+
 
 console.log(`DataTwin listening on ${port}`);
-console.log(`DataTwin listening on ${datport}`);
+
 
