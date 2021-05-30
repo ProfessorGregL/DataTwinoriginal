@@ -47,7 +47,7 @@ processRatios = (ratios, thresholds) => {
 
 // add handler for post from godaddy
 
-datapp.post('/api/godaddy', (req, res) => {
+datapp.post('/', (req, res) => {
 
 console.log("go daddy post");
 
