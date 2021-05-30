@@ -7,8 +7,7 @@ var app = express();
 const datapp = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-//io.on('connection', () => { console.log("connecting");
-//});
+io.on('connection', () => { /* … */ });
 server.listen(8080);
 
 // parse application/x-www-form-urlencoded
@@ -48,7 +47,7 @@ processRatios = (ratios, thresholds) => {
 
 // add handler for post from godaddy
 
-server.post('/api/godaddy', (req, res) => {
+datapp.post('/api/godaddy', (req, res) => {
 
 console.log("go daddy post");
 
