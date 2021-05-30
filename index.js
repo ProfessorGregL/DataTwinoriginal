@@ -4,20 +4,27 @@ const path = require('path');
 
 var bodyParser = require('body-parser');
 var app = express();
+var datapp = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+datapp.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+datapp.use(bodyParser.json());
 
 app.use(cors());
+datapp.use(cors());
 
 const port = process.env.PORT || 5000;
 
+const dataport = 80;
+
+
+
+
 var MongoClient = require('mongodb').MongoClient;
-
-
 
 processRatios = (ratios, thresholds) => {
 
@@ -33,9 +40,10 @@ processRatios = (ratios, thresholds) => {
 }
 
 
+
 // add handler for post from godaddy
 
-app.post('/api/godaddy', (req, res) => {
+datapp.post('/api/godaddy', (req, res) => {
 
 console.log("go daddy post");
 
@@ -102,6 +110,8 @@ if (process.env.NODE_ENV === 'production') {
 
 
 app.listen(port);
+datapp.listen(datport);
 
 console.log(`DataTwin listening on ${port}`);
+console.log(`DataTwin listening on ${datport}`);
 
