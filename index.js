@@ -7,7 +7,7 @@ var app = express();
 const datapp = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.on('connection', () => { console.log("connecting"});
+io.on('connection', () => { console.log("connecting"};);
 server.listen(8080);
 
 // parse application/x-www-form-urlencoded
