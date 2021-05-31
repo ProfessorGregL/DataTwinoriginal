@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var app = express();
 const datapp = express();
 const server = require('https').createServer(app);
-const io = require('socket.io')(server);
-io.on('connection', () => { /* … */ });
-server.listen(8080);
+//const io = require('socket.io')(server);
+//io.on('connection', () => { /* … */ });
+//server.listen(8080);
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +24,10 @@ datapp.use(cors());
 const port = process.env.PORT || 5000;
 
 
-
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 
 
@@ -103,7 +106,7 @@ app.post('/api/riskratios', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 
-
+/*
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -113,7 +116,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-
+*/
 
 app.listen(port);
 
