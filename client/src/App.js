@@ -355,6 +355,8 @@ class App extends React.Component {
 
             console.log("valid form - post to server");
 
+            console.log(this.state.formControls);
+
 
             //axios.post('http://localhost:5000/api/riskratios', this.state.formControls).then(res => {
             //axios.post('/api/riskratios', this.state.formControls).then(res => {
