@@ -50,7 +50,7 @@ processRatios = (ratios, thresholds) => {
 
 // add handler for post from godaddy
 
-app.post('api/godaddy', (req, res) => {
+app.post('api/gd', (req, res) => {
 
 console.log("go daddy post");
 

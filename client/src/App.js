@@ -366,9 +366,12 @@ class App extends React.Component {
             
             // test post to api/godaddy
             
-            axios.post('/api/godaddy', this.state.formControls).then(res => {
-            
-            console.log(res);
+            axios.post('/api/gd', {
+                Name: 'Fred',
+                Age: '23'       
+            }).
+            then(res => {          
+                console.log(res);
             });
             
 
