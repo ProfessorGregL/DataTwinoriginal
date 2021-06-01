@@ -56,6 +56,9 @@ console.log("go daddy post");
 
 console.log(req.body);
 
+results = "success";
+res.send(results);
+
 });
 
 
