@@ -308,6 +308,9 @@ class App extends React.Component {
         //}
 
         //e.preventDefault();
+        
+        
+        ///////////////////////////////////////////
 
 
         // todo temp make form valid
@@ -363,18 +366,18 @@ class App extends React.Component {
             //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
             
             
-            
+         /*   
             // test post to api/godaddy
             
             axios.post('/api/gd', {
-                Name: 'Fred',
-                Age: '23'       
+                ReturnURL: 'www.mydatatwin.com',
+              
             }).
             then(res => {          
                 console.log(res);
             });
             
-
+        */
             axios.post('/api/riskratios', this.state.formControls).then(res => {
 
                 console.log(res);
@@ -397,17 +400,29 @@ class App extends React.Component {
                 if (res.data[0] || res.data[1] || res.data[2]) {
 
                     this.setState({showmodal: true});
+                    
                 } else {
+                
+                    // Assuming that once the risk scores were developed and checked against the 
+                    // criteria and the user either fixed or confirmed the info I will now get a final
+                    // signal that the form has valid data in it and is ready to go back to the data recipient
+                    // and hand the user back to the originating web site.  I then need to do something to 
+                    // terminate the dyno running this form and server. 
 
+                    
+                    // the okeedokee modal needs to alert the user that they are going to transfer back to the 
+                    // originating site and request a confirmation or ok then we post the info back to
+                    // some secure API of some data consuming app and redirect back to the website.
                     this.setState({showokeedokee: true})
-
-                    //const newState = update(this.state, {
-                     //   showArray: {
-                         //   okeedokee: {$set: true}
-                      //  },
-                   // });
-
-                   // this.setState(newState);
+                    
+                   // either create the data json here or back at the server
+                   // I think the server will have all of the information so I don't need to resend it. 
+                   
+                    
+                    
+                    
+                    
+                    
                 }
             }, () => {
                 console.log(this.state); // Note how the callback fixes the async issue with last character
