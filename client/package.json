@@ -1,9 +1,8 @@
 {
-  "name": "bootstrap-basic",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "axios": "^0.20.0",
     "babel-cli": "^6.26.0",
