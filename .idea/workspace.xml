@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/client/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +14,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/client/Procfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/public/index.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/Procfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/src/App.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -117,6 +117,7 @@
       <workItem from="1626528971823" duration="1258000" />
       <workItem from="1626532126700" duration="2273000" />
       <workItem from="1626586205033" duration="603000" />
+      <workItem from="1631817949857" duration="822000" />
     </task>
     <servers />
   </component>
