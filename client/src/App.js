@@ -18,7 +18,7 @@ var numpages = 2;
 
 class MasterForm extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             currentStep: 1,
             pageName: 'Start Here',
@@ -339,7 +339,7 @@ class MasterForm extends React.Component {
 
 
             }
-        }
+        };
     }
 
 

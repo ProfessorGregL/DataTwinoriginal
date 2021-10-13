@@ -1,21 +1,19 @@
 //Modal component
 import React, { } from 'react';
-import {Button, FormGroup, Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { Col, Row, Form } from "react-bootstrap";
 //import Autosuggest, { ItemAdapter } from 'react-bootstrap-autosuggest'
 import '../App.css';
-
 //import Select from 'react-select';
 //import Popover from 'react-bootstrap/Popover'
 let classnames = require('classnames');
-
 
 
 export const formfieldResponseModal = (props) => {
     //onClick={() => { props.showPopover("ssnmodalshow",false) }} // how to pass a function!
 
 
-    console.log("In the modal " + props.headertext);
+    console.log("In the modal" + props.headertext);
     return(
 
         <Modal
@@ -48,53 +46,14 @@ export const formfieldResponseModal = (props) => {
     )
 }
 
-export const Breadcrumb = (props) => {
+export const firstLastName = (props) => {
+// updated with the red and green change on valid / invalid
 
-    //console.log("In Breadcrumb" + props.breadcrumbImage);
-
-    return (
-
-        <Form.Group as={Row} controlId="" className = "breadcrumb">
-            <Col >
-                <img src={props.breadcrumbImage}/>
-            </Col>
-        </Form.Group>
-    )
-}
-
-export const Page_Header = (props) => {
-
-    // save of first Col
-    //<Col className = "lheaderwarning text-center">
-    //Please follow finstructions and format carefully!
-    // </Col>
-
-    return(
-
-        <Form.Group as={Row} controlId="Header" className="headerborder  mb-3" >
-
-
-            <Col className = "lheader text-center">
-                {props.pageName}
-            </Col>
-
-            <Col className = "lheadertemp text-center">
-                Navigation Choices
-            </Col>
-
-
-        </Form.Group>
-    )
-
-}
-
-///############################ color control functions //####################
-// NOTE THE SPECIFIC USES
-//
-
-function firstinput(props) {   // for use with text entry boxes
     let firstinputControl = "validname";
     let firstlabelname = "l1";
+
+    //console.log("firstname " + props.firsttouched);
+    //console.log("firstname " + props.firstvalid);
 
     if (props.firsttouched && !props.firstvalid) {
         firstinputControl = 'validname invalidname';
@@ -105,10 +64,9 @@ function firstinput(props) {   // for use with text entry boxes
         firstinputControl = 'validname';
         firstlabelname = 'l1 l1valid';
     }
-    return {firstinputControl, firstlabelname};
-}
 
-function lastinput(props) {  // for use with text entry boxes
+
+
     let lastinputControl = "validname";
     let lastlabelname = "l1";
 
@@ -121,30 +79,14 @@ function lastinput(props) {  // for use with text entry boxes
         lastinputControl = 'validname';
         lastlabelname = 'l1 l1valid';
     }
-    return {lastinputControl, lastlabelname};
-}
 
-//###################################################################
 
-export const Page1_Name = (props) => {
-// updated with the red and green change on valid / invalid
-    // add top of form that will have navigation and such
 
-    if (props.currentStep !== 1) {
-        return null
-    }
-
-    //console.log("firstname " + props.firsttouched);
-    //console.log("firstname " + props.firstvalid);
-
-    let {firstinputControl, firstlabelname} = firstinput(props);
-
-    let {lastinputControl, lastlabelname} = lastinput(props);
 
 
     return (
 
-        <Form.Group as={Row} controlId="Page1_Name" className="formgroup">
+        <Form.Group as={Row} controlId="formMortgagePersonalInfoFName" className="formgroup">
 
             < Form.Label className={firstlabelname}>
                 Name:
@@ -178,26 +120,42 @@ export const Page1_Name = (props) => {
                     onFocus = {props.onFocus}
                 />
             </Col>
-
-
         </Form.Group>
 
     )
 }
 
-export const Page1_SpouseName = (props) => {
+export const spouseName = (props) => {
+    let firstinputControl = "validname";
+    let firstlabelname = "l1";
 
-    if (props.currentStep !== 1) {
-        return null
+
+    if (props.firsttouched && !props.firstvalid) {
+        firstinputControl = 'validname invalidname';
+        firstlabelname = 'l1 l1invalid';
     }
 
-    let {firstinputControl, firstlabelname} = firstinput(props);
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
+    }
 
-    let {lastinputControl, lastlabelname} = lastinput(props);
+    let lastinputControl = "validname";
+    let lastlabelname = "l1";
+
+    if (props.lasttouched && !props.lastvalid) {
+        lastinputControl = 'validname invalidname';
+        lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
+    }
 
     return(
 
-        <Form.Group  as={Row} controlId="Page1_SpouseName" className = "formgroup">
+        <Form.Group  as={Row} controlId="formMortgagePersonalInfoSpouseName" className = "formgroup">
 
 
             <Form.Label  className={firstlabelname}>
@@ -242,21 +200,49 @@ export const Page1_SpouseName = (props) => {
 }
 
 
+export const streetCity = (props) => {
 
 
-//######################################################################################
-export const Page1_StreetCity = (props) => {
 
-    if (props.currentStep !== 1) {
-        return null
+    let firstinputControl = "validname";
+    let firstlabelname = "l1";
+
+    //console.log("street " + props.firsttouched);
+    //console.log("street " + props.firstvalid);
+
+    if (props.firsttouched && !props.firstvalid) {
+        firstinputControl = 'validname invalidname';
+        firstlabelname = 'l1 l1invalid';
     }
 
-    let {firstinputControl, firstlabelname} = firstinput(props);
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
+    }
 
-    let {lastinputControl, lastlabelname} = lastinput(props);
+
+
+
+
+
+    let lastinputControl = "validname";
+    let lastlabelname = "l1";
+
+    if (props.lasttouched && !props.lastvalid) {
+        lastinputControl = 'validname invalidname';
+        lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
+    }
+
 
     return(
-        <Form.Group  as={Row} controlId="Page1_CityStreet" className = "formgroup" >
+
+
+        <Form.Group  as={Row} controlId="formMortgagePersonalInfoCityStreet" className = "formgroup" >
             <Form.Label  className={firstlabelname}>
                 Street:
             </Form.Label>
@@ -288,6 +274,7 @@ export const Page1_StreetCity = (props) => {
                 />
             </Col>
 
+
         </Form.Group>
 
     )
@@ -296,13 +283,7 @@ export const Page1_StreetCity = (props) => {
 //###########################################################################################
 
 
-export const Page1_StateZip = (props) => {
-    if (props.currentStep !== 1) {
-        return null
-    }
-
-    // todo understand why this section is different from the others
-    // think its because this uses a pull down selection box
+export const stateZip = (props) => {
 
     let firstinputControl = "validname";
     let firstlabelname = "l1";
@@ -354,7 +335,25 @@ export const Page1_StateZip = (props) => {
 
     return (
 
-        <Form.Group  as={Row} controlId="Page1_StateZip" className = "formgroup">
+        <Form.Group  as={Row} controlId="formMortgagePersonalInfoCityStreet2" className = "formgroup">
+            {/*
+            <Form.Label  className={firstlabelname}>
+                State:
+            </Form.Label>
+
+            <Col>
+                <Form.Control
+                    type="text"
+                    placeholder={props.firstplaceholder}
+                    className={firstinputControl}
+                    name="state"
+                    value={props.firstvalue} // makes this a controlled component
+                    onChange={props.onChange}
+                />
+            </Col>
+
+            */}
+
             <Form.Label className={firstlabelname}>
                 State:
             </Form.Label>
@@ -448,23 +447,52 @@ export const Page1_StateZip = (props) => {
                 />
             </Col>
 
+
         </Form.Group>
+
+
     )
+
 }
 
 
-export const Page1_AgeSsn = (props) => {
-    if (props.currentStep !== 1) {
-        return null
+export const agessn = (props) => {
+
+
+
+
+
+
+    let firstinputControl = "validname";
+    let firstlabelname = "l1";
+
+    if (props.firsttouched && !props.firstvalid) {
+        firstinputControl = 'validname invalidname';
+        firstlabelname = 'l1 l1invalid';
     }
 
-    let {firstinputControl, firstlabelname} = firstinput(props);
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
+    }
 
-    let {lastinputControl, lastlabelname} = lastinput(props);
+    // update with red/green
+    let lastinputControl = "validname";
+    let lastlabelname = "l1";
+
+    if (props.lasttouched && !props.lastvalid) {
+        lastinputControl = 'validname invalidname';
+        lastlabelname = 'l1 l1invalid';
+    }
+
+    if (props.lasttouched && props.lastvalid) {
+        lastinputControl = 'validname';
+        lastlabelname = 'l1 l1valid';
+    }
 
     return(
 
-        <Form.Group  as={Row} controlId="Page1_AgeSsn" className = "formgroup">
+        <Form.Group  as={Row} controlId="formMortgagePersonalInfoAgeSSN" className = "formgroup">
 
             <Form.Label  className={firstlabelname}>
                 Age:
@@ -504,200 +532,36 @@ export const Page1_AgeSsn = (props) => {
 
 }
 
-export const Page1_SpouseAgeSsn = (props) => {
-    if (props.currentStep !== 1) {
-        return null
-    }
-
-    let {firstinputControl, firstlabelname} = firstinput(props);
-
-    let {lastinputControl, lastlabelname} = lastinput(props);
-
-    return(
-
-        <Form.Group  as={Row} controlId="Page1_SpouseAgeSsn" className = "formgroup">
-
-            <Form.Label  className={firstlabelname}>
-                Spouse Age:
-            </Form.Label>
-            <Col>
-                <Form.Control
-                    type="text"
-                    placeholder={props.firstplaceholder}
-                    className={firstinputControl}
-                    name="spouse_age"
-                    value={props.firstvalue} // makes this a controlled component
-                    onChange={props.firstonChange}
-                    onBlur = {props.firstonBlur}
-                    onFocus = {props.onFocus}
-                />
-            </Col>
-
-            <Form.Label  className={lastlabelname}>
-                Spouse Social Security Number:
-            </Form.Label>
-            <Col>
-                <Form.Control
-                    type="text"
-                    placeholder={props.lastplaceholder}
-                    className={lastinputControl}
-                    name="spouse_socialsecuritynumber"
-                    value={props.lastvalue} // makes this a controlled component
-                    onChange={props.lastonChange}
-                    onBlur = {props.lastonBlur}
-                    onFocus = {props.onFocus}
-                />
-            </Col>
-
-        </Form.Group>
-
-    )
-
-}
-
-export const Page1_PhoneEmail = (props) => {
-
-    console.log("phone " + props.currentStep);
-    if (props.currentStep !== 1) {
-        return null
-    }
-
-    let {firstinputControl, firstlabelname} = firstinput(props);
-
-    let {lastinputControl, lastlabelname} = lastinput(props);
-
-    return(
-
-        <Form.Group  as={Row} controlId="Page1_PhoneEmail" className = "formgroup">
-
-            <Form.Label  className={firstlabelname}>
-                Phone Number:
-            </Form.Label>
-            <Col>
-                <Form.Control
-                    type="text"
-                    placeholder={props.firstplaceholder}
-                    className={firstinputControl}
-                    name="phone"
-                    value={props.firstvalue} // makes this a controlled component
-                    onChange={props.firstonChange}
-                    onBlur = {props.firstonBlur}
-                    onFocus = {props.onFocus}
-                />
-            </Col>
-
-            <Form.Label  className={lastlabelname}>
-                Email Address:
-            </Form.Label>
-            <Col>
-                <Form.Control
-                    type="text"
-                    placeholder={props.lastplaceholder}
-                    className={lastinputControl}
-                    name="email"
-                    value={props.lastvalue} // makes this a controlled component
-                    onChange={props.lastonChange}
-                    onBlur = {props.lastonBlur}
-                    onFocus = {props.onFocus}
-                />
-            </Col>
-
-        </Form.Group>
-
-    )
-
-}
-
-export const Page1_MaritalStatus = (props) => {
-
-    if (props.currentStep !== 1) {
-        return null
-    }
-
-    //console.log("marital " + props.firsttouched);
-    //console.log("marital " + props.firstvalid);
 
 
-    let inputControl = "radiovalidname";
-    let labelname = "l1";
+export const income = (props) => {
 
-
-    if (props.firsttouched && !props.firstvalid) {
-        inputControl = 'radiovalidname invalidname';
-        labelname = 'l1 l1invalid'
-
-    }
-
-    if (props.firsttouched && props.firstvalid) {
-        inputControl = 'radiovalidname';
-        labelname = 'l1 l1valid'
-
-    }
-
-
-
-    return(
-
-        <Form.Group as = {Row} controlId="formMortgagePersonalInfoMaritalStatus" className = "formgroup">
-
-            <Form.Label className={labelname}>Marital Status</Form.Label>
-            <Col>
-
-                {['radio'].map((type) => (
-                    <div key={`inline-${type}`} className={inputControl}>
-                        <Form.Check inline
-                                    label = "Single"
-                                    value="Single"
-                                    name = "maritalstatus"
-                                    type={type}
-                                    id={`inline-MaritalStatus-1`}
-                                    onChange ={props.hideSpouse}
-                                    checked = {props.value === "Single"}
-
-                        />
-                        <Form.Check inline
-                                    label = "Married"
-                                    value="Married"
-                                    name = "maritalstatus"
-                                    type={type}
-                                    id={`inline-MaritalStatus-2`}
-                                    onChange ={props.showSpouse}
-                                    checked = {props.value === "Married"}
-
-                        />
-
-                        <Form.Check inline
-                                    label = "Divorced"
-                                    value="Divorced"
-                                    name = "maritalstatus"
-                                    type={type}
-                                    id={`inline-MaritalStatus-3`}
-                                    onChange ={props.hideSpouse}
-                                    checked = {props.value === "Divorced"}
-                        />
-
-                    </div>
-                ))}
-            </Col>
-
-        </Form.Group>
-
-    )
-}
-
-export const Page2_Income = (props) => {
-
-    console.log("income " + props.currentStep);
-    if (props.currentStep !== 2) {
-        return null
-    }
 
     //console.log("income " + props.firsttouched);
     //console.log("income " + props.firstvalid);
 
-    let {firstinputControl, firstlabelname} = firstinput(props);
+
+    let firstinputControl = "validname";
+    let firstlabelname = "l1";
+
+
+
+    if (props.firsttouched && !props.firstvalid) {
+        firstinputControl = 'validname invalidname';
+        firstlabelname = 'l1 l1invalid';
+    }
+
+    if (props.firsttouched && props.firstvalid) {
+        firstinputControl = 'validname';
+        firstlabelname = 'l1 l1valid';
+    }
+
+
+
 
     return(
+
+
         <Form.Group as = {Row} controlId="formMortgagePersonalInfoIncome" className = "formgroup">
             <Form.Label className={firstlabelname} >Gross Income $</Form.Label>
             <Col>
@@ -720,11 +584,7 @@ export const Page2_Income = (props) => {
 }
 
 
-export const Page2_Education = (props) => {
-
-    if (props.currentStep !== 2) {
-        return null
-    }
+export const education = (props) => {
 
     let inputControl = "radiovalidname";
     let firstlabelname = "l1";
@@ -809,14 +669,83 @@ export const Page2_Education = (props) => {
 
 
 
+export const maritalStatus = (props) => {
+
+    //console.log("marital " + props.firsttouched);
+    //console.log("marital " + props.firstvalid);
 
 
+    let inputControl = "radiovalidname";
+    let labelname = "l1";
 
-export const Page2_Dependents = (props) => {
 
-    if (props.currentStep !== 2) {
-        return null
+    if (props.firsttouched && !props.firstvalid) {
+        inputControl = 'radiovalidname invalidname';
+        labelname = 'l1 l1invalid'
+
     }
+
+    if (props.firsttouched && props.firstvalid) {
+        inputControl = 'radiovalidname';
+        labelname = 'l1 l1valid'
+
+    }
+
+
+
+    return(
+
+        <Form.Group as = {Row} controlId="formMortgagePersonalInfoMaritalStatus" className = "formgroup">
+
+            <Form.Label className={labelname}>Marital Status</Form.Label>
+            <Col>
+
+                {['radio'].map((type) => (
+                    <div key={`inline-${type}`} className={inputControl}>
+                        <Form.Check inline
+                                    label = "Single"
+                                    value="Single"
+                                    name = "maritalstatus"
+                                    type={type}
+                                    id={`inline-MaritalStatus-1`}
+                                    onChange ={props.hideSpouse}
+
+                        />
+                        <Form.Check inline
+                                    label = "Married"
+                                    value="Married"
+                                    name = "maritalstatus"
+                                    type={type}
+                                    id={`inline-MaritalStatus-2`}
+                                    onChange ={props.showSpouse}
+
+                        />
+
+                        <Form.Check inline
+                                    label = "Divorced"
+                                    value="Divorced"
+                                    name = "maritalstatus"
+                                    type={type}
+                                    id={`inline-MaritalStatus-3`}
+                                    onChange ={props.hideSpouse}
+
+                        />
+
+                    </div>
+                ))}
+            </Col>
+
+        </Form.Group>
+
+
+
+
+
+    )
+}
+
+
+export const dependents = (props) => {
 
     //console.log("in dependents display" + props.value)
 
@@ -936,11 +865,7 @@ export const Page2_Dependents = (props) => {
 }
 
 
-export const Page2_Residence= (props) => {
-
-    if (props.currentStep !== 2) {
-        return null
-    }
+export const residence= (props) => {
 
     let inputControl = "radiovalidname";
     let labelname = "l1";
@@ -1004,8 +929,7 @@ export const Page2_Residence= (props) => {
 
 
 
-export const applications = (props) => { // not used
-
+export const applications = (props) => {
 
     let inputControl = "radaiovalidname";
     let labelname = "l1";
@@ -1082,7 +1006,7 @@ export const applications = (props) => { // not used
 }
 
 
-export const applicationsdenied = (props) => { // not used
+export const applicationsdenied = (props) => {
 
     let inputControl = "radiovalidname";
     let labelname = "l1";
@@ -1154,24 +1078,6 @@ export const applicationsdenied = (props) => { // not used
 
     )
 }
-
-export const Page1_bottominfo = (props) => {
-
-    if (props.currentStep !== 1) {
-        return null
-    }
-    return(
-        <Form.Text className="text-muted">
-            <ul>
-                <li>This is the basic information we need to create your account and assign you a customer number.</li>
-                <li>It will be encrypted before it is stored.</li>
-                <li>We will never share your information without your permission!</li>
-            </ul>
-        </Form.Text>
-    )
-
-}
-
 
 export const okeedokee = (props) => {
     return(

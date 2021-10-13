@@ -19,7 +19,7 @@ export const MyModal2 = (props) => {
         >
             <Modal.Header>
                 <h6>Hi {props.firstname.value},
-                this bank uses advanced algorithmic software from DataTwin to check for errors and issues that
+                    this bank uses advanced algorithmic software from DataTwin to check for errors and issues that
                     can affect your application. An unusual pattern was detected.</h6>
                 <button
                     type="button"
@@ -36,9 +36,9 @@ export const MyModal2 = (props) => {
                 <p>Please confirm this information</p>
 
 
-                { props.showarray.dependents ? < displays.dependents  value = {props.numdependents.value} parseKids = {props.parseKids} /> : ""}
-                { props.showarray.income ? < displays.income value = {props.rawincome.value} storeIncome = {props.storeIncome}/>: "" }
-                { props.showarray.education ? < displays.education  value = {props.education.value}  handleChange = {props.handleChange2} /> : "" }
+                { props.showarray.dependents ? < displays.Page2_Dependents  value = {props.numdependents.value} parseKids = {props.parseKids} /> : ""}
+                { props.showarray.income ? < displays.Page2_Income value = {props.rawincome.value} storeIncome = {props.storeIncome}/>: "" }
+                { props.showarray.education ? < displays.Page2_Education  value = {props.education.value}  handleChange = {props.handleChange2} /> : "" }
                 { props.showarray.okeedokee ? < displays.okeedokee />: "" }
 
             </Modal.Body>
