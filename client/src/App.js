@@ -1,33 +1,29 @@
 import React, { } from 'react';
+import {Container, Col, Row, Form, Button, FormGroup} from "react-bootstrap";
 import axios from 'axios';
-import { Container, Col, Row, Form , Button} from "react-bootstrap";
 import update from 'immutability-helper';
 import validate from './components/validator.js';
 
-
-//import ModalClass from "./components/ModalClass";  -- using a class
-import MyModal2 from "./components/MyModal"; // using a function
-
-import * as displays from './components/DisplayFunctions.js';  // note the differences from the import validate above
-
 import './App.css';
+import * as displays from './components/DisplayFunctions.js';
+//import * as breadcrumbs from './images/'; // todo figure out how to import multiple images
+import breadcrumb3 from './images/breadcrumb3.png';
+import breadcrumb4 from './images/breadcrumb4.png';
+
+import MyModal2 from "./components/MyModal";
+import {Page1_SpouseAgeSsn} from "./components/DisplayFunctions.js"; // using a function
+
+var numpages = 2;
 
 
-class App extends React.Component {
+class MasterForm extends React.Component {
     constructor(props) {
-        super(props);
-        this.handleChange2 = this.handleChange2.bind(this);
-        this.parseIncome = this.parseIncome.bind(this);
-        this.parseKids = this.parseKids.bind(this);
-        this.hideSpouse2 = this.hideSpouse2.bind(this);
-        this.showSpouse2 = this.showSpouse2.bind(this);
-        this.toggle = this.toggle.bind(this);  // added for modal
-        this.storeIncome = this.storeIncome.bind(this);
-        this.printValue = this.printValue.bind(this);
-        this.ssn_PopoverLogic = this.ssn_PopoverLogic.bind(this);
-        this.closeModals = this.closeModals.bind(this);
-
+        super(props)
         this.state = {
+            currentStep: 1,
+            pageName: 'Start Here',
+            breadcrumbImage:breadcrumb3,
+
             showFormMortgagePersonalInfoSpouseName: false,
             hideFormMortgagePersonalInfoSpouseName: true,
             show: false,
@@ -57,14 +53,12 @@ class App extends React.Component {
                 income: '',
                 education: '',
             },
-
-
             formControls: {
                 firstname: {
                     value: '',
                     minlength: 2,
                     maxlength: 31,
-                    placeholder: 'First name',
+                    placeholder: 'First name as on drivers licence',
                     valid: false,
                     touched: false,
                     visible: true,
@@ -79,7 +73,7 @@ class App extends React.Component {
                     value: '',
                     minlength: 2,
                     maxlength: 31,
-                    placeholder: 'Last name',
+                    placeholder: 'Last name as on drivers licence',
                     valid: false,
                     touched: false,
                     visible: true,
@@ -95,7 +89,7 @@ class App extends React.Component {
                     value: '',
                     minlength: 2,
                     maxlength: 31,
-                    placeholder: 'First name',
+                    placeholder: 'First name as on drivers licence',
                     valid: false,
                     touched: false,
                     visible: 'false',
@@ -110,7 +104,7 @@ class App extends React.Component {
                     value: '',
                     minlength: 2,
                     maxlength: 31,
-                    placeholder: 'Last name',
+                    placeholder: 'Last name as on drivers licence',
                     valid: false,
                     touched: false,
                     visible: 'false',
@@ -121,10 +115,37 @@ class App extends React.Component {
                         emptyTextFieldValidator: false
                     }
                 },
+                spouse_age: {
+                    value: '',
+                    minlength: 1,
+                    maxlength: 3,
+                    placeholder: '22',
+                    valid: false,
+                    touched: false,
+                    visible: true,
+                    validationRules: {
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false,
+                        ageValidator: true
+                    }
+                },
+                spouse_ssn: {
+                    value: '',
+                    minlength: 9,
+                    placeholder: '111223333',
+                    valid: false,
+                    touched: false,
+                    visible: true,
+                    validationRules: {
+                        requiredValidator: true,
+                        basicSSNValidator : true,
+                        emptyTextFieldValidator: false
+                    }
+                },
                 street: {
                     value: '',
                     minlength: 2,
-                    placeholder: 'Street',
+                    placeholder: 'Where you live',
                     valid: false,
                     touched: false,
                     visible: true,
@@ -203,6 +224,30 @@ class App extends React.Component {
                         emptyTextFieldValidator: false
                     }
                 },
+                phone: {
+                    value: '',
+                    minlength: 10,
+                    placeholder: '5125551212',
+                    valid: false,
+                    touched: false,
+                    visible: true,
+                    validationRules: {
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false
+                    }
+                },
+                email: {
+                    value: '',
+                    minlength: 4,
+                    placeholder: 'greg@aol.com',
+                    valid: false,
+                    touched: false,
+                    visible: true,
+                    validationRules: {
+                        requiredValidator: true,
+                        emptyTextFieldValidator: false
+                    }
+                },
                 maritalstatus: {
                     value: '',
                     valid: false,
@@ -212,6 +257,17 @@ class App extends React.Component {
                         requiredValidator: true,
                     }
                 },
+                // start of page 2 state variables ////////////////////////////////////////////
+                nickname: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    visible: true,
+                    validationRules: {
+                        requiredValidator: true,
+                    }
+                },
+
                 numdependents: {
                     value: '',
                     valid: false,
@@ -243,7 +299,7 @@ class App extends React.Component {
                         numbersOnlyValidator: true
                     }
                 },
-                pastapplications: {
+                pastapplications: {  // not currently used
                     value: '',
                     valid: false,
                     touched: false,
@@ -252,7 +308,7 @@ class App extends React.Component {
                         requiredValidator: true,
                     }
                 },
-                pastapplicationsdenied: {
+                pastapplicationsdenied: { // not currently used
                     value: '',
                     valid: false,
                     touched: false,
@@ -280,25 +336,23 @@ class App extends React.Component {
                     }
                 }
 
+
+
             }
-        };
-
-
+        }
     }
 
 
-
-
-
-
-
+//#####################################################################
+// #################### CODE FROM RANDO ###############################
+//#####################################################################
     toggle = () => {
 
         //console.log(this.state.showmodal);
         this.setState({showmodal: !this.state.showmodal});// added for modal
     }
 
-
+//#####################################################################
     handleSubmit = (e) => {
 
         console.log("in submit");
@@ -308,19 +362,19 @@ class App extends React.Component {
         //}
 
         //e.preventDefault();
-        
-        
+
+
         ///////////////////////////////////////////
 
 
-        // todo temp make form valid
+// todo temp make form valid
 
         this.setState({formIsValid : true});
 
         //////////////////////////////////////////
 
         //if (!this.state.formIsValid) {
-            if (false) {
+        if (false) {
 
 
             // first make sure all invalid fields are set to label red
@@ -352,8 +406,8 @@ class App extends React.Component {
             // Now all I need to do is pop a modal that says they have to fill in the missing info
 
 
-       // } else if (this.state.formIsValid) {
-            } else if (true) {
+            // } else if (this.state.formIsValid) {
+        } else if (true) {
 
 
             console.log("valid form - post to server");
@@ -364,20 +418,20 @@ class App extends React.Component {
             //axios.post('http://localhost:5000/api/riskratios', this.state.formControls).then(res => {
             //axios.post('/api/riskratios', this.state.formControls).then(res => {
             //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
-            
-            
-         /*   
-            // test post to api/godaddy
-            
-            axios.post('/api/gd', {
-                ReturnURL: 'www.mydatatwin.com',
-              
-            }).
-            then(res => {          
-                console.log(res);
-            });
-            
-        */
+
+
+            /*
+               // test post to api/godaddy
+
+               axios.post('/api/gd', {
+                   ReturnURL: 'www.mydatatwin.com',
+
+               }).
+               then(res => {
+                   console.log(res);
+               });
+
+           */
             axios.post('/api/riskratios', this.state.formControls).then(res => {
 
                 console.log(res);
@@ -400,29 +454,29 @@ class App extends React.Component {
                 if (res.data[0] || res.data[1] || res.data[2]) {
 
                     this.setState({showmodal: true});
-                    
+
                 } else {
-                
-                    // Assuming that once the risk scores were developed and checked against the 
+
+                    // Assuming that once the risk scores were developed and checked against the
                     // criteria and the user either fixed or confirmed the info I will now get a final
                     // signal that the form has valid data in it and is ready to go back to the data recipient
-                    // and hand the user back to the originating web site.  I then need to do something to 
-                    // terminate the dyno running this form and server. 
+                    // and hand the user back to the originating web site.  I then need to do something to
+                    // terminate the dyno running this form and server.
 
-                    
-                    // the okeedokee modal needs to alert the user that they are going to transfer back to the 
+
+                    // the okeedokee modal needs to alert the user that they are going to transfer back to the
                     // originating site and request a confirmation or ok then we post the info back to
                     // some secure API of some data consuming app and redirect back to the website.
                     this.setState({showokeedokee: true})
-                    
-                   // either create the data json here or back at the server
-                   // I think the server will have all of the information so I don't need to resend it. 
-                   
-                    
-                    
-                    
-                    
-                    
+
+                    // either create the data json here or back at the server
+                    // I think the server will have all of the information so I don't need to resend it.
+
+
+
+
+
+
                 }
             }, () => {
                 console.log(this.state); // Note how the callback fixes the async issue with last character
@@ -441,7 +495,7 @@ class App extends React.Component {
         //})
     }
 
-
+//#####################################################################
 // helper change handler
     handleChange = (name, value, visible = true) => {
 
@@ -465,7 +519,12 @@ class App extends React.Component {
         let formIsValid = true;
 
 
+        // VALID FORM CHECK
         // dealing with the conditional display - there has got to be a better way to do this
+        // only consider the fields that are visible.
+        // we currently walk through all the fields but maybe there is a way to have a set of
+        // fields that are in the form actively
+
         for (let inputIdentifier in updatedControls) {
 
             if (updatedControls[inputIdentifier].visible) {
@@ -487,7 +546,7 @@ class App extends React.Component {
 
     }
 
-
+//#####################################################################
 // can handle any target
     handleChange2 = (e) => {
 
@@ -537,111 +596,14 @@ class App extends React.Component {
     }
 
 
-    hideSpouse2 = e => {  // called from marital selector
-
-        let fieldname1 = "spouse_firstname";
-
-        const value = e.target.value;
-
-        let updatedControls = {
-            ...this.state.formControls // gives you all of the form controls and all their ste elements
-        };
-
-        // all of the state for firstname (or whatever is the target) - particular form control
-        const updatedFormElement = {
-            ...updatedControls[fieldname1]
-        };
-
-        updatedFormElement.visible = false;
-
-        updatedControls[fieldname1] = updatedFormElement;
-
-        ///////////////////////////////////////////////////////////////////////
-
-        fieldname1 = "spouse_lastname";
-
-        // all of the state for firstname (or whatever is the target) - particular form control
-        const updatedFormElement2 = {
-            ...updatedControls[fieldname1]
-        };
-
-        updatedFormElement2.visible = false;
-
-        updatedControls[fieldname1] = updatedFormElement2;
-
-        let name1 = "spouse_firstname";
-        let name2 = "spouse_lastname";
-
-        console.log(updatedControls[name1])
-        console.log(updatedControls[name2])
-
-        this.setState({
-            showFormMortgagePersonalInfoSpouseName: false,
-            hideFormMortgagePersonalInfoSpouseName: true,
-            formControls: updatedControls
-        }, () => {
-            console.log(this.state);
-            this.handleChange("maritalstatus", value);
-
-        });
-    }
-
-
-    showSpouse2 = e => {  // called from marital selector
-
-        let fieldname1 = "spouse_firstname";
-
-        const value = e.target.value;
-
-        let updatedControls = {
-            ...this.state.formControls // gives you all of the form controls and all their ste elements
-        };
-
-        // all of the state for firstname (or whatever is the target) - particular form control
-        const updatedFormElement = {
-            ...updatedControls[fieldname1]
-        };
-
-        updatedFormElement.visible = true;
-
-        updatedControls[fieldname1] = updatedFormElement;
-
-        ///////////////////////////////////////////////////////////////////////
-
-        fieldname1 = "spouse_lastname";
-
-        // all of the state for firstname (or whatever is the target) - particular form control
-        const updatedFormElement2 = {
-            ...updatedControls[fieldname1]
-        };
-
-        updatedFormElement2.visible = true;
-
-        updatedControls[fieldname1] = updatedFormElement2;
-
-        let name1 = "spouse_firstname";
-        let name2 = "spouse_lastname";
-
-        console.log(updatedControls[name1])
-        console.log(updatedControls[name2])
-
-        this.setState({
-            showFormMortgagePersonalInfoSpouseName: true,
-            hideFormMortgagePersonalInfoSpouseName: false,
-            formControls: updatedControls
-        }, () => {
-            console.log(this.state);
-            this.handleChange("maritalstatus", value);
-
-        });
-    }
-
-
+    //#####################################################################
     printValue = e => {
 
         console.log(e.target.value);
 
     }
+
+    //#####################################################################
 
 
 //converts the dollar amount to the index
@@ -966,11 +928,11 @@ class App extends React.Component {
 
 
 
-                this.setState({
-                    showzipwrong: true
-                }, () => {
-                    console.log("in the zip_PopoverLogic zipwrong");
-                });
+            this.setState({
+                showzipwrong: true
+            }, () => {
+                console.log("in the zip_PopoverLogic zipwrong");
+            });
 
         }
 
@@ -1172,6 +1134,226 @@ class App extends React.Component {
         });
     }
 
+    // #############################################################
+
+    hideSpouse2 = e => {  // called from marital selector
+
+        let fieldname1 = "spouse_firstname";
+
+        const value = e.target.value;
+
+        let updatedControls = {
+            ...this.state.formControls // gives you all of the form controls and all their ste elements
+        };
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement = {
+            ...updatedControls[fieldname1]
+        };
+
+        updatedFormElement.visible = false;
+
+        updatedControls[fieldname1] = updatedFormElement;
+
+        ///////////////////////////////////////////////////////////////////////
+
+        fieldname1 = "spouse_lastname";
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement2 = {
+            ...updatedControls[fieldname1]
+        };
+
+        updatedFormElement2.visible = false;
+
+        updatedControls[fieldname1] = updatedFormElement2;
+
+        let name1 = "spouse_firstname";
+        let name2 = "spouse_lastname";
+
+        console.log(updatedControls[name1])
+        console.log(updatedControls[name2])
+
+        this.setState({
+            showFormMortgagePersonalInfoSpouseName: false,
+            hideFormMortgagePersonalInfoSpouseName: true,
+            formControls: updatedControls
+        }, () => {
+            console.log(this.state);
+            this.handleChange("maritalstatus", value);
+
+        });
+    }
+
+// ########################################################################
+
+    showSpouse2 = e => {  // called from marital selector
+
+        let fieldname1 = "spouse_firstname";
+
+        const value = e.target.value;
+
+        console.log("showspouse " + value);
+
+        let updatedControls = {
+            ...this.state.formControls // gives you all of the form controls and all their ste elements
+        };
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement = {
+            ...updatedControls[fieldname1]
+        };
+
+        updatedFormElement.visible = true;
+
+        updatedControls[fieldname1] = updatedFormElement;
+
+        ///////////////////////////////////////////////////////////////////////
+
+        fieldname1 = "spouse_lastname";
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement2 = {
+            ...updatedControls[fieldname1]
+        };
+
+        updatedFormElement2.visible = true;
+
+        updatedControls[fieldname1] = updatedFormElement2;
+
+        let name1 = "spouse_firstname";
+        let name2 = "spouse_lastname";
+
+        console.log(updatedControls[name1])
+        console.log(updatedControls[name2])
+
+        this.setState({
+            showFormMortgagePersonalInfoSpouseName: true,
+            hideFormMortgagePersonalInfoSpouseName: false,
+            formControls: updatedControls
+        }, () => {
+            console.log(this.state);
+            this.handleChange("maritalstatus", value);
+
+        });
+    }
+
+//###############################################################
+//######################  NEW CODE ##############################
+
+    //handleChange = event => {
+    // const {name, value} = event.target
+    //this.setState({
+    // [name]: value
+    //})
+    //}
+
+    // this is junk // todo rewrite
+    handleSubmit = event => {
+        event.preventDefault()
+        const { email, username, password } = this.state
+        alert(`Your registration detail: \n 
+           Email: ${email} \n 
+           Username: ${username} \n
+           Password: ${password}`)
+    }
+
+
+    next_prev_select = () => {
+        console.log("next_select " + this.state.currentStep)
+        switch(this.state.currentStep){
+            case 1:
+                this.setState({pageName : "Start Here"});
+                this.setState({breadcrumbImage: breadcrumb3})
+                console.log("I am in case 1");
+                break;
+            case 2:
+                this.setState({pageName : "About You"});
+                this.setState({breadcrumbImage: breadcrumb4})
+                console.log("I am in case 2");
+                break;
+        }
+    }
+
+    // manages what happens when you press the next button
+    _next = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep >= numpages? numpages: currentStep + 1
+        // console.log("In _next");
+        //console.log(currentStep);
+        this.setState({currentStep: currentStep},
+            () => this.next_prev_select()
+
+        )
+
+        // console.log(this.state);
+    }
+
+
+
+    // manages what happens when you press the previous button
+    // can use
+    _prev = () => {
+        //console.log("In _prev")
+        let currentStep = this.state.currentStep
+        currentStep = currentStep <= 1? 1: currentStep - 1
+        //console.log(currentStep);
+        this.setState({currentStep: currentStep},
+            () => this.next_prev_select()
+        )
+    }
+
+    /*
+    * the functions for our button
+    */
+
+
+    buttons() {
+        let currentStep = this.state.currentStep;
+
+        if(currentStep !==1 && currentStep < numpages ){ // this
+            return (
+                <FormGroup  as={Row} >
+                    <Col className = "text-left">
+                        <Button variant="primary" className="mb-3" onClick={this._prev}>
+                            Previous
+                        </Button>
+                    </Col>
+
+                    <Col className="text-right">
+                        <Button variant="primary" className="mb-3" onClick={this._next}>
+                            Save and Next
+                        </Button>
+                    </Col>
+                </FormGroup>
+            )
+        }
+
+        else if(currentStep == 1){ // this will refer the first page only
+            return (
+                <FormGroup  as={Row} >
+                    <Col className="text-right">
+                        <Button variant="primary" className="mb-3" onClick={this._next}>
+                            Save and Next
+                        </Button>
+                    </Col>
+                </FormGroup>
+            )
+        }
+        else if(currentStep == numpages) {  // this refers to the last page only
+            return (
+                <FormGroup as={Row}>
+                    <Col className="text-left">
+                        <Button variant="primary" className="mb-3" onClick={this._prev}>
+                            Previous
+                        </Button>
+                    </Col>
+                </FormGroup>
+
+            )
+        }
+        else {return null;}
+    }
 
     render() {
 
@@ -1179,458 +1361,432 @@ class App extends React.Component {
             showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong,
             showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong,
             showokeedokee, shownotokeedokee,showssninuse,showssnblacklist} = this.state;
-
         return (
 
-            <Container className="container">
+            <Container className = "container">
+                <Form className = "form">
+                    <Col></Col>
+                    <Col className=" lheaderdemo text-center">
 
-                <Form
-                    className="form"
-                    /*onSubmit = {this.handleSubmit}*/
-                >
+                        Data Twin Credit Application Demo
+                    </Col>
+                    <Col></Col>
 
+                    <React.Fragment>
 
-                    <Form.Label className="l2">
-                        Data Twin Demo:
-                    </Form.Label>
+                        <form onSubmit={this.handleSubmit}>
 
+                            <displays.Breadcrumb
+                                breadcrumbImage = {this.state.breadcrumbImage}
+                            />
 
-                    <displays.firstLastName
-                        type="text"
-                        firstplaceholder={this.state.formControls.firstname.placeholder}
-                        firstvalue={this.state.formControls.firstname.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.firstname.valid}
-                        firsttouched={this.state.formControls.firstname.touched}
+                            <displays.Page_Header
+                                pageName = {this.state.pageName}
+                            />
 
+                            <displays.Page1_Name
+                                currentStep={this.state.currentStep}
+                                type="text"
+                                firstplaceholder={this.state.formControls.firstname.placeholder}
+                                firstvalue={this.state.formControls.firstname.value} // makes this a controlled component
+                                firstvalid={this.state.formControls.firstname.valid}
+                                firsttouched={this.state.formControls.firstname.touched}
 
-                        lastplaceholder={this.state.formControls.lastname.placeholder}
-                        lastvalue={this.state.formControls.lastname.value}
-                        lastvalid={this.state.formControls.lastname.valid}
-                        lasttouched={this.state.formControls.lastname.touched}
-                        myonChange={this.handleChange2}
-                        onBlur = {this.name_PopoverLogic}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                                lastplaceholder={this.state.formControls.lastname.placeholder}
+                                lastvalue={this.state.formControls.lastname.value}
+                                lastvalid={this.state.formControls.lastname.valid}
+                                lasttouched={this.state.formControls.lastname.touched}
+                                myonChange={this.handleChange2}
+                                onBlur = {this.name_PopoverLogic}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
-
-                    {showFormMortgagePersonalInfoSpouseName && !hideFormMortgagePersonalInfoSpouseName && (
-                        <displays.spouseName
-                            type="text"
-                            firstplaceholder={this.state.formControls.spouse_firstname.placeholder}
-                            firstvalue={this.state.formControls.spouse_firstname.value} // makes this a controlled component
-                            firstvalid={this.state.formControls.spouse_firstname.valid}
-                            firsttouched={this.state.formControls.spouse_firstname.touched}
-
-
-                            lastplaceholder={this.state.formControls.spouse_lastname.placeholder}
-                            lastvalue={this.state.formControls.spouse_lastname.value}
-                            lastvalid={this.state.formControls.spouse_lastname.valid}
-                            lasttouched={this.state.formControls.spouse_lastname.touched}
-                            myonChange={this.handleChange2}
-                            onBlur = {this.name_PopoverLogic}
-                            onFocus = {this.setTouchedOnFocus}
-                        /> )}
-
-
-                    <displays.streetCity
-                        type="text"
-                        firstplaceholder={this.state.formControls.street.placeholder}
-                        lastplaceholder={this.state.formControls.city.placeholder}
-                        firstvalue={this.state.formControls.street.value} // makes this a controlled component
-                        lastvalue={this.state.formControls.city.value}
-                        onChange={this.handleChange2}
-                        firstvalid={this.state.formControls.street.valid}
-                        lastvalid={this.state.formControls.city.valid}
-                        firsttouched={this.state.formControls.street.touched}
-                        lasttouched={this.state.formControls.city.touched}
-                        firstonBlur = {this.street_PopoverLogic}
-                        lastonBlur = {this.city_PopoverLogic}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            <displays.Page1_StreetCity
+                                currentStep={this.state.currentStep}
+                                type="text"
+                                firstplaceholder={this.state.formControls.street.placeholder}
+                                lastplaceholder={this.state.formControls.city.placeholder}
+                                firstvalue={this.state.formControls.street.value} // makes this a controlled component
+                                lastvalue={this.state.formControls.city.value}
+                                onChange={this.handleChange2}
+                                firstvalid={this.state.formControls.street.valid}
+                                lastvalid={this.state.formControls.city.valid}
+                                firsttouched={this.state.formControls.street.touched}
+                                lasttouched={this.state.formControls.city.touched}
+                                firstonBlur = {this.street_PopoverLogic}
+                                lastonBlur = {this.city_PopoverLogic}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
 
-                    <displays.stateZip
-                        type="text"
-                        firstplaceholder={this.state.formControls.state.placeholder}
-                        lastplaceholder={this.state.formControls.zip.placeholder}
-                        firstvalue={this.state.formControls.state.value} // makes this a controlled component
-                        lastvalue={this.state.formControls.zip.value}
-                        onChange={this.handleChange2}
-                        firstvalid={this.state.formControls.state.valid}
-                        lastvalid={this.state.formControls.zip.valid}
-                        firsttouched={this.state.formControls.state.touched}
-                        lasttouched={this.state.formControls.zip.touched}
-                        firstonBlur = {this.state_PopoverLogic}
-                        lastonBlur = {this.zip_PopoverLogic}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            <displays.Page1_StateZip
+                                currentStep={this.state.currentStep}
+                                type="text"
+                                firstplaceholder={this.state.formControls.state.placeholder}
+                                lastplaceholder={this.state.formControls.zip.placeholder}
+                                firstvalue={this.state.formControls.state.value} // makes this a controlled component
+                                lastvalue={this.state.formControls.zip.value}
+                                onChange={this.handleChange2}
+                                firstvalid={this.state.formControls.state.valid}
+                                lastvalid={this.state.formControls.zip.valid}
+                                firsttouched={this.state.formControls.state.touched}
+                                lasttouched={this.state.formControls.zip.touched}
+                                firstonBlur = {this.state_PopoverLogic}
+                                lastonBlur = {this.zip_PopoverLogic}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
+
+                            <displays.Page1_AgeSsn
+                                currentStep={this.state.currentStep}
+                                type="text"
+                                firstplaceholder={this.state.formControls.age.placeholder}
+                                firstvalue={this.state.formControls.age.value} // makes this a controlled component
+                                firstonChange={this.handleChange2}
+                                firstvalid={this.state.formControls.age.valid}
+                                firsttouched={this.state.formControls.age.touched}
+                                lastplaceholder={this.state.formControls.socialsecuritynumber.placeholder}
+                                lastvalue={this.state.formControls.socialsecuritynumber.value} // makes this a controlled component
+                                lastonChange={this.handleChange2}
+                                lastvalid={this.state.formControls.socialsecuritynumber.valid}
+                                lasttouched={this.state.formControls.socialsecuritynumber.touched}
+                                firstonBlur = {this.age_PopoverLogic}
+                                lastonBlur = {this.ssn_PopoverLogic}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
 
-                    <displays.agessn
-                        type="text"
-                        firstplaceholder={this.state.formControls.age.placeholder}
-                        firstvalue={this.state.formControls.age.value} // makes this a controlled component
-                        firstonChange={this.handleChange2}
-                        firstvalid={this.state.formControls.age.valid}
-                        firsttouched={this.state.formControls.age.touched}
-                        lastplaceholder={this.state.formControls.socialsecuritynumber.placeholder}
-                        lastvalue={this.state.formControls.socialsecuritynumber.value} // makes this a controlled component
-                        lastonChange={this.handleChange2}
-                        lastvalid={this.state.formControls.socialsecuritynumber.valid}
-                        lasttouched={this.state.formControls.socialsecuritynumber.touched}
-                        firstonBlur = {this.age_PopoverLogic}
-                        lastonBlur = {this.ssn_PopoverLogic}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            <displays.Page1_PhoneEmail
+                                currentStep={this.state.currentStep}
+                                type="text"
+                                firstplaceholder={this.state.formControls.phone.placeholder}
+                                firstvalue={this.state.formControls.phone.value} // makes this a controlled component
+                                firstonChange={this.handleChange2}
+                                firstvalid={this.state.formControls.phone.valid}
+                                firsttouched={this.state.formControls.phone.touched}
+                                lastplaceholder={this.state.formControls.email.placeholder}
+                                lastvalue={this.state.formControls.email.value} // makes this a controlled component
+                                lastonChange={this.handleChange2}
+                                lastvalid={this.state.formControls.email.valid}
+                                lasttouched={this.state.formControls.email.touched}
+                                firstonBlur = {this.age_PopoverLogic}
+                                lastonBlur = {this.ssn_PopoverLogic}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
-                    <displays.maritalStatus
-                        numdependents={this.state.formControls.maritalstatus.value}
-                        showSpouse={this.showSpouse2}
-                        hideSpouse={this.hideSpouse2}
-                        type="text"
-                        value={this.state.formControls.maritalstatus.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.maritalstatus.valid}
-                        firsttouched={this.state.formControls.maritalstatus.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            <displays.Page1_MaritalStatus
+                                currentStep={this.state.currentStep}
+                                maritalstatus={this.state.formControls.maritalstatus.value}
+                                showSpouse={this.showSpouse2}
+                                hideSpouse={this.hideSpouse2}
+                                type="text"
+                                value={this.state.formControls.maritalstatus.value} // makes this a controlled component
+                                firstvalid={this.state.formControls.maritalstatus.valid}
+                                firsttouched={this.state.formControls.maritalstatus.touched}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
-
-                    <displays.dependents
-                        numdependents={this.state.formControls.numdependents.value}
-                        parseKids={this.parseKids}
-                        type="text"
-                        value={this.state.formControls.numdependents.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.numdependents.valid}
-                        firsttouched={this.state.formControls.numdependents.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
-
-
-                    <displays.residence
-                        residence={this.state.formControls.residence.value}
-                        handleChange={this.handleChange2}
-                        type="text"
-                        value={this.state.formControls.residence.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.residence.valid}
-                        firsttouched={this.state.formControls.residence.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            {showFormMortgagePersonalInfoSpouseName && !hideFormMortgagePersonalInfoSpouseName && (
+                                <displays.Page1_SpouseName
+                                    currentStep={this.state.currentStep}
+                                    type="text"
+                                    firstplaceholder={this.state.formControls.spouse_firstname.placeholder}
+                                    firstvalue={this.state.formControls.spouse_firstname.value} // makes this a controlled component
+                                    firstvalid={this.state.formControls.spouse_firstname.valid}
+                                    firsttouched={this.state.formControls.spouse_firstname.touched}
 
 
-                    <displays.income
-                        rawincome={this.state.formControls.rawincome.value}
-                        storeIncome={this.storeIncome}
-                        placeholder={this.state.formControls.income.placeholder}
-                        firstvalid={this.state.formControls.rawincome.valid}
-                        firsttouched={this.state.formControls.rawincome.touched}
-                        value={this.state.formControls.rawincome.value}
-                        onFocus = {this.setTouchedOnFocus}
-                        firstonBlur = {this.income_PopoverLogic}
+                                    lastplaceholder={this.state.formControls.spouse_lastname.placeholder}
+                                    lastvalue={this.state.formControls.spouse_lastname.value}
+                                    lastvalid={this.state.formControls.spouse_lastname.valid}
+                                    lasttouched={this.state.formControls.spouse_lastname.touched}
+                                    myonChange={this.handleChange2}
+                                    onBlur = {this.name_PopoverLogic}
+                                    onFocus = {this.setTouchedOnFocus}
+                                /> )}
 
-                    />
-
-
-                    <displays.education
-                        education={this.state.formControls.education.value}
-                        handleChange={this.handleChange2}
-                        type="text"
-                        placeholder={this.state.formControls.education.placeholder}
-                        value={this.state.formControls.education.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.education.valid}
-                        firsttouched={this.state.formControls.education.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
-
-                    {/*
-
-                    <Form.Label className="l2">
-                        Mortgage Applications:
-                    </Form.Label>
+                            {showFormMortgagePersonalInfoSpouseName && !hideFormMortgagePersonalInfoSpouseName && (
+                                <displays.Page1_SpouseAgeSsn
+                                    currentStep={this.state.currentStep}
+                                    type="text"
+                                    firstplaceholder={this.state.formControls.spouse_age.placeholder}
+                                    firstvalue={this.state.formControls.spouse_age.value} // makes this a controlled component
+                                    firstvalid={this.state.formControls.spouse_age.valid}
+                                    firsttouched={this.state.formControls.spouse_age.touched}
 
 
-                    <displays.applications
-                        applications={this.state.formControls.pastapplications.value}
-                        handleChange={this.handleChange2}
-                        placeholder={this.state.formControls.pastapplications.placeholder}
-                        value={this.state.formControls.pastapplications.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.pastapplications.valid}
-                        firsttouched={this.state.formControls.pastapplications.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                                    lastplaceholder={this.state.formControls.spouse_ssn.placeholder}
+                                    lastvalue={this.state.formControls.spouse_ssn.value}
+                                    lastvalid={this.state.formControls.spouse_ssn.valid}
+                                    lasttouched={this.state.formControls.spouse_ssn.touched}
+                                    myonChange={this.handleChange2}
+                                    onBlur = {this.name_PopoverLogic}
+                                    onFocus = {this.setTouchedOnFocus}
+                                /> )}
 
-                    <displays.applicationsdenied
-                        applicationsdenied={this.state.formControls.pastapplicationsdenied.value}
-                        handleChange={this.handleChange2}
-                        placeholder={this.state.formControls.pastapplicationsdenied.placeholder}
-                        value={this.state.formControls.pastapplicationsdenied.value} // makes this a controlled component
-                        firstvalid={this.state.formControls.pastapplicationsdenied.valid}
-                        firsttouched={this.state.formControls.pastapplicationsdenied.touched}
-                        onFocus = {this.setTouchedOnFocus}
-                    />
+                            <displays.Page1_bottominfo
+                                currentStep={this.state.currentStep}
+                            />
 
-                    */}
+                            <displays.Page2_Income
+                                currentStep={this.state.currentStep}
+                                rawincome={this.state.formControls.rawincome.value}
+                                storeIncome={this.storeIncome}
+                                placeholder={this.state.formControls.income.placeholder}
+                                firstvalid={this.state.formControls.rawincome.valid}
+                                firsttouched={this.state.formControls.rawincome.touched}
+                                value={this.state.formControls.rawincome.value}
+                                onFocus = {this.setTouchedOnFocus}
+                                firstonBlur = {this.income_PopoverLogic}
 
+                            />
 
-                    <Form.Group as={Row} controlId="submitButton" className="formgroup">
-                        <Col>
-                            <Button
-                                className="submitButton"
-                                onClick={this.handleSubmit}
-                                //disabled={!this.state.formIsValid}
-                            > Submit
-                            </Button>
-                        </Col>
+                            <displays.Page2_Education
+                                currentStep={this.state.currentStep}
+                                education={this.state.formControls.education.value}
+                                handleChange={this.handleChange2}
+                                type="text"
+                                placeholder={this.state.formControls.education.placeholder}
+                                value={this.state.formControls.education.value} // makes this a controlled component
+                                firstvalid={this.state.formControls.education.valid}
+                                firsttouched={this.state.formControls.education.touched}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
-                    </Form.Group>
+                            <displays.Page2_Residence
+                                currentStep={this.state.currentStep}
+                                residence={this.state.formControls.residence.value}
+                                handleChange={this.handleChange2}
+                                type="text"
+                                value={this.state.formControls.residence.value} // makes this a controlled component
+                                firstvalid={this.state.formControls.residence.valid}
+                                firsttouched={this.state.formControls.residence.touched}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
-                    {/*
-                    <Form.Group as={Row} controlId="modalButton" className="formgroup">
-                        <Col>
-                            <Button
-                                className="submitButton"
-
-                                onClick={this.toggle}
-                            >
-                                Show Modal
-                            </Button>
-                        </Col>ß
-
-                    </Form.Group>
-
-
-                    <Alert variant="success">
-                        <Alert.Heading>Hey, nice to see you</Alert.Heading>
-                        <p>
-                            Aww yeah, you successfully read this important alert message. This example
-                            text is going to run a bit longer so that you can see how spacing within an
-                            alert works with this kind of content.
-                        </p>
-                        <hr />
-                        <p className="mb-0">
-                            Whenever you need to, be sure to use margin utilities to keep things nice
-                            and tidy.
-                        </p>
-                    </Alert
-*/}
-
-                    {showssnwrong && (
-
-                        <displays.formfieldResponseModal
-                            show = {this.state.showssnwrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Illegal Characters in SSN"
-                            bodytext = "Please enter a social security number with nine digits and no hypens"
-                        />
-                    )}
-
-                    {showssnwronglength && (
-
-                        <displays.formfieldResponseModal
-                            show = {this.state.showssnwronglength}
-                            closeModals = {this.closeModals}
-                            headertext = "Too Short or Too long!"
-                            bodytext = "Your social security number must be exactly nine (9) numbers in length"
-                        />
-                    )}
+                            <displays.Page2_Dependents
+                                currentStep={this.state.currentStep}
+                                numdependents={this.state.formControls.numdependents.value}
+                                parseKids={this.parseKids}
+                                type="text"
+                                value={this.state.formControls.numdependents.value} // makes this a controlled component
+                                firstvalid={this.state.formControls.numdependents.valid}
+                                firsttouched={this.state.formControls.numdependents.touched}
+                                onFocus = {this.setTouchedOnFocus}
+                            />
 
 
-                    {showblankfield && (
 
-                    <displays.formfieldResponseModal
-                            show = {this.state.showblankfield}
-                            closeModals = {this.closeModals}
-                            headertext = "You have left a field blank"
-                            bodytext = "We really need this information to process your application!"
-                            width = "modal-50w"
-                        />
-                    )}
 
-                    {shownamewrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.shownamewrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Names contain characters only"
-                            bodytext = "Please delete all non letters from your name -
+                            {this.buttons()}
+
+
+                            {showssnwrong && (
+
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showssnwrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Illegal Characters in SSN"
+                                    bodytext = "Please enter a social security number with nine digits and no hypens"
+                                />
+                            )}
+
+                            {showssnwronglength && (
+
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showssnwronglength}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Too Short or Too long!"
+                                    bodytext = "Your social security number must be exactly nine (9) numbers in length"
+                                />
+                            )}
+
+
+                            {showblankfield && (
+
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showblankfield}
+                                    closeModals = {this.closeModals}
+                                    headertext = "You have left a field blank"
+                                    bodytext = "We really need this information to process your application!"
+                                    width = "modal-50w"
+                                />
+                            )}
+
+                            {shownamewrong && (
+
+                                <displays.formfieldResponseModal
+                                    show = {this.state.shownamewrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Names contain characters only"
+                                    bodytext = "Please delete all non letters from your name -
                             spaces are not valid characters - make sure you didn't add one to name!!"
-                        />
-                    )}
+                                />
+                            )}
 
-                    {shownamewronglength && (
+                            {shownamewronglength && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.shownamewronglength}
-                            closeModals = {this.closeModals}
-                            headertext = "Name length must be more than one character and less than 32 characters"
-                            bodytext = "Please enter your name as it is on your passport!"
-                            width = "modal-70w"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.shownamewronglength}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Name length must be more than one character and less than 32 characters"
+                                    bodytext = "Please enter your name as it is on your passport!"
+                                    width = "modal-70w"
+                                />
+                            )}
 
-                    {showstreetwrong && (
+                            {showstreetwrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showstreetwrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Street addresses have letters, numbers, hyphens, and periods."
-                            bodytext = "Please delete everything else from your street address"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showstreetwrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Street addresses have letters, numbers, hyphens, and periods."
+                                    bodytext = "Please delete everything else from your street address"
+                                />
+                            )}
 
-                    {showstreetwronglength && (
+                            {showstreetwronglength && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showstreetwronglength}
-                            closeModals = {this.closeModals}
-                            headertext = "Street address length must be more than one character and less than 36 characters"
-                            bodytext = "Please check your street address for length"
-                            width = "modal-70w"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showstreetwronglength}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Street address length must be more than one character and less than 36 characters"
+                                    bodytext = "Please check your street address for length"
+                                    width = "modal-70w"
+                                />
+                            )}
 
-                    {showcitywrong && (
+                            {showcitywrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showcitywrong}
-                            closeModals = {this.closeModals}
-                            headertext = "City names contain letters only"
-                            bodytext = "Please delete all non letters from your city name"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showcitywrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "City names contain letters only"
+                                    bodytext = "Please delete all non letters from your city name"
+                                />
+                            )}
 
-                    {showcitywronglength && (
+                            {showcitywronglength && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showcitywronglength}
-                            closeModals = {this.closeModals}
-                            headertext = "Name length must be more than three characters and less than 25 characters"
-                            bodytext = "Please check the length of your city name"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showcitywronglength}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Name length must be more than three characters and less than 25 characters"
+                                    bodytext = "Please check the length of your city name"
+                                />
+                            )}
 
-                    {showzipwrong && (
+                            {showzipwrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showzipwrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Your zip code should be either 5 numbers or 5 numbers, a dash, and 4 more numbers"
-                            bodytext = "Please make sure your zip code meets these requirements"
-                            width = "modal-70w"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showzipwrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Your zip code should be either 5 numbers or 5 numbers, a dash, and 4 more numbers"
+                                    bodytext = "Please make sure your zip code meets these requirements"
+                                    width = "modal-70w"
+                                />
+                            )}
 
-                    {showagewrong && (
+                            {showagewrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showagewrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Your age is required to be 17 to 120 years old"
-                            bodytext = "We do not lend to folks younger than 17.  If you are older than 120 years old please
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showagewrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Your age is required to be 17 to 120 years old"
+                                    bodytext = "We do not lend to folks younger than 17.  If you are older than 120 years old please
                             call customer service for special service to make this easier."
-                        />
-                    )}
+                                />
+                            )}
 
-                    {showincomewrong && (
+                            {showincomewrong && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showincomewrong}
-                            closeModals = {this.closeModals}
-                            headertext = "Your income should be only numbers."
-                            bodytext = "There is no need to enter a dollar sign. Please make sure you have only entered numbers!"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showincomewrong}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Your income should be only numbers."
+                                    bodytext = "There is no need to enter a dollar sign. Please make sure you have only entered numbers!"
+                                />
+                            )}
 
-                    {showokeedokee && (
+                            {showokeedokee && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showokeedokee}
-                            closeModals = {this.closeModals}
-                            headertext = "Your application has been submitted."
-                            bodytext = "Thanks for submitting your application! We are reviewing and validating your information using a battery
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showokeedokee}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Your application has been submitted."
+                                    bodytext = "Thanks for submitting your application! We are reviewing and validating your information using a battery
                             of sophisticated algortihmic tools from DataTwin.  You should receive an email shortly with an account number
                              and password."
-                        />
-                    )}
+                                />
+                            )}
 
-                    {shownotokeedokee && (
+                            {shownotokeedokee && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.shownotokeedokee}
-                            closeModals = {this.closeModals}
-                            headertext = "Your application cannot be submitted unless all fields are complete and valid."
-                            bodytext = "Invalid fields are clearly marked in red.  Please fix and click submit."
-                            width = "modal-70w"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.shownotokeedokee}
+                                    closeModals = {this.closeModals}
+                                    headertext = "Your application cannot be submitted unless all fields are complete and valid."
+                                    bodytext = "Invalid fields are clearly marked in red.  Please fix and click submit."
+                                    width = "modal-70w"
+                                />
+                            )}
 
-                    {showssnblacklist && (
+                            {showssnblacklist && (
 
-                        <displays.formfieldResponseModal
-                            show = {this.state.showssnblacklist}
-                            closeModals = {this.closeModals}
-                            headertext = "The entered SSN is not allowed!."
-                            bodytext = "The SSN you have entered is blacklisted by the IRS and is not allowed, please enter your correct SSN!"
-                            width = "modal-70w"
-                        />
-                    )}
-
-
-                    {showssninuse && (
-
-                        <displays.formfieldResponseModal
-                            show = {this.state.showssninuse}
-                            closeModals = {this.closeModals}
-                            headertext = "The entered SSN is assigned to another person!"
-                            bodytext = "Make sure you are entering your name as it is on your drivers license or passport.  Please make sure the number you have entered is correct!"
-                            width = "modal-70w"
-                        />
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showssnblacklist}
+                                    closeModals = {this.closeModals}
+                                    headertext = "The entered SSN is not allowed!."
+                                    bodytext = "The SSN you have entered is blacklisted by the IRS and is not allowed, please enter your correct SSN!"
+                                    width = "modal-70w"
+                                />
+                            )}
 
 
+                            {showssninuse && (
 
-                    {showmodal && (
-                        <MyModal2
-                            show={this.state.showmodal}
-                            showarray={this.state.showArray}
-                            firstname={this.state.formControls.firstname}
-                            rawincome={this.state.formControls.rawincome}
-                            numdependents={this.state.formControls.numdependents}
-                            education={this.state.formControls.education}
-                            storeIncome={this.storeIncome}
-                            parentAction={this.toggle}
-                            parseKids = {this.parseKids}/>
-                        /*  <ModalClass show = {this.state.show} parentAction = {this.toggle}/>*/
-                    )}
+                                <displays.formfieldResponseModal
+                                    show = {this.state.showssninuse}
+                                    closeModals = {this.closeModals}
+                                    headertext = "The entered SSN is assigned to another person!"
+                                    bodytext = "Make sure you are entering your name as it is on your drivers license or passport.  Please make sure the number you have entered is correct!"
+                                    width = "modal-70w"
+                                />
+                            )}
 
 
 
+                            {showmodal && (
+                                <MyModal2
+                                    show={this.state.showmodal}
+                                    showarray={this.state.showArray}
+                                    firstname={this.state.formControls.firstname}
+                                    rawincome={this.state.formControls.rawincome}
+                                    numdependents={this.state.formControls.numdependents}
+                                    education={this.state.formControls.education}
+                                    storeIncome={this.storeIncome}
+                                    parentAction={this.toggle}
+                                    parseKids = {this.parseKids}/>
+                                /*  <ModalClass show = {this.state.show} parentAction = {this.toggle}/>*/
+                            )}
 
 
 
-
-                    {/*
-                    {showbasicSSNmodal && (
-                    <Modal
-                        animation = {true}
-                        size = "md"
-                        show={true}>
-                        <Modal.Body>Your Social Security Number contains exactly 9 numbers with no letters or other characters other than hyphens.
-                            Please check what you have entered.</Modal.Body>
-                    </Modal>
-                    )}
-
-                    */}
+                        </form>
+                    </React.Fragment>
 
                 </Form>
+
             </Container>
         );
-
     }
-
 }
 
 
+//ReactDOM.render(<MasterForm />, document.getElementById('root'))
+
+export default MasterForm;
 
 
 
-export default App;
+

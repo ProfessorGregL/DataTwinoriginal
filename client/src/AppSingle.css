@@ -8,58 +8,6 @@
     padding: 5px;
 }
 
-.breadcrumb{
-    background-color: antiquewhite;
-
-}
-.lheader {
-    padding : .25em;
-    font-size : 30px;
-    display:inline;
-    padding-left: .5em;
-    padding-right: .5em;
-    padding-bottom: 5px;
-    color: darkslategray;
-    font-weight: bold;
-
-
-}
-
-.lheaderdemo {
-    padding : .25em;
-    font-size : 20px;
-    display:inline;
-    padding-left: .5em;
-    padding-right: .5em;
-    padding-bottom: 5px;
-    color: darkslategray;
-    font-weight: bold;
-
-
-}
-.lheadertemp {
-    padding : .25em;
-    font-size : 16px;
-    display:inline;
-    padding-left: .5em;
-    padding-right: .5em;
-    color:deepskyblue;
-    font-weight: bold;
-    font-style: italic;
-
-}
-
-.lheaderwarning {
-    padding : .25em;
-    font-size : 16px;
-    display:inline;
-    padding-left: .5em;
-    padding-right: .5em;
-    color:crimson;
-    font-weight: bold;
-    font-style: italic;
-
-}
 .l1 {
     padding : .25em;
     font-size : 20px;
@@ -89,11 +37,14 @@
 
 .l2 {
     font-size : 30px;
+
+    /*background-color:peachpuff;*/
+
     color: black;
     font-weight: bold;
+    /*border: 3px solid green;*/
+
 }
-
-
 
 .b1{
     /*border: 3px solid green;
@@ -104,25 +55,6 @@
 
     align-items: center;
 
-}
-
-.headerborder{
-    border-bottom: 3px solid green;
-    padding-bottom: 15px;
-}
-
-.backgroundforvisual{
-    background-color: chartreuse;
-
-    padding-bottom:10px;
-    padding-top:10px;
-}
-
-.backgroundforvisual2{
-    background-color: crimson ;
-
-    padding-bottom:10px;
-    padding-top:10px;
 }
 
 
@@ -150,59 +82,44 @@
 }
 
 #placeholdercolor::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 
 #formMortgagePersonalInfoFName::placeholder {
     color: aquamarine;
 }
 
-#Page1_Name::placeholder {
-    color: gold;
+#formMortgagePersonalInfoSpouseName::placeholder {
+    color: aquamarine;
 }
 
-#Page1_SpouseName::placeholder {
-    color: gold;
+#formMortgagePersonalInfoCityStreet::placeholder {
+    color: aquamarine;
 }
 
-#Page1_SpouseAgeSsn::placeholder {
-    color: gold;
+#formMortgagePersonalInfoCityStreet2::placeholder {
+    color: aquamarine;
 }
-
-#Page1_CityStreet::placeholder {
-    color: gold;
-}
-
-#Page1_CityStreet2::placeholder {
-    color: gold;
-}
-
-#Page1_StateZip::placeholder {
-    color: gold;
-}
-#Page1_AgeSsn::placeholder {
-    color: gold;
-}
-#Page1_PhoneEmail::placeholder {
-    color: gold;
+#formMortgagePersonalInfoAgeSSN::placeholder {
+    color: aquamarine;
 }
 #formMortgagePersonalInfoMaritalStatus::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 #formMortgagePersonalInfoDependents::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 #formMortgagePersonalInfoIncome::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 #formMortgagePersonalInfoEducation::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 #formMortgagePersonalInfoResidence::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 #formMortgagePersonalInfoApplications::placeholder {
-    color: gold;
+    color: aquamarine;
 }
 
 .validname {
@@ -254,5 +171,5 @@
 
 select.placeholder {
 
-    color: gold;
+    color: aquamarine;
 }
