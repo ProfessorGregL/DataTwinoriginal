@@ -541,7 +541,7 @@ export const Page1_SpouseAgeSsn = (props) => {
                     type="text"
                     placeholder={props.lastplaceholder}
                     className={lastinputControl}
-                    name="spouse_socialsecuritynumber"
+                    name="spouse_ssn"
                     value={props.lastvalue} // makes this a controlled component
                     onChange={props.myonChange}
                     onBlur = {props.lastonBlur}
