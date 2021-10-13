@@ -1500,6 +1500,7 @@ class MasterForm extends React.Component {
                                 /> )}
 
                             {showFormMortgagePersonalInfoSpouseName && !hideFormMortgagePersonalInfoSpouseName && (
+
                                 <displays.Page1_SpouseAgeSsn
                                     currentStep={this.state.currentStep}
                                     type="text"
@@ -1508,13 +1509,15 @@ class MasterForm extends React.Component {
                                     firstonChange={this.handleChange2}
                                     firstvalid={this.state.formControls.spouse_age.valid}
                                     firsttouched={this.state.formControls.spouse_age.touched}
-                                    firstonBlur = {this.age_PopoverLogic}
+
 
                                     lastplaceholder={this.state.formControls.spouse_ssn.placeholder}
                                     lastvalue={this.state.formControls.spouse_ssn.value} // makes this a controlled component
                                     lastonChange={this.handleChange2}
                                     lastvalid={this.state.formControls.spouse_ssn.valid}
                                     lasttouched={this.state.formControls.spouse_ssn.touched}
+
+                                    firstonBlur = {this.age_PopoverLogic}
                                     lastonBlur = {this.ssn_PopoverLogic}
                                     onFocus = {this.setTouchedOnFocus}
 
