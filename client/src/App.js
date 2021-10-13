@@ -1505,17 +1505,19 @@ class MasterForm extends React.Component {
                                     type="text"
                                     firstplaceholder={this.state.formControls.spouse_age.placeholder}
                                     firstvalue={this.state.formControls.spouse_age.value} // makes this a controlled component
+                                    firstonChange={this.handleChange2}
                                     firstvalid={this.state.formControls.spouse_age.valid}
                                     firsttouched={this.state.formControls.spouse_age.touched}
-
+                                    firstonBlur = {this.age_PopoverLogic}
 
                                     lastplaceholder={this.state.formControls.spouse_ssn.placeholder}
-                                    lastvalue={this.state.formControls.spouse_ssn.value}
+                                    lastvalue={this.state.formControls.spouse_ssn.value} // makes this a controlled component
+                                    lastonChange={this.handleChange2}
                                     lastvalid={this.state.formControls.spouse_ssn.valid}
                                     lasttouched={this.state.formControls.spouse_ssn.touched}
-                                    myonChange={this.handleChange2}
-                                    onBlur = {this.name_PopoverLogic}
+                                    lastonBlur = {this.ssn_PopoverLogic}
                                     onFocus = {this.setTouchedOnFocus}
+
                                 /> )}
 
                             <displays.Page1_bottominfo

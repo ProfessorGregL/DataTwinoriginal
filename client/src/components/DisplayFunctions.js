@@ -527,8 +527,8 @@ export const Page1_SpouseAgeSsn = (props) => {
                     className={firstinputControl}
                     name="spouse_age"
                     value={props.firstvalue} // makes this a controlled component
-                    onChange={props.myonChange}
-                    onBlur = {props.onBlur}
+                    onChange={props.firstonChange}
+                    onBlur = {props.firstonBlur}
                     onFocus = {props.onFocus}
                 />
             </Col>
@@ -543,7 +543,7 @@ export const Page1_SpouseAgeSsn = (props) => {
                     className={lastinputControl}
                     name="spouse_ssn"
                     value={props.lastvalue} // makes this a controlled component
-                    onChange={props.myonChange}
+                    onChange={props.lastonChange}
                     onBlur = {props.lastonBlur}
                     onFocus = {props.onFocus}
                 />
