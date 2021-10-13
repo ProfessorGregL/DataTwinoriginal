@@ -36,9 +36,9 @@ export const MyModal2 = (props) => {
                 <p>Please confirm this information</p>
 
 
-                { props.showarray.dependents ? < displays.Page2_Dependents  value = {props.numdependents.value} parseKids = {props.parseKids} /> : ""}
-                { props.showarray.income ? < displays.Page2_Income value = {props.rawincome.value} storeIncome = {props.storeIncome}/>: "" }
-                { props.showarray.education ? < displays.Page2_Education  value = {props.education.value}  handleChange = {props.handleChange2} /> : "" }
+                { props.showarray.dependents ? < displays.Page2_Dependents currentStep={props.currentStep} value = {props.numdependents.value} parseKids = {props.parseKids} /> : ""}
+                { props.showarray.income ? < displays.Page2_Income currentStep={props.currentStep} value = {props.rawincome.value} storeIncome = {props.storeIncome}/>: "" }
+                { props.showarray.education ? < displays.Page2_Education currentStep={props.currentStep} value = {props.education.value}  handleChange = {props.handleChange2} /> : "" }
                 { props.showarray.okeedokee ? < displays.okeedokee />: "" }
 
             </Modal.Body>

@@ -557,7 +557,6 @@ export const Page1_SpouseAgeSsn = (props) => {
 
 export const Page1_PhoneEmail = (props) => {
 
-    console.log("phone " + props.currentStep);
     if (props.currentStep !== 1) {
         return null
     }
@@ -687,7 +686,6 @@ export const Page1_MaritalStatus = (props) => {
 
 export const Page2_Income = (props) => {
 
-    console.log("income " + props.currentStep);
     if (props.currentStep !== 2) {
         return null
     }
@@ -814,7 +812,7 @@ export const Page2_Education = (props) => {
 
 export const Page2_Dependents = (props) => {
 
-    if (props.currentStep !== 2) {
+   if (props.currentStep !== 2) {
         return null
     }
 
@@ -838,9 +836,6 @@ export const Page2_Dependents = (props) => {
 
 
     let checkedbuttonnumber = props.value;
-
-    console.log(" checked button number"  + checkedbuttonnumber);
-
 
     return(
 

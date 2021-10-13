@@ -420,21 +420,7 @@ class MasterForm extends React.Component {
             //axios.post(`http://localhost:9000/testAPI`, this.state.formControls).then(res => {
 
 
-            /*
-               // test post to api/godaddy
-
-               axios.post('/api/gd', {
-                   ReturnURL: 'www.mydatatwin.com',
-
-               }).
-               then(res => {
-                   console.log(res);
-               });
-
-           */
             axios.post('/api/riskratios', this.state.formControls).then(res => {
-
-                console.log(res);
 
                 const newState = update(this.state, {
                     showArray: {
@@ -447,7 +433,7 @@ class MasterForm extends React.Component {
 
                 this.setState(newState);
 
-                console.log(this.state);
+                console.log(" State" + this.state);
 
                 console.log(res.data[0] || res.data[1] || res.data[2])
 
@@ -479,7 +465,7 @@ class MasterForm extends React.Component {
 
                 }
             }, () => {
-                console.log(this.state); // Note how the callback fixes the async issue with last character
+               // console.log(this.state); // Note how the callback fixes the async issue with last character
 
             });
 
@@ -539,7 +525,7 @@ class MasterForm extends React.Component {
 
         }, () => {
             console.log("checking form is valid");
-            console.log(this.state);
+            //console.log(this.state);
 
 
         });
@@ -589,7 +575,7 @@ class MasterForm extends React.Component {
             formControls: updatedControls,
             formIsValid: formIsValid
         }, () => {
-            console.log(this.state);
+           // console.log(this.state);
 
         });
 
@@ -1336,33 +1322,33 @@ class MasterForm extends React.Component {
             return (
                 <FormGroup as={Row}>
                     <Col className="text-left">
-                        <Button variant="primary" className="mb-3" onClick={this._prev}>
+                        <Button variant="primary"
+                                className="mb-3"
+                                onClick={this._prev}
+                                size='sm'>
                             Previous
                         </Button>
                     </Col>
+
+                    <Col className="text-right">
+                        <Button
+                            variant="primary"
+                            size='sm'
+                            className="mb-3"
+                            onClick={this.handleSubmit}
+                            //disabled={!this.state.formIsValid}
+                        > Submit
+                        </Button>
+                    </Col>
                 </FormGroup>
+
 
             )
         }
         else {return null;}
     }
 
-    submitbutton(){
-        let currentStep = this.state.currentStep;
-        return(
-            <Form.Group as={Row} controlId="submitButton" className="formgroup">
-                <Col>
-                    <Button
-                        className="submitButton"
-                        onClick={this.handleSubmit}
-                        //disabled={!this.state.formIsValid}
-                    > Submit
-                    </Button>
-                </Col>
 
-            </Form.Group>
-        )
-    }
 
     render() {
 
@@ -1585,7 +1571,7 @@ class MasterForm extends React.Component {
 
 
                             {this.buttons()}
-                            {this.submitbutton()}
+
 
                             {showssnwrong && (
 
@@ -1764,6 +1750,7 @@ class MasterForm extends React.Component {
 
                             {showmodal && (
                                 <MyModal2
+                                    currentStep={this.state.currentStep}
                                     show={this.state.showmodal}
                                     showarray={this.state.showArray}
                                     firstname={this.state.formControls.firstname}

@@ -4,6 +4,9 @@
     <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/MyModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/MyModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +137,6 @@
     </configuration>
     <list>
       <item itemvalue="JavaScript Debug.Unnamed" />
-      <item itemvalue="JavaScript Debug." />
       <item itemvalue="npm.npm start" />
     </list>
   </component>
@@ -156,7 +158,8 @@
       <workItem from="1626586205033" duration="603000" />
       <workItem from="1631817949857" duration="3650000" />
       <workItem from="1631991889306" duration="3000" />
-      <workItem from="1634089035892" duration="5264000" />
+      <workItem from="1634089035892" duration="6408000" />
+      <workItem from="1634139562361" duration="9276000" />
     </task>
     <task id="LOCAL-00001" summary="New file to hold single page App.  Copy single page code from App then copy multipage code into App">
       <created>1634089322025</created>
@@ -179,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634092341080</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added submit button, fixed residence checked,">
+      <created>1634094481393</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634094481393</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -214,7 +224,8 @@
     <MESSAGE value="New file to hold single page App.  Copy single page code from App then copy multipage code into App" />
     <MESSAGE value="Copied over the multipage code to app.css,app.js,DisplayFunctions.js" />
     <MESSAGE value="Copied over more code to Mymodal.js, fixed copy over error to display function, added images folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Copied over more code to Mymodal.js, fixed copy over error to display function, added images folder" />
+    <MESSAGE value="Added submit button, fixed residence checked," />
+    <option name="LAST_COMMIT_MESSAGE" value="Added submit button, fixed residence checked," />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
