@@ -1248,15 +1248,7 @@ class MasterForm extends React.Component {
     //})
     //}
 
-    // this is junk // todo rewrite
-    handleSubmit = event => {
-        event.preventDefault()
-        const { email, username, password } = this.state
-        alert(`Your registration detail: \n 
-           Email: ${email} \n 
-           Username: ${username} \n
-           Password: ${password}`)
-    }
+
 
 
     next_prev_select = () => {
@@ -1353,6 +1345,23 @@ class MasterForm extends React.Component {
             )
         }
         else {return null;}
+    }
+
+    submitbutton(){
+        let currentStep = this.state.currentStep;
+        return(
+            <Form.Group as={Row} controlId="submitButton" className="formgroup">
+                <Col>
+                    <Button
+                        className="submitButton"
+                        onClick={this.handleSubmit}
+                        //disabled={!this.state.formIsValid}
+                    > Submit
+                    </Button>
+                </Col>
+
+            </Form.Group>
+        )
     }
 
     render() {
@@ -1575,11 +1584,8 @@ class MasterForm extends React.Component {
                             />
 
 
-
-
-
                             {this.buttons()}
-
+                            {this.submitbutton()}
 
                             {showssnwrong && (
 

@@ -973,6 +973,7 @@ export const Page2_Residence= (props) => {
                         name = "residence"
                         value = "owner"
                         onChange = {props.handleChange}
+                        checked = {props.value === "owner"}
                     />
                     <Form.Check
                         inline
@@ -982,6 +983,7 @@ export const Page2_Residence= (props) => {
                         name = "residence"
                         value = "tenant"
                         onChange = {props.handleChange}
+                        checked = {props.value === "tenant"}
                     />
                     <Form.Check
                         inline
@@ -991,6 +993,7 @@ export const Page2_Residence= (props) => {
                         name = "residence"
                         value = "livewithrelative"
                         onChange = {props.handleChange}
+                        checked = {props.value === "livewithrelative"}
                     />
                 </div>
             ))}
