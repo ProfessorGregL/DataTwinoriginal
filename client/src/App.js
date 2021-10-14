@@ -1775,6 +1775,15 @@ class MasterForm extends React.Component {
 
                 </Form>
 
+                <Form>
+                    <Col></Col>
+                    <Col className=" lheaderdemo text-center">
+
+                        How to use this demo
+                    </Col>
+                    <Col></Col>
+                </Form>
+
             </Container>
         );
     }
