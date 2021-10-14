@@ -1784,7 +1784,13 @@ class MasterForm extends React.Component {
                     <Col>
                         The goal of this demo is to show various ways that verification and user guidance can prevent input errors
                         Verification is typically rudimentary and feedback even worse.  Try to enter a one letter name or enter
-                        control characters where numbers usually are or a short or long social.  Try to make mistakes!
+                        control characters where numbers usually are or a short or long social.  Try to make mistakes!  If you do
+                        and I don't catch it, let me know!!!
+
+                        On Page 2 I am demonstrating more advanced context sensitive error detection.  Try entering $100000 income
+                        , 5 kids, and a high school education.  This combination is unusual and is flagged for review.  It may be
+                        true but based on a large data base of answers is less likely and indicative of a entry error like an
+                        extra zero in income.
                     </Col>
                 </Form>
 
