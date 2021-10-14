@@ -1359,7 +1359,7 @@ class MasterForm extends React.Component {
         return (
 
             <Container className = "container">
-                <Form className = "form">
+                <Form className = "form" noValidate>
                     <Col></Col>
                     <Col className=" lheaderdemo text-center">
 
@@ -1779,12 +1779,17 @@ class MasterForm extends React.Component {
                     <Col></Col>
                     <Col className=" lheaderdemo text-center">
 
-                        How to use this demo
+                        How to use this Demo
                     </Col>
-                    <Col></Col>
+                    <Col>
+                        The goal of this demo is to show various ways that verification and user guidance can prevent input errors
+                        Verification is typically rudimentary and feedback even worse.  Try to enter a one letter name or enter
+                        control characters where numbers usually are or a short or long social.  Try to make mistakes!
+                    </Col>
                 </Form>
 
             </Container>
+
         );
     }
 }
