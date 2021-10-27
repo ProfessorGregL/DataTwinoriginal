@@ -13,6 +13,11 @@ import breadcrumb4 from './images/breadcrumb4.png';
 import MyModal2 from "./components/MyModal";
 import {Page1_SpouseAgeSsn} from "./components/DisplayFunctions.js"; // using a function
 
+
+import * as SmartyStreetsSDK from "smartystreets-javascript-sdk";  //todo where is this???
+import * as sdkUtils from "smartystreets-javascript-sdk-utils";
+import Suggestions from "./Suggestions";
+
 var numpages = 2;
 
 
@@ -20,10 +25,19 @@ class MasterForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+
+            // smarty state items
+            shouldValidate: true,
+            country: "US",
+            suggestions: [],
+            error: "",
+
+            // added for multipage form
             currentStep: 1,
             pageName: 'Start Here',
             breadcrumbImage:breadcrumb3,
 
+            //original state
             showFormMortgagePersonalInfoSpouseName: false,
             hideFormMortgagePersonalInfoSpouseName: true,
             show: false,
@@ -340,6 +354,122 @@ class MasterForm extends React.Component {
 
             }
         };
+
+        //################################# added smarty stuff  ########################################
+
+        const SmartyStreetsCore = SmartyStreetsSDK.core;
+        const websiteKey = "109492610003229950"; // Your website key here
+        const smartyStreetsSharedCredentials = new SmartyStreetsCore.SharedCredentials(websiteKey);
+        const autoCompleteClientBuilder = new SmartyStreetsCore.ClientBuilder(smartyStreetsSharedCredentials).withLicenses(["us-autocomplete-pro-cloud"]);
+        const usStreetClientBuilder = new SmartyStreetsCore.ClientBuilder(smartyStreetsSharedCredentials);
+
+        this.SmartyStreetsCore = SmartyStreetsCore;
+        this.autoCompleteClient = autoCompleteClientBuilder.buildUsAutocompleteProClient();
+        this.usStreetClient = usStreetClientBuilder.buildUsStreetApiClient();
+
+        this.updateField = this.updateField.bind(this);
+        this.updateCheckbox = this.updateCheckbox.bind(this);
+        this.queryAutocompleteForSuggestions = this.queryAutocompleteForSuggestions.bind(this);
+        this.selectSuggestion = this.selectSuggestion.bind(this);
+        this.updateStateFromValidatedUsAddress = this.updateStateFromValidatedUsAddress.bind(this);
+        this.validateUsAddress = this.validateUsAddress.bind(this);
+        this.formatAutocompleteSuggestion = this.formatAutocompleteSuggestion.bind(this);
+    }
+
+
+//#####################################################################
+//################### Smartystreets support functions #################
+//#####################################################################
+
+    updateField(e) {
+        this.updateStateFromForm(e.target.id, e.target.value);
+    }
+
+    updateCheckbox(e) {
+        this.updateStateFromForm(e.target.id, e.target.checked);
+    }
+
+    // this may be duplicate functionality
+    updateStateFromForm(key, value) {
+        const newState = {};
+        newState[key] = value;
+
+        this.setState(newState);
+    }
+
+
+    queryAutocompleteForSuggestions(query) {
+        const lookup = new SmartyStreetsSDK.usAutocomplete.Lookup(query);
+
+        this.autoCompleteClient.send(lookup)
+            .then(response => {
+                this.setState({suggestions: response.result});
+            })
+            .catch(console.warn);
+    }
+
+    selectSuggestion(suggestion) {
+        this.useAutoCompleteSuggestion(suggestion)
+            .then(() => {
+                if (this.state.shouldValidate) this.validateUsAddress();
+            });
+    }
+
+    useAutoCompleteSuggestion(suggestion) {  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+        return new Promise(resolve => {
+            this.setState({
+                street: suggestion.streetLine,
+                city: suggestion.city,
+                state: suggestion.state,
+                suggestions: [],
+            }, resolve);
+        });
+    }
+
+    validateUsAddress() {
+        let lookup = new SmartyStreetsSDK.usStreet.Lookup();
+        lookup.street = this.state.street;
+        //lookup.street2 = this.state.address2;
+        lookup.city = this.state.city;
+        lookup.state = this.state.state;
+        lookup.zipCode = this.state.zip;
+
+        if (!!lookup.street) {
+            this.usStreetClient.send(lookup)
+                .then(this.updateStateFromValidatedUsAddress)
+                .catch(e => this.setState({error: e.error}));
+        } else {
+            this.setState({error: "A street address is required."});
+        }
+    }
+
+    updateStateFromValidatedUsAddress(response) {
+        const lookup = response.lookups[0];
+        const isValid = sdkUtils.isValid(lookup);
+        const isAmbiguous = sdkUtils.isAmbiguous(lookup);
+        const isMissingSecondary = sdkUtils.isMissingSecondary(lookup);
+        const newState = {
+            error: "",
+        };
+
+        if (!isValid) {
+            newState.error = "The address is invalid.";
+        } else if (isAmbiguous) {
+            newState.error = "The address is ambiguous.";
+        } else if (isMissingSecondary) {
+            newState.error = "The address is missing a secondary number.";
+        } else if (isValid) {
+            const candidate = lookup.result[0];
+
+            newState.address1 = candidate.deliveryLine1;
+            //newState.address2 = candidate.deliveryLine2 || "";
+            newState.city = candidate.components.cityName;
+            newState.state = candidate.components.state;
+            newState.zip = `${candidate.components.zipCode}-${candidate.components.plus4Code}`;
+            newState.error = "";
+        }
+
+        this.setState(newState);
     }
 
 

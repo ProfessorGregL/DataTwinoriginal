@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/Suggestion.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/Suggestion.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/Suggestions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +103,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src" />
     <property name="node.js.detected.package.jscs" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.jscs" value="project" />
@@ -109,6 +117,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src" />
       <recent name="$PROJECT_DIR$/client/src/images" />
       <recent name="$PROJECT_DIR$/client" />
       <recent name="$PROJECT_DIR$" />
@@ -156,6 +165,7 @@
       <workItem from="1631991889306" duration="3000" />
       <workItem from="1634089035892" duration="6408000" />
       <workItem from="1634139562361" duration="19465000" />
+      <workItem from="1635260727832" duration="5217000" />
     </task>
     <task id="LOCAL-00001" summary="New file to hold single page App.  Copy single page code from App then copy multipage code into App">
       <created>1634089322025</created>
