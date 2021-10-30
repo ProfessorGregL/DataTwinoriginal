@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import * as PropTypes from "prop-types";
-import "./Suggestion.scss";
+import "./Suggestion.css";
 
 export default class Suggestion extends Component {
 	constructor(props) {
@@ -14,6 +14,17 @@ export default class Suggestion extends Component {
 		this.buildResultHoverClass = this.buildResultHoverClass.bind(this);
 	}
 
+	formatAutocompleteSuggestion(suggestion) {
+		const street = suggestion.streetLine ? `${suggestion.streetLine} ` : "";
+		const secondary = suggestion?.secondary ? `${suggestion.secondary} ` : "";
+		const entries = suggestion?.entries > 1 ? `(${suggestion.entries} more entries) ` : "";
+		const city = suggestion?.city ? `${suggestion.city} ` : "";
+		const state = suggestion?.state ? `${suggestion.state}, ` : "";
+		const zip = suggestion?.zipcode ? `${suggestion.zipcode}` : "";
+
+		return street + secondary + entries + city + state + zip;
+	}
+
 	setIsHovered(isHovered) {
 		this.setState({isHovered});
 	}
@@ -24,6 +35,7 @@ export default class Suggestion extends Component {
 	}
 
 	render() {
+		//console.log(this.props.suggestion)
 		return (
 			<div
 				className={this.buildResultHoverClass()}
@@ -31,7 +43,7 @@ export default class Suggestion extends Component {
 				onMouseEnter={() => this.setIsHovered(true)}
 				onMouseLeave={() => this.setIsHovered(false)}
 			>
-				{this.props.suggestion.text}
+				{this.formatAutocompleteSuggestion(this.props.suggestion)}
 			</div>
 		);
 	}

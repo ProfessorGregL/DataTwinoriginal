@@ -13,7 +13,7 @@ export const formfieldResponseModal = (props) => {
     //onClick={() => { props.showPopover("ssnmodalshow",false) }} // how to pass a function!
 
 
-    console.log("In the modal" + props.headertext);
+    //console.log("In the modal" + props.headertext);
     return(
 
         <Modal
@@ -237,6 +237,10 @@ export const streetCity = (props) => {
         lastinputControl = 'validname';
         lastlabelname = 'l1 l1valid';
     }
+
+
+    console.log("$$$$$$$$$$$$lastinputcontrol "+ lastinputControl)
+    console.log("$$$$$$$$$$$$$lastlabelname "+ lastlabelname)
 
 
     return(
@@ -768,7 +772,7 @@ export const dependents = (props) => {
 
     let checkedbuttonnumber = props.value;
 
-    console.log(" checked button number"  + checkedbuttonnumber);
+    //console.log(" checked button number"  + checkedbuttonnumber);
 
 
     return(

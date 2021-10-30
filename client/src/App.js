@@ -31,6 +31,7 @@ class MasterForm extends React.Component {
             country: "US",
             suggestions: [],
             error: "",
+            showSuggestions: true,
 
             // added for multipage form
             currentStep: 1,
@@ -164,8 +165,8 @@ class MasterForm extends React.Component {
                     touched: false,
                     visible: true,
                     validationRules: {
-                        minLengthValidator: 2,
-                        requiredValidator: true,
+                       // minLengthValidator: 2,
+                       // requiredValidator: true,
                         //streetValidator: true
                     }
                 },
@@ -367,13 +368,13 @@ class MasterForm extends React.Component {
         this.autoCompleteClient = autoCompleteClientBuilder.buildUsAutocompleteProClient();
         this.usStreetClient = usStreetClientBuilder.buildUsStreetApiClient();
 
-        this.updateField = this.updateField.bind(this);
-        this.updateCheckbox = this.updateCheckbox.bind(this);
-        this.queryAutocompleteForSuggestions = this.queryAutocompleteForSuggestions.bind(this);
-        this.selectSuggestion = this.selectSuggestion.bind(this);
-        this.updateStateFromValidatedUsAddress = this.updateStateFromValidatedUsAddress.bind(this);
-        this.validateUsAddress = this.validateUsAddress.bind(this);
-        this.formatAutocompleteSuggestion = this.formatAutocompleteSuggestion.bind(this);
+        this.handleChangeNoVal = this.handleChangeNoVal.bind(this);
+        //this.updateCheckbox = this.updateCheckbox.bind(this);
+        //this.queryAutocompleteForSuggestions = this.queryAutocompleteForSuggestions.bind(this);
+        //this.selectSuggestion = this.selectSuggestion.bind(this);
+        //this.updateStateFromValidatedUsAddress = this.updateStateFromValidatedUsAddress.bind(this);
+        //this.validateUsAddress = this.validateUsAddress.bind(this);
+        //this.formatAutocompleteSuggestion = this.formatAutocompleteSuggestion.bind(this);
     }
 
 
@@ -381,52 +382,95 @@ class MasterForm extends React.Component {
 //################### Smartystreets support functions #################
 //#####################################################################
 
-    updateField(e) {
+    updateField = (e) => {
         this.updateStateFromForm(e.target.id, e.target.value);
     }
 
-    updateCheckbox(e) {
+    updateCheckbox = (e) => {
         this.updateStateFromForm(e.target.id, e.target.checked);
     }
 
     // this may be duplicate functionality
-    updateStateFromForm(key, value) {
+    updateStateFromForm = (key, value) => {
+
+        console.log( "In updatestateformfunction")
         const newState = {};
         newState[key] = value;
 
-        this.setState(newState);
+        this.setState({newState}, () => {
+            console.log(this.state)
+            console.log("done updating a field");});
     }
 
 
-    queryAutocompleteForSuggestions(query) {
-        const lookup = new SmartyStreetsSDK.usAutocomplete.Lookup(query);
 
+    queryAutocompleteForSuggestions(query, hasSecondaries=false) {
+
+        this.setState({showSuggestions:true}, () => {
+            console.log(this.state)
+            console.log("done updating a field");});
+
+        const lookup = new SmartyStreetsSDK.usAutocompletePro.Lookup(query);
+
+        if (hasSecondaries) {
+            lookup.selected = query;
+        }
+        //console.log( lookup);
         this.autoCompleteClient.send(lookup)
-            .then(response => {
-                this.setState({suggestions: response.result});
+            .then(results => {
+                //console.log( results.result.length);
+                this.setState({
+                    suggestions: results.result,
+                }, () => { console.log(" suggestions are now updated");
+                                    console.log(this.state);
+                    }
+                )
             })
             .catch(console.warn);
     }
 
-    selectSuggestion(suggestion) {
-        this.useAutoCompleteSuggestion(suggestion)
-            .then(() => {
-                if (this.state.shouldValidate) this.validateUsAddress();
-            });
+    formatAutocompleteSuggestion(suggestion) {
+        const street = suggestion.streetLine ? `${suggestion.streetLine} ` : "";
+        const secondary = suggestion?.secondary ? `${suggestion.secondary} ` : "";
+        const entries = suggestion?.entries > 1 ? `(${suggestion.entries} more entries) ` : "";
+        const city = suggestion?.city ? `${suggestion.city} ` : "";
+        const state = suggestion?.state ? `${suggestion.state}, ` : "";
+        const zip = suggestion?.zipcode ? `${suggestion.zipcode}` : "";
+
+        return street + secondary + entries + city + state + zip;
     }
 
-    useAutoCompleteSuggestion(suggestion) {  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-        return new Promise(resolve => {
-            this.setState({
-                street: suggestion.streetLine,
-                city: suggestion.city,
-                state: suggestion.state,
-                suggestions: [],
-            }, resolve);
-        });
+
+    selectSuggestion=(suggestion)=> {
+
+        console.log("In Select Suggestion " + suggestion )
+        if (suggestion.entries > 1) {
+            this.queryAutocompleteForSuggestions(this.formatAutocompleteSuggestion(suggestion), true);
+        } else {
+            this.useAutoCompleteSuggestion(suggestion)
+                //.then(() => {
+                    //this.validateUsAddress();})
+
+        }
     }
 
-    validateUsAddress() {
+
+    useAutoCompleteSuggestion = (suggestion) => {
+        console.log("in use suggestion");
+
+        this.setState({showSuggestions:false}, () => {
+            console.log(this.state)
+            console.log("done updating a field");});
+
+        this.handleChangeNoVal(suggestion);
+
+
+    }
+
+
+
+    validateUsAddress = () => {
+        console.log("In Validate US Address");
         let lookup = new SmartyStreetsSDK.usStreet.Lookup();
         lookup.street = this.state.street;
         //lookup.street2 = this.state.address2;
@@ -436,14 +480,14 @@ class MasterForm extends React.Component {
 
         if (!!lookup.street) {
             this.usStreetClient.send(lookup)
-                .then(this.updateStateFromValidatedUsAddress)
+                .then((response) => this.updateStateFromValidatedUsAddress(response, true))
                 .catch(e => this.setState({error: e.error}));
         } else {
             this.setState({error: "A street address is required."});
         }
     }
 
-    updateStateFromValidatedUsAddress(response) {
+    updateStateFromValidatedUsAddress(response, isAutocomplete = false) {
         const lookup = response.lookups[0];
         const isValid = sdkUtils.isValid(lookup);
         const isAmbiguous = sdkUtils.isAmbiguous(lookup);
@@ -456,13 +500,12 @@ class MasterForm extends React.Component {
             newState.error = "The address is invalid.";
         } else if (isAmbiguous) {
             newState.error = "The address is ambiguous.";
-        } else if (isMissingSecondary) {
+        } else if (isMissingSecondary && !isAutocomplete) {
             newState.error = "The address is missing a secondary number.";
         } else if (isValid) {
             const candidate = lookup.result[0];
 
-            newState.address1 = candidate.deliveryLine1;
-            //newState.address2 = candidate.deliveryLine2 || "";
+            newState.street = candidate.deliveryLine1;
             newState.city = candidate.components.cityName;
             newState.state = candidate.components.state;
             newState.zip = `${candidate.components.zipCode}-${candidate.components.plus4Code}`;
@@ -527,8 +570,8 @@ class MasterForm extends React.Component {
             this.setState({
                 formControls: updatedControls
             }, () => {
-                console.log("turning all untouched red ");
-                console.log(this.state);
+               // console.log("turning all untouched red ");
+                //console.log(this.state);
                 this.setState({shownotokeedokee: true});
 
             });
@@ -540,9 +583,9 @@ class MasterForm extends React.Component {
         } else if (true) {
 
 
-            console.log("valid form - post to server");
+           // console.log("valid form - post to server");
 
-            console.log(this.state.formControls);
+           // console.log(this.state.formControls);
 
 
             //axios.post('http://localhost:5000/api/riskratios', this.state.formControls).then(res => {
@@ -563,9 +606,9 @@ class MasterForm extends React.Component {
 
                 this.setState(newState);
 
-                console.log(" State" + this.state);
+                //console.log(" State" + this.state);
 
-                console.log(res.data[0] || res.data[1] || res.data[2])
+                //console.log(res.data[0] || res.data[1] || res.data[2])
 
                 if (res.data[0] || res.data[1] || res.data[2]) {
 
@@ -610,7 +653,89 @@ class MasterForm extends React.Component {
         //console.log(res.data);
         //})
     }
+//##############################  helper change  - no validation #####
 
+
+    handleChangeNoVal = (suggestion) => {
+
+
+
+        const updatedControls = {
+            ...this.state.formControls // gives you all of the form controls and all their ste elements
+        };
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement = {
+            ...updatedControls["street"]
+        };
+
+        updatedFormElement.value =suggestion.streetLine;
+        updatedFormElement.touched = true; // we did enter something - may not be correct yet
+        //updatedFormElement.valid = validate(suggestion.streetLine, updatedFormElement.validationRules); // goes though each rule in switch
+
+        updatedControls["street"] = updatedFormElement;
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement2 = {
+            ...updatedControls["city"]
+        };
+
+        console.log("in noval checkig city")
+
+        updatedFormElement2.value =suggestion.city;
+        updatedFormElement2.touched = true; // we did enter something - may not be correct yet
+        updatedFormElement2.valid = validate(suggestion.city, updatedFormElement.validationRules); // goes though each rule in switch
+
+        updatedControls["city"] = updatedFormElement2;
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+
+        // all of the state for firstname (or whatever is the target) - particular form control
+        const updatedFormElement3 = {
+            ...updatedControls["state"]
+        };
+
+        updatedFormElement3.value =suggestion.state;
+        updatedFormElement3.touched = true; // we did enter something - may not be correct yet
+        updatedFormElement3.valid = validate(suggestion.state, updatedFormElement.validationRules); // goes though each rule in switch
+
+        updatedControls["state"] = updatedFormElement3;
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        const updatedFormElement4 = {
+            ...updatedControls["zip"]
+        };
+
+        updatedFormElement4.value =suggestion.zipcode;
+        updatedFormElement4.touched = true; // we did enter something - may not be correct yet
+        updatedFormElement4.valid = validate(suggestion.zipcode, updatedFormElement.validationRules); // goes though each rule in switch
+
+        updatedControls["zip"] = updatedFormElement4;
+
+        let formIsValid = true;
+
+
+        for (let inputIdentifier in updatedControls) {
+
+            if (updatedControls[inputIdentifier].visible) {
+                formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+            }
+        }
+
+        this.setState({
+            formControls: updatedControls,
+        }, () => {
+            console.log(this.state)
+            console.log("done updating a field");
+
+
+
+        });
+        return(true);
+
+    }
 //#####################################################################
 // helper change handler
     handleChange = (name, value, visible = true) => {
@@ -681,6 +806,14 @@ class MasterForm extends React.Component {
         const updatedFormElement = {
             ...updatedControls[name]
         };
+
+
+        if (name === "street") {
+
+            console.log(" In street smartyquery section")
+            this.queryAutocompleteForSuggestions(e.target.value);
+        }
+
 
 
         updatedFormElement.value = value;
@@ -1485,7 +1618,7 @@ class MasterForm extends React.Component {
         const {showFormMortgagePersonalInfoSpouseName, hideFormMortgagePersonalInfoSpouseName, showmodal,
             showssnwrong,showssnwronglength, showblankfield, shownamewrong, shownamewronglength,showstreetwrong,
             showstreetwronglength, showcitywrong, showcitywronglength, showzipwrong, showagewrong,showincomewrong,
-            showokeedokee, shownotokeedokee,showssninuse,showssnblacklist} = this.state;
+            showokeedokee, shownotokeedokee,showssninuse,showssnblacklist,showSuggestions} = this.state;
         return (
 
             <Container className = "container">
@@ -1896,6 +2029,13 @@ class MasterForm extends React.Component {
                                     parentAction={this.toggle}
                                     parseKids = {this.parseKids}/>
                                 /*  <ModalClass show = {this.state.show} parentAction = {this.toggle}/>*/
+                            )}
+
+
+                            {showSuggestions && (
+                            <Suggestions
+                                suggestions={this.state.suggestions}
+                                selectSuggestion={this.selectSuggestion}/>
                             )}
 
 

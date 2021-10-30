@@ -251,6 +251,8 @@ export const Page1_StreetCity = (props) => {
         return null
     }
 
+    // first input, last input are functions that control the color of border
+    // look above
     let {firstinputControl, firstlabelname} = firstinput(props);
 
     let {lastinputControl, lastlabelname} = lastinput(props);

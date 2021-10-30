@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/Suggestion.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/Suggestion.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/Suggestions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Suggestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Suggestion.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Suggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/DisplayFunctionsSingle.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DisplayFunctionsSingle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/validator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +32,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/client/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/Procfile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/package.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/src/App.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/Suggestions.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/Suggestion.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/Suggestion.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -165,7 +170,11 @@
       <workItem from="1631991889306" duration="3000" />
       <workItem from="1634089035892" duration="6408000" />
       <workItem from="1634139562361" duration="19465000" />
-      <workItem from="1635260727832" duration="5217000" />
+      <workItem from="1635260727832" duration="8723000" />
+      <workItem from="1635336670659" duration="8206000" />
+      <workItem from="1635415070452" duration="17519000" />
+      <workItem from="1635537779126" duration="4240000" />
+      <workItem from="1635593476133" duration="3317000" />
     </task>
     <task id="LOCAL-00001" summary="New file to hold single page App.  Copy single page code from App then copy multipage code into App">
       <created>1634089322025</created>
@@ -265,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634179210664</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Multiple additions of smartystreet code including the updated credential code">
+      <created>1635301556295</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1635301556295</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -308,7 +324,8 @@
     <MESSAGE value="spouse age and ssn fixed popover logic connections" />
     <MESSAGE value="adding demo explanantion" />
     <MESSAGE value="Add explanation text" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add explanation text" />
+    <MESSAGE value="Multiple additions of smartystreet code including the updated credential code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multiple additions of smartystreet code including the updated credential code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
