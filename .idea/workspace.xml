@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="">
+    <list default="true" id="d19ce1a0-716d-406c-bd48-d8609466bd4e" name="Default" comment="INtegrated smartystreets autocomplete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Suggestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Suggestion.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Suggestions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/Suggestions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DisplayFunctions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/DisplayFunctionsSingle.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/DisplayFunctionsSingle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/validator.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +24,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/client/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/Procfile" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/public/index.html" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/src/App.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/client/src/Suggestions.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/src/Suggestion.css" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/client/src/Suggestion.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/Suggestions.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -55,6 +49,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/client/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
@@ -62,6 +59,9 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/server/package.json" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1828" />
     <option name="y" value="183" />
@@ -104,22 +104,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client/src" />
-    <property name="node.js.detected.package.jscs" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.jscs" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.jscs" value="" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/greglakomski/WebstormProjects/AWSWorking_smarty_v2 copy&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/src" />
@@ -174,7 +170,22 @@
       <workItem from="1635336670659" duration="8206000" />
       <workItem from="1635415070452" duration="17519000" />
       <workItem from="1635537779126" duration="4240000" />
-      <workItem from="1635593476133" duration="3317000" />
+      <workItem from="1635593476133" duration="4665000" />
+      <workItem from="1635600488392" duration="859000" />
+      <workItem from="1665487489237" duration="551000" />
+      <workItem from="1668996516514" duration="237000" />
+      <workItem from="1669031748762" duration="3053000" />
+      <workItem from="1669083567537" duration="1569000" />
+      <workItem from="1669121217063" duration="14000" />
+      <workItem from="1669169278038" duration="39000" />
+      <workItem from="1669255287772" duration="3314000" />
+      <workItem from="1669291270926" duration="4100000" />
+      <workItem from="1669466538756" duration="598000" />
+      <workItem from="1669644550683" duration="598000" />
+      <workItem from="1669705842475" duration="598000" />
+      <workItem from="1669707675482" duration="598000" />
+      <workItem from="1699817477245" duration="1644000" />
+      <workItem from="1699992529958" duration="2852000" />
     </task>
     <task id="LOCAL-00001" summary="New file to hold single page App.  Copy single page code from App then copy multipage code into App">
       <created>1634089322025</created>
@@ -281,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635301556295</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="INtegrated smartystreets autocomplete">
+      <created>1635598319927</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1635598319927</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -312,6 +330,59 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="9dedcb35-8af0-4a51-a932-a900999cd47a" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="9dedcb35-8af0-4a51-a932-a900999cd47a">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New file to hold single page App.  Copy single page code from App then copy multipage code into App" />
     <MESSAGE value="Copied over the multipage code to app.css,app.js,DisplayFunctions.js" />
@@ -325,7 +396,8 @@
     <MESSAGE value="adding demo explanantion" />
     <MESSAGE value="Add explanation text" />
     <MESSAGE value="Multiple additions of smartystreet code including the updated credential code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multiple additions of smartystreet code including the updated credential code" />
+    <MESSAGE value="INtegrated smartystreets autocomplete" />
+    <option name="LAST_COMMIT_MESSAGE" value="INtegrated smartystreets autocomplete" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
